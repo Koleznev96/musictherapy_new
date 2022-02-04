@@ -8,17 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* musictherapyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* musictherapyTests.m */; };
+		097306CE60184A2CA458B43E /* Bellota-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7202CF72A0AC429498C8A83B /* Bellota-Bold.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		097306CE60184A2CA458B43E /* Bellota-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7202CF72A0AC429498C8A83B /* Bellota-Bold.ttf */; };
-		EB9B5B60F6034554BA9E607E /* Bellota-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28AD0400277F4CE18EC787AD /* Bellota-Light.ttf */; };
+		3EE6F1AA820649F4FF12CF81 /* libPods-musictherapy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 913DC47C7B6023340319EA4E /* libPods-musictherapy.a */; };
 		76CD21E4FE154A0292961885 /* Bellota-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90DD44F5B0914D79A50F8AEB /* Bellota-Regular.ttf */; };
-		EDD4254C13244E708FFB8136 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6705149296E04D78B80E6C6F /* OpenSans-Bold.ttf */; };
-		D3FD4A6D4C5B4A0BB1CBF56E /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83CECD438A544DFC898FF362 /* OpenSans-Light.ttf */; };
-		85B458330925428F8042CE4D /* OpenSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 913D5EDA75754DA98D09CC20 /* OpenSans-Medium.ttf */; };
+		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8221A8726F584A6CB95D0715 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0CEE1ABB41F44451B538DFE2 /* OpenSans-Regular.ttf */; };
+		85B458330925428F8042CE4D /* OpenSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 913D5EDA75754DA98D09CC20 /* OpenSans-Medium.ttf */; };
+		8C594A37D02EFA3395444B4A /* libPods-musictherapy-musictherapyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 160D86C1732E9240CA0272F5 /* libPods-musictherapy-musictherapyTests.a */; };
+		D3FD4A6D4C5B4A0BB1CBF56E /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83CECD438A544DFC898FF362 /* OpenSans-Light.ttf */; };
+		EB9B5B60F6034554BA9E607E /* Bellota-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28AD0400277F4CE18EC787AD /* Bellota-Light.ttf */; };
+		EDD4254C13244E708FFB8136 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6705149296E04D78B80E6C6F /* OpenSans-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,24 +34,30 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		001B3C9AA9C905988DA8003E /* Pods-musictherapy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-musictherapy.release.xcconfig"; path = "Target Support Files/Pods-musictherapy/Pods-musictherapy.release.xcconfig"; sourceTree = "<group>"; };
 		00E356EE1AD99517003FC87E /* musictherapyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = musictherapyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* musictherapyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = musictherapyTests.m; sourceTree = "<group>"; };
+		0CEE1ABB41F44451B538DFE2 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Regular.ttf"; path = "../src/assets/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* musictherapy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = musictherapy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = musictherapy/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = musictherapy/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = musictherapy/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = musictherapy/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = musictherapy/main.m; sourceTree = "<group>"; };
+		160D86C1732E9240CA0272F5 /* libPods-musictherapy-musictherapyTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-musictherapy-musictherapyTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		28AD0400277F4CE18EC787AD /* Bellota-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Bellota-Light.ttf"; path = "../src/assets/fonts/Bellota-Light.ttf"; sourceTree = "<group>"; };
+		45C2A533431FB64E2C51EC26 /* Pods-musictherapy-musictherapyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-musictherapy-musictherapyTests.debug.xcconfig"; path = "Target Support Files/Pods-musictherapy-musictherapyTests/Pods-musictherapy-musictherapyTests.debug.xcconfig"; sourceTree = "<group>"; };
+		61A908E285C46094EA91706F /* Pods-musictherapy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-musictherapy.debug.xcconfig"; path = "Target Support Files/Pods-musictherapy/Pods-musictherapy.debug.xcconfig"; sourceTree = "<group>"; };
+		6705149296E04D78B80E6C6F /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Bold.ttf"; path = "../src/assets/fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		7202CF72A0AC429498C8A83B /* Bellota-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Bellota-Bold.ttf"; path = "../src/assets/fonts/Bellota-Bold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = musictherapy/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		83CECD438A544DFC898FF362 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../src/assets/fonts/OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		90DD44F5B0914D79A50F8AEB /* Bellota-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Bellota-Regular.ttf"; path = "../src/assets/fonts/Bellota-Regular.ttf"; sourceTree = "<group>"; };
+		913D5EDA75754DA98D09CC20 /* OpenSans-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Medium.ttf"; path = "../src/assets/fonts/OpenSans-Medium.ttf"; sourceTree = "<group>"; };
+		913DC47C7B6023340319EA4E /* libPods-musictherapy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-musictherapy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECB9BD9A115EE16341B61AFD /* Pods-musictherapy-musictherapyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-musictherapy-musictherapyTests.release.xcconfig"; path = "Target Support Files/Pods-musictherapy-musictherapyTests/Pods-musictherapy-musictherapyTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		7202CF72A0AC429498C8A83B /* Bellota-Bold.ttf */ = {isa = PBXFileReference; name = "Bellota-Bold.ttf"; path = "../src/assets/fonts/Bellota-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		28AD0400277F4CE18EC787AD /* Bellota-Light.ttf */ = {isa = PBXFileReference; name = "Bellota-Light.ttf"; path = "../src/assets/fonts/Bellota-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		90DD44F5B0914D79A50F8AEB /* Bellota-Regular.ttf */ = {isa = PBXFileReference; name = "Bellota-Regular.ttf"; path = "../src/assets/fonts/Bellota-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		6705149296E04D78B80E6C6F /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; name = "OpenSans-Bold.ttf"; path = "../src/assets/fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		83CECD438A544DFC898FF362 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; name = "OpenSans-Light.ttf"; path = "../src/assets/fonts/OpenSans-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		913D5EDA75754DA98D09CC20 /* OpenSans-Medium.ttf */ = {isa = PBXFileReference; name = "OpenSans-Medium.ttf"; path = "../src/assets/fonts/OpenSans-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		0CEE1ABB41F44451B538DFE2 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; name = "OpenSans-Regular.ttf"; path = "../src/assets/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C594A37D02EFA3395444B4A /* libPods-musictherapy-musictherapyTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EE6F1AA820649F4FF12CF81 /* libPods-musictherapy.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +97,20 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		06C7A7D506C642D1B834A940 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7202CF72A0AC429498C8A83B /* Bellota-Bold.ttf */,
+				28AD0400277F4CE18EC787AD /* Bellota-Light.ttf */,
+				90DD44F5B0914D79A50F8AEB /* Bellota-Regular.ttf */,
+				6705149296E04D78B80E6C6F /* OpenSans-Bold.ttf */,
+				83CECD438A544DFC898FF362 /* OpenSans-Light.ttf */,
+				913D5EDA75754DA98D09CC20 /* OpenSans-Medium.ttf */,
+				0CEE1ABB41F44451B538DFE2 /* OpenSans-Regular.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* musictherapy */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +128,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
+				913DC47C7B6023340319EA4E /* libPods-musictherapy.a */,
+				160D86C1732E9240CA0272F5 /* libPods-musictherapy-musictherapyTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -124,6 +150,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				06C7A7D506C642D1B834A940 /* Resources */,
+				C5D5F940E1361C5B97921FDF /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -139,20 +166,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		06C7A7D506C642D1B834A940 /* Resources */ = {
-			isa = "PBXGroup";
+		C5D5F940E1361C5B97921FDF /* Pods */ = {
+			isa = PBXGroup;
 			children = (
-				7202CF72A0AC429498C8A83B /* Bellota-Bold.ttf */,
-				28AD0400277F4CE18EC787AD /* Bellota-Light.ttf */,
-				90DD44F5B0914D79A50F8AEB /* Bellota-Regular.ttf */,
-				6705149296E04D78B80E6C6F /* OpenSans-Bold.ttf */,
-				83CECD438A544DFC898FF362 /* OpenSans-Light.ttf */,
-				913D5EDA75754DA98D09CC20 /* OpenSans-Medium.ttf */,
-				0CEE1ABB41F44451B538DFE2 /* OpenSans-Regular.ttf */,
+				61A908E285C46094EA91706F /* Pods-musictherapy.debug.xcconfig */,
+				001B3C9AA9C905988DA8003E /* Pods-musictherapy.release.xcconfig */,
+				45C2A533431FB64E2C51EC26 /* Pods-musictherapy-musictherapyTests.debug.xcconfig */,
+				ECB9BD9A115EE16341B61AFD /* Pods-musictherapy-musictherapyTests.release.xcconfig */,
 			);
-			name = Resources;
+			path = Pods;
 			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -161,9 +184,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "musictherapyTests" */;
 			buildPhases = (
+				4CBA63665C2D202D4472B810 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				5E6D9418E1F07987C3054F78 /* [CP] Embed Pods Frameworks */,
+				9BCCA6F28897B479323FA0A9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -179,11 +205,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "musictherapy" */;
 			buildPhases = (
+				CE3132BB57BA70A40B5FF142 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				CBD1FB8DA7275BAFC180EF76 /* [CP] Embed Pods Frameworks */,
+				70342D9975936E7846524C7F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -271,6 +300,118 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
+		4CBA63665C2D202D4472B810 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-musictherapy-musictherapyTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5E6D9418E1F07987C3054F78 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-musictherapy-musictherapyTests/Pods-musictherapy-musictherapyTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-musictherapy-musictherapyTests/Pods-musictherapy-musictherapyTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-musictherapy-musictherapyTests/Pods-musictherapy-musictherapyTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		70342D9975936E7846524C7F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-musictherapy/Pods-musictherapy-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-musictherapy/Pods-musictherapy-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-musictherapy/Pods-musictherapy-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9BCCA6F28897B479323FA0A9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-musictherapy-musictherapyTests/Pods-musictherapy-musictherapyTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-musictherapy-musictherapyTests/Pods-musictherapy-musictherapyTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-musictherapy-musictherapyTests/Pods-musictherapy-musictherapyTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CBD1FB8DA7275BAFC180EF76 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-musictherapy/Pods-musictherapy-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-musictherapy/Pods-musictherapy-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-musictherapy/Pods-musictherapy-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE3132BB57BA70A40B5FF142 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-musictherapy-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -323,6 +464,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45C2A533431FB64E2C51EC26 /* Pods-musictherapy-musictherapyTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -349,6 +491,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ECB9BD9A115EE16341B61AFD /* Pods-musictherapy-musictherapyTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -372,6 +515,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61A908E285C46094EA91706F /* Pods-musictherapy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -387,16 +531,18 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.musictherapy;
 				PRODUCT_NAME = musictherapy;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 001B3C9AA9C905988DA8003E /* Pods-musictherapy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -411,9 +557,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.musictherapy;
 				PRODUCT_NAME = musictherapy;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -451,6 +598,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -515,6 +663,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
