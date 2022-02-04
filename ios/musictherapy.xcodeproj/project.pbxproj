@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* musictherapyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* musictherapyTests.m */; };
+		046E99DE27AD8338000E09D8 /* Q0MN9oYGQ2E.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 046E99DD27AD8338000E09D8 /* Q0MN9oYGQ2E.jpg */; };
 		097306CE60184A2CA458B43E /* Bellota-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7202CF72A0AC429498C8A83B /* Bellota-Bold.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -38,6 +39,7 @@
 		00E356EE1AD99517003FC87E /* musictherapyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = musictherapyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* musictherapyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = musictherapyTests.m; sourceTree = "<group>"; };
+		046E99DD27AD8338000E09D8 /* Q0MN9oYGQ2E.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Q0MN9oYGQ2E.jpg; sourceTree = "<group>"; };
 		0CEE1ABB41F44451B538DFE2 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Regular.ttf"; path = "../src/assets/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* musictherapy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = musictherapy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = musictherapy/AppDelegate.h; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
+				046E99DD27AD8338000E09D8 /* Q0MN9oYGQ2E.jpg */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
@@ -271,6 +274,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				046E99DE27AD8338000E09D8 /* Q0MN9oYGQ2E.jpg in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				097306CE60184A2CA458B43E /* Bellota-Bold.ttf in Resources */,
