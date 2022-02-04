@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState, useRef} from 'react';
 import {
     Text,
     View,
+    Linking,
     ScrollView,
     TouchableOpacity,
     ImageBackground,
@@ -192,9 +193,14 @@ function RegisterScreen ({ navigation }) {
                 </ScrollView>
                 <View style={styles.footer}>
                     {!isKeyboardVisible ? (
+                    <TouchableOpacity
+                    style={[styles.button_footer]}
+                    onPress={() => Linking.openURL('https://musictherapy.by/politikakonfidentapp/').catch(err => console.error('An error occurred', err))}
+                    >
                     <Text style={[GlobalStyle.CustomFontRegular, styles.button_footer_text]}>
                         Регестрируясь, принимаю условия использования и даю согласие на хранение и обработку персональных данных 
                     </Text>
+                    </TouchableOpacity>
                     ): null}
                 </View>            
             </SafeAreaView>

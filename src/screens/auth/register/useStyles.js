@@ -35,6 +35,11 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    button_footer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     button_footer_text: {
         fontSize: 12,
         letterSpacing: 1,

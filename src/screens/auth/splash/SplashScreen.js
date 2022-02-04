@@ -65,7 +65,7 @@ function SplashScreen ({ navigation }) {
                 <View style={styles.footer}>
                     <TouchableOpacity
                         style={[styles.button_footer]}
-                        onPress={() => Linking.openURL('https://vk.com').catch(err => console.error('An error occurred', err))}
+                        onPress={() => Linking.openURL('https://musictherapy.by/konsultant/').catch(err => console.error('An error occurred', err))}
                     >
                         <Text style={[GlobalStyle.CustomFontRegular, styles.button_footer_text]}>
                             Консультант 
@@ -74,7 +74,7 @@ function SplashScreen ({ navigation }) {
                     <View style={styles.hr} />
                     <TouchableOpacity
                         style={[styles.button_footer]}
-                        onPress={() => Linking.openURL('https://vk.com').catch(err => console.error('An error occurred', err))}
+                        onPress={() => Linking.openURL('https://musictherapy.by/kontakty/').catch(err => console.error('An error occurred', err))}
                     >
                         <Text style={[GlobalStyle.CustomFontRegular, styles.button_footer_text]}>
                             Связаться с нами
