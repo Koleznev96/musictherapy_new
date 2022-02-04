@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState, useRef} from 'react';
 import {
     Text,
     View,
+    Linking,
     ScrollView,
     TouchableOpacity,
     ImageBackground,
@@ -108,10 +109,16 @@ function RegisterScreen ({ navigation }) {
             if (data.errors) {
                 setErrorField({...errorField, [data.errors[0][0]]: data.errors[0][1]});
             } else {
-                navigation.navigate({
-                    name: 'CodeCheck',
-                    params: {data: {name, fullName, telephone, email, password}, tokenCode: data.tokenCode},
-                });
+                const dataNew = await request(`/api/auth/code_check`, 'POST', {name, fullName, telephone, email, password, tokenCode: data.tokenCode, code: '111111'});
+                if (dataNew.errors) {
+                    setErrorField(dataNew.errors[0][1]);
+                } else {
+                    auth.login(dataNew.token, email, password);
+                }
+                // navigation.navigate({
+                //     name: 'CodeCheck',
+                //     params: {data: {name, fullName, telephone, email, password}, tokenCode: data.tokenCode},
+                // });
             }
         } catch (e) {}
     };
@@ -186,9 +193,14 @@ function RegisterScreen ({ navigation }) {
                 </ScrollView>
                 <View style={styles.footer}>
                     {!isKeyboardVisible ? (
+                    <TouchableOpacity
+                    style={[styles.button_footer]}
+                    onPress={() => Linking.openURL('https://musictherapy.by/politikakonfidentapp/').catch(err => console.error('An error occurred', err))}
+                    >
                     <Text style={[GlobalStyle.CustomFontRegular, styles.button_footer_text]}>
                         Регестрируясь, принимаю условия использования и даю согласие на хранение и обработку персональных данных 
                     </Text>
+                    </TouchableOpacity>
                     ): null}
                 </View>            
             </SafeAreaView>

@@ -24,14 +24,18 @@ export const styles = StyleSheet.create({
     item_block: {
         width: '100%',
         alignItems: 'center',
-        height: 420,
+        // height: 420,
         marginBottom: 30,
     },
     item_img: {
         width: '100%',
-        height: 350,
+        height: 450,
+        // flex: 1,
+        // width: null,
+        // height: null,
+        resizeMode: 'contain',
         borderRadius: 16,
-        backgroundColor: 'rgba(198, 198, 198, 0.54)'
+        // backgroundColor: 'rgba(198, 198, 198, 0.54)'
     },
     item_button: {
         marginTop: 20,
