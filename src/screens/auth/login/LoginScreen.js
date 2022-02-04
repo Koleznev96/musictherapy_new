@@ -129,7 +129,7 @@ function LoginScreen ({ navigation }) {
                                     Создать новый аккаунт 
                                 </Text>
                             </TouchableOpacity>  
-                            <View style={styles.hr} />
+                            {/* <View style={styles.hr} />
                             <TouchableOpacity
                                 style={[styles.button_footer]}
                                 onPress={() => helpHandler()}
@@ -137,7 +137,7 @@ function LoginScreen ({ navigation }) {
                                 <Text style={[GlobalStyle.CustomFontRegular, styles.button_footer_text]}>
                                     Забыли пароль?
                                 </Text>
-                            </TouchableOpacity>  
+                            </TouchableOpacity>   */}
                         </View>
                     </View>
 

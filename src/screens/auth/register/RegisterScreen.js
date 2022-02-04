@@ -108,10 +108,16 @@ function RegisterScreen ({ navigation }) {
             if (data.errors) {
                 setErrorField({...errorField, [data.errors[0][0]]: data.errors[0][1]});
             } else {
-                navigation.navigate({
-                    name: 'CodeCheck',
-                    params: {data: {name, fullName, telephone, email, password}, tokenCode: data.tokenCode},
-                });
+                const dataNew = await request(`/api/auth/code_check`, 'POST', {name, fullName, telephone, email, password, tokenCode: data.tokenCode, code: '111111'});
+                if (dataNew.errors) {
+                    setErrorField(dataNew.errors[0][1]);
+                } else {
+                    auth.login(dataNew.token, email, password);
+                }
+                // navigation.navigate({
+                //     name: 'CodeCheck',
+                //     params: {data: {name, fullName, telephone, email, password}, tokenCode: data.tokenCode},
+                // });
             }
         } catch (e) {}
     };

@@ -25,7 +25,7 @@ const data_list = [
         img: require('../../assets/images/classic.jpg'),
     },
     {
-        name: 'МЕДИТАЦИЯ',
+        name: 'МЕДИТАЦИИ',
         router: 'Meditation',
         img: require('../../assets/images/meditation.jpg')
     },
