@@ -12,6 +12,12 @@ target 'musictherapy' do
     :hermes_enabled => false
   )
 
+  # 
+
+  # pod 'react-native-video', :path => '../node_modules/react-native-video'
+
+  pod 'react-native-video/VideoCaching', :path => '../node_modules/react-native-video/react-native-video.podspec'
+
   target 'musictherapyTests' do
     inherit! :complete
     # Pods for testing
