@@ -1,4 +1,4 @@
-package com.musictherapy;
+package by.musictherapy;
 
 import com.facebook.react.ReactActivity;
 
