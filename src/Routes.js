@@ -1,4 +1,5 @@
 import React from "react";
+import { Platform } from 'react-native';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -103,7 +104,7 @@ const StackRoutes = () => (
   >
     <Tab.Screen name ='Home' component={HomeRoutes} options={{ headerShown: false, tabBarLabel: 'Главная' }}/>
     <Tab.Screen name ='Consultant' component={ConsultantScreen} options={{ headerShown: false, tabBarLabel: 'Консультант' }}/>
-    <Tab.Screen name ='Profile' component={ProfileScreen} options={{ headerShown: false, tabBarLabel: 'Аккаунт' }}/>
+    {/* {Platform.OS !== 'ios' ? (<Tab.Screen name ='Profile' component={ProfileScreen} options={{ headerShown: false, tabBarLabel: 'Аккаунт' }}/>) : null} */}
   </Tab.Navigator>
 );
 
@@ -115,7 +116,7 @@ export const Routes = isAuthenticated => {
         cardStyleInterpolator: forFade, 
       }}
     >
-      {isAuthenticated ? (
+      {/* {Platform.OS !== 'ios' ? (isAuthenticated ? (
         <Stack.Navigator 
           initialRouteName='Root' 
           screenOptions={{ 
@@ -140,7 +141,17 @@ export const Routes = isAuthenticated => {
           <Stack.Screen name='CodeCheck' component={CodeCheckScreen} options={{ headerShown: false }}/>
           <Stack.Screen name='Info' component={InfoScreen} options={{ headerShown: false }}/>
         </Stack.Navigator>
-      )} 
+      )) : ( */}
+        <Stack.Navigator 
+          initialRouteName='Root' 
+          screenOptions={{ 
+            headerShown: false, 
+            cardStyleInterpolator: forFade, 
+          }}
+        >
+          <Stack.Screen name='Root' component={StackRoutes} options={{ headerShown: false }}/>
+          <Stack.Screen name='FullVideo' component={FullVideoScreen} options={{ headerShown: false }}/>
+        </Stack.Navigator>
     </NavigationContainer>
   );
 }

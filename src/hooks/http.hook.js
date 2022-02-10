@@ -1,6 +1,6 @@
 import {useState, useCallback, useContext} from 'react';
 import {httpServer} from '../../const';
-import {AsyncStorage} from 'react-native';
+import {AsyncStorage, Platform} from 'react-native';
 import {AuthContext} from "../context/authContext";
 
 const reAuthorization = async () => {
@@ -45,16 +45,18 @@ export const useHttp = () => {
             }
             console.log("response-", httpServer + url, {method, body, headers})
             let response = await fetch(httpServer + url, {method, body, headers})
-            if (!response.ok && response.status === 401) {
-                const dataUserNew = await reAuthorization();
-                if (dataUserNew.token && dataUserNew.email && dataUserNew.password){
-                    auth.login(dataUserNew.token, dataUserNew.email, dataUserNew.password);
-                    headers.Authorization = `${dataUserNew.token}`
-                    response = await fetch(httpServer + url, {method, body, headers}); 
-                } else {
-                    auth.logout();
-                }
-            }
+            // if (Platform.OS !== 'ios') {
+            //     if (!response.ok && response.status === 401) {
+            //         const dataUserNew = await reAuthorization();
+            //         if (dataUserNew.token && dataUserNew.email && dataUserNew.password){
+            //             auth.login(dataUserNew.token, dataUserNew.email, dataUserNew.password);
+            //             headers.Authorization = `${dataUserNew.token}`
+            //             response = await fetch(httpServer + url, {method, body, headers}); 
+            //         } else {
+            //             auth.logout();
+            //         }
+            //     }
+            // }
             let data = await response.json();
             
             if (!response.ok) {

@@ -39,7 +39,7 @@ function ClassicScreen ({ navigation }) {
     const getData = async () => {
         setLoader(true);
         try {
-            const data = await request(`/api/data/classic/0`, 'GET', null, {
+            const data = await request(`/api/data/classic/ios/0`, 'GET', null, {
                 Authorization: `${auth.token}`
             });
             setData(data.data);
@@ -67,7 +67,7 @@ function ClassicScreen ({ navigation }) {
 
         try {
             setLoaderPaginashion(true);
-            const answer = await request(`/api/data/classic/${counterPage}`, 'GET', null, {
+            const answer = await request(`/api/data/classic/ios/${counterPage}`, 'GET', null, {
                 Authorization: `${auth.token}`
             });
             setData([...data, ...answer.data]);

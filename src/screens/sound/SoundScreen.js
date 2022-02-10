@@ -33,7 +33,7 @@ function SoundScreen ({ navigation }) {
     const getData = async () => {
         setLoader(true);
         try {
-            const data = await request(`/api/data/live_sound/0`, 'GET', null, {
+            const data = await request(`/api/data/live_sound/ios/0`, 'GET', null, {
                 Authorization: `${auth.token}`
             });
             setData(data.data);
@@ -54,7 +54,7 @@ function SoundScreen ({ navigation }) {
 
         try {
             setLoaderPaginashion(true);
-            const answer = await request(`/api/data/live_sound/${counterPage}`, 'GET', null, {
+            const answer = await request(`/api/data/live_sound/ios/${counterPage}`, 'GET', null, {
                 Authorization: `${auth.token}`
             });
             setData([...data, ...answer.data]);

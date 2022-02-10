@@ -41,7 +41,7 @@ function MeditationScreen ({ navigation }) {
     const getData = async () => {
         setLoader(true);
         try {
-            const data = await request(`/api/data/meditation/0`, 'GET', null, {
+            const data = await request(`/api/data/meditation/ios/0`, 'GET', null, {
                 Authorization: `${auth.token}`
             });
             setData(data.data);
@@ -62,7 +62,7 @@ function MeditationScreen ({ navigation }) {
 
         try {
             setLoaderPaginashion(true);
-            const answer = await request(`/api/data/meditation/${counterPage}`, 'GET', null, {
+            const answer = await request(`/api/data/meditation/ios/${counterPage}`, 'GET', null, {
                 Authorization: `${auth.token}`
             });
             setData([...data, ...answer.data]);
