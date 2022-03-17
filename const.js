@@ -1,10 +1,10 @@
 // herocku
-// export const httpServer = "https://admin.musictherapy.by";
+export const httpServer = "https://admin.musictherapy.by";
 
 // prodaction
 // export const httpServer = "https://musictherapy96.herokuapp.com";
 
 // localhost
-export const httpServer = "http://192.168.0.140:5000";
+// export const httpServer = "http://192.168.0.140:5000";
 
-export const appVersion = "1";
+export const appVersion = "2";
