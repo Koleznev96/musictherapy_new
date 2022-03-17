@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
         width: '100%',
         height: 63,
         flexDirection: 'row',
+        justifyContent: 'space-between',
         paddingTop: 0,
         alignItems: 'center',
         alignContent: 'center',
@@ -24,5 +25,16 @@ export const styles = StyleSheet.create({
     text_glav: {
         marginLeft: 15,
         fontSize: 22,
+    },
+    back_button: {
+        paddingHorizontal: 10,
+        paddingVertical: 2,
+        borderRadius: 12,
+        borderWidth: 1.5,
+        borderColor: '#fff',
+        marginTop: 2,
+    },
+    back_button_text: {
+        fontSize: 16,
     },
 });

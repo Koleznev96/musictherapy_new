@@ -30,6 +30,7 @@ export const styles = StyleSheet.create({
     item_img: {
         width: '100%',
         height: 450,
+        // backgroundColor: 'red',
         // flex: 1,
         // width: null,
         // height: null,

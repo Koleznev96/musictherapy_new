@@ -51,14 +51,14 @@ function SplashScreen ({ navigation }) {
                     <Image source={require('../../../assets/images/logo.png')} style={styles.logo}/>
                 
                     <Text style={[GlobalStyle.BellotaFontRegular, styles.text_glav]}>
-                        МУЗЫКОТЕРАПИЯ
+                        {(auth.translations && auth.translations['Музыкотерапия']) ? auth.translations['Музыкотерапия'].toUpperCase() : 'МУЗЫКОТЕРАПИЯ'}
                     </Text>
                     <Text style={[GlobalStyle.BellotaFontRegular, styles.text_foot]}>
-                        Уникальные программы востановления и отдыха
+                        {(auth.translations && auth.translations['Уникальные программы востановления и отдыха']) ? auth.translations['Уникальные программы востановления и отдыха'] : 'Уникальные программы востановления и отдыха'}
                     </Text>
                     <View style={styles.block_buttons}>
-                        <ButtonFull data={{value: 'Создать новый аккаунт', change: registerHandler, styles: {marginTop: '25%',}}} />
-                        <ButtonFull data={{value: 'Войти', change: loginHandler, styles: {marginTop: 25,}}} />
+                        <ButtonFull data={{value: (auth.translations && auth.translations['Создать новый аккаунт']) ? auth.translations['Создать новый аккаунт'] : 'Создать новый аккаунт', change: registerHandler, styles: {marginTop: '25%',}}} />
+                        <ButtonFull data={{value: (auth.translations && auth.translations['Войти']) ? auth.translations['Войти'] : 'Войти', change: loginHandler, styles: {marginTop: 25,}}} />
                     </View>
                 </View>
 
@@ -68,7 +68,7 @@ function SplashScreen ({ navigation }) {
                         onPress={() => Linking.openURL('https://musictherapy.by/konsultant/').catch(err => console.error('An error occurred', err))}
                     >
                         <Text style={[GlobalStyle.CustomFontRegular, styles.button_footer_text]}>
-                            Консультант 
+                            {(auth.translations && auth.translations['Консультант']) ? auth.translations['Консультант'] : 'Консультант'}
                         </Text>
                     </TouchableOpacity>  
                     <View style={styles.hr} />
@@ -77,7 +77,7 @@ function SplashScreen ({ navigation }) {
                         onPress={() => Linking.openURL('https://musictherapy.by/kontakty/').catch(err => console.error('An error occurred', err))}
                     >
                         <Text style={[GlobalStyle.CustomFontRegular, styles.button_footer_text]}>
-                            Связаться с нами
+                            {(auth.translations && auth.translations['Связаться с нами']) ? auth.translations['Связаться с нами'] : 'Связаться с нами'}
                         </Text>
                     </TouchableOpacity>  
                 </View>

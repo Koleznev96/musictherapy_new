@@ -21,7 +21,7 @@ export const ButtonFull = ({ data }) => {
                     <ActivityIndicator size={40} color={ColorsStyles.colorTextError} style={styles.loader}/>
                 </View>
             ) : (
-                <Text style={[GlobalStyle.CustomFontRegular, styles.button_text]}>
+                <Text style={[GlobalStyle.CustomFontRegular, styles.button_text, data?.styles_text ? data.styles_text : null]}>
                     {data.value}
                 </Text>
             )}

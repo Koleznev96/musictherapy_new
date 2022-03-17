@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
     Text,
     View,
@@ -7,18 +7,29 @@ import {
 import {styles} from "./useStyles";
 import GlobalStyle from "../GlobalStyle";
 import { GlobalSvgSelector } from '../../assets/GlobalSvgSelector';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { AuthContext } from '../../context/authContext';
 
 
 export const HeaderRoot = ({ data }) => {
+    const auth = useContext(AuthContext);
     return (
         <View style={styles.body}>
             <View style={styles.block}>
             <Image source={require('../../assets/images/logo-min.png')} style={styles.logo}/>
                 
             <Text style={[GlobalStyle.CustomFontBold, styles.text_glav]}>
-                {data?.label}
+                {data?.label?.toUpperCase()}
             </Text>
             </View>
+            {data?.backHandler && <TouchableOpacity
+            style={styles.back_button}
+            onPress={() => data?.backHandler()}
+            >
+                <Text style={[GlobalStyle.CustomFontRegular, styles.back_button_text]}>
+                    {(auth.translations && auth.translations['Назад']) ? auth.translations['Назад'] : 'Назад'}
+                </Text>
+            </TouchableOpacity>}
         </View>
     );
 }

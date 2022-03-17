@@ -6,9 +6,55 @@ export const styles = StyleSheet.create({
         marginTop: 10,
         width: '100%',
     },
+    button_like: {
+        opacity: 0.8,
+        width: 36,
+        height: 36,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    futter_plyer: {
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
+    },
     scrollView: {
         marginTop: 10,
         alignItems: 'center',
+    },
+    block_root_v: {
+        width: '100%',
+        height: 200,
+        borderRadius: 16,
+        marginTop: 10,
+        backgroundColor: 'rgba(198, 198, 198, 0.54)',
+    },
+    block_root_v_active: {
+        zIndex: 3000,
+        position: 'relative',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        flex: 1,
+        // height: 600,
+    },
+    video_false: {
+        borderRadius: 16,
+        height: 200,
+        width: '100%',
+    },
+    video_false_v: {
+        width: '100%',
+        height: 200,
+    },
+    video_true: {
+        flex: 1,
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
     },
     item_video: {
         width: Dimensions.get('window').width - 40,
@@ -19,7 +65,7 @@ export const styles = StyleSheet.create({
     },
     block: {
         alignItems: 'center',
-        width: '90%',
+        width: '100%',
     },
     item_block_root: {
         marginBottom: 15,

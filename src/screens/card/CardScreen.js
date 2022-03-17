@@ -20,7 +20,8 @@ import { LoaderIn } from '../../components/loader/minLoader/LoaderIn';
 import {httpServer} from '../../../const';
 
 
-function SoundScreen ({ navigation }) {
+function CardScreen ({ navigation, route }) {
+    const {data_root} = route.params;
     const auth = useContext(AuthContext);
     const {loading, request, error, clearError} = useHttp();
     const [Refreshing, setRefreshing] = useState(false);
@@ -33,7 +34,7 @@ function SoundScreen ({ navigation }) {
     const getData = async () => {
         setLoader(true);
         try {
-            const data = await request(`/api/data/live_sound/ios/0`, 'GET', null, {
+            const data = await request(`${data_root.url}ios/0`, 'GET', null, {
                 Authorization: `${auth.token}`
             });
             setData(data.data);
@@ -54,7 +55,7 @@ function SoundScreen ({ navigation }) {
 
         try {
             setLoaderPaginashion(true);
-            const answer = await request(`/api/data/live_sound/ios/${counterPage}`, 'GET', null, {
+            const answer = await request(`${data_root.url}ios/${counterPage}`, 'GET', null, {
                 Authorization: `${auth.token}`
             });
             setData([...data, ...answer.data]);
@@ -66,6 +67,10 @@ function SoundScreen ({ navigation }) {
 
     const nextHandler = (url) => {
         Linking.openURL(url).catch(err => console.error('An error occurred', err));
+    }
+
+    const backHandler = () => {
+        navigation.goBack()
     }
 
     return (
@@ -82,17 +87,17 @@ function SoundScreen ({ navigation }) {
                     style={{width: '100%', height: '100%', alignItems: 'center'}}
                 >
             
-                <HeaderRoot data={{label: 'ЖИВОЙ ЗВУК'}}/>
+                <HeaderRoot data={{label: data_root.name, backHandler}}/>
                     <View style={styles.block}>
                         <Text style={[GlobalStyle.CustomFontRegular, styles.label]}>
-                            Приглашаем на ЖИВЫЕ концерты!
+                            {(auth.translations && auth.translations['Приглашаем на ЖИВЫЕ концерты!']) ? auth.translations['Приглашаем на ЖИВЫЕ концерты!'] : 'Приглашаем на ЖИВЫЕ концерты!'}
                         </Text>
                         {loader ? (
                             <LoaderIn />
                         ) : (
                         <FlatList
-                            onEndReached={paginashion}
-                            onEndReachedThreshold={0.3}
+                            // onEndReached={paginashion}
+                            // onEndReachedThreshold={0.3}
                             showsVerticalScrollIndicator={false}
                             style={{width: '100%'}}
                             contentContainerStyle={{paddingBottom: 100}}
@@ -115,7 +120,7 @@ function SoundScreen ({ navigation }) {
                                 onPress={() => nextHandler(item.url)}
                                 >
                                     <Text style={[GlobalStyle.CustomFontRegular, styles.item_button_text]}>
-                                        Купить билеты
+                                        {(auth.translations && auth.translations['Купить билеты']) ? auth.translations['Купить билеты'] : 'Купить билеты'}
                                     </Text>
                                 </TouchableOpacity>
                                 </View>
@@ -129,4 +134,4 @@ function SoundScreen ({ navigation }) {
     )
 }
 
-export default SoundScreen;
+export default CardScreen;

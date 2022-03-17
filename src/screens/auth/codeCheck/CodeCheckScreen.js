@@ -36,7 +36,8 @@ function CodeCheckScreen ({ navigation, route }) {
             if (data.errors) {
                 setErrorField(data.errors[0][1]);
             } else {
-                 auth.login(data.token, reg_data.email, reg_data.password);
+                auth.login(data.token, reg_data.email, reg_data.password);
+                navigation.navigate('Profile');
             }
         } catch (e) {}
     };
@@ -63,7 +64,8 @@ function CodeCheckScreen ({ navigation, route }) {
             > 
                 <HeaderAuth />
                 <Text style={[GlobalStyle.CustomFontRegular, styles.text_foot]}>
-                    Для завершения регистрации введите код активации, который отправлен вам на e-mail
+                    {(auth.translations && auth.translations['Для завершения регистрации введите код активации, который отправлен вам на e-mail']) ? auth.translations['Для завершения регистрации введите код активации, который отправлен вам на e-mail'] : 'Для завершения регистрации введите код активации, который отправлен вам на e-mail'}
+                    
                 </Text>
                 <ScrollView style={styles.scroll} 
                     keyboardShouldPersistTaps='handled' 
@@ -71,37 +73,39 @@ function CodeCheckScreen ({ navigation, route }) {
                     contentContainerStyle={styles.scrollView}
                 >
                     <View style={styles.block}>
-                        <InputFull data={{value: code, change: setCode, placeholder: 'Код', error: errorField}} />
+                        <InputFull data={{value: code, change: setCode, placeholder: (auth.translations && auth.translations['Код']) ? auth.translations['Код'] : 'Код', error: errorField}} />
 
                         <View style={styles.block_reset}>
                             {status? (
                             <>
                             <Text style={[GlobalStyle.CustomFontRegular, styles.block_reset_text]}>
-                                Не получили код? 
+                                {(auth.translations && auth.translations['Не получили код?']) ? auth.translations['Не получили код?'] : 'Не получили код?'}
                             </Text>
                             <TouchableOpacity
                                 style={styles.button_reset}
                                 onPress={() => newCode()}
                             >
                                 <Text style={[GlobalStyle.CustomFontRegular, styles.button_reset_text]}>
-                                    Отправить ещё раз
+                                    {(auth.translations && auth.translations['Отправить ещё раз']) ? auth.translations['Отправить ещё раз'] : 'Отправить ещё раз'}
                                 </Text>
                             </TouchableOpacity>  
                             </>
                             ) : (
                             <Text style={[GlobalStyle.CustomFontRegular, styles.block_reset_text]}>
-                                Код отправлен 
+                                {(auth.translations && auth.translations['Код отправлен']) ? auth.translations['Код отправлен'] : 'Код отправлен'}
+                                
                             </Text>
                             )}
                         </View>
 
-                        <ButtonFull data={{value: 'Завершить регистрацию', change: AuthHandler, styles: {marginTop: 50,}, loading: loading}} />
+                        <ButtonFull data={{value: (auth.translations && auth.translations['Завершить регистрацию']) ? auth.translations['Завершить регистрацию'] : 'Завершить регистрацию', change: AuthHandler, styles: {marginTop: 50,}, loading: loading}} />
                         <TouchableOpacity
                             style={styles.buttonLog}
                             onPress={() => loginHandler()}
                         >
                             <Text style={[GlobalStyle.CustomFontRegular, styles.buttonLog_text]}>
-                                Войти в существующий аккаунт 
+                                {(auth.translations && auth.translations['Войти в существующий аккаунт']) ? auth.translations['Войти в существующий аккаунт'] : 'Войти в существующий аккаунт'}
+                                
                             </Text>
                         </TouchableOpacity>  
                     </View>

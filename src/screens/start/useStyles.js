@@ -23,4 +23,25 @@ export const styles = StyleSheet.create({
     item_name: {
         fontSize: 24,
     },
+    block_dalate: {
+        width: '100%',
+        paddingHorizontal: 15,
+        paddingVertical: 15,
+        alignItems: 'center',
+    },
+    label_root: {
+        fontSize: 16,
+        marginBottom: 15,
+    },
+    label: {
+        marginBottom: 30,
+    },
+    button_dalete: {
+        width: '60%',
+        height: 42,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: ColorsStyles.colorButton,
+        borderRadius: 20,
+    }
 });

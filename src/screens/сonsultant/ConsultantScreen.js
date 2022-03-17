@@ -16,7 +16,6 @@ import { GlobalSvgSelector } from '../../assets/GlobalSvgSelector';
 import {HeaderRoot} from "../../components/headerRoot/HeaderRoot";
 import { ColorsStyles } from '../../constants/ColorsStyles';
 
-
 const data_list = [
     {
         label: 'Зачем мне это приложение?',
@@ -47,7 +46,13 @@ const data_list = [
         text: `Для связи с нами вы можете писать на нашу почту info@musictherapy.by.
 Еще больше актуальной информации о нашем проекте в нашем Instagram https://www.instagram.com/music.therapy.by/.`,
     },
+    {
+        label: 'Как можно использовать приложение?',
+        text: `Запустите приложение когда принимаете ванну. Стоите в пробке - используйте это время для
+релакса! Удобно пользоваться везде. Запустили и наслаждаетесь гармонией!`,
+    },
 ];
+
 
 function ConsultantScreen ({ navigation }) {
     const auth = useContext(AuthContext);
@@ -59,6 +64,10 @@ function ConsultantScreen ({ navigation }) {
         else setActiveIndex(index);
     }
 
+    const backHandler = () => {
+        navigation.navigate('Home');
+    }
+
     return (
         <ImageBackground
             source={require('../../assets/images/background.jpg')}
@@ -68,20 +77,18 @@ function ConsultantScreen ({ navigation }) {
             <SafeAreaView
                 style={{width: '100%', height: '100%', alignItems: 'center'}}
             > 
-                <HeaderRoot data={{label: 'КОНСУЛЬТАНТ'}}/>
+                <HeaderRoot data={{label: (auth.translations && auth.translations['Консультант']) ? auth.translations['Консультант'].toUpperCase() : 'КОНСУЛЬТАНТ', backHandler: backHandler}}/>
                 <View style={styles.block}>
                 <FlatList
                 style={{width: '100%', height: '95%'}}
                 contentContainerStyle={{paddingBottom: 100}}
                 showsVerticalScrollIndicator={false}
-                data={data_list}
+                data={(auth.translations && auth.translations['consultations']) ? auth.translations['consultations'] : data_list}
                 renderItem={({item, index}) => (
                     <>
                     {index === 0 ? (<Text style={[GlobalStyle.CustomFontRegular, styles.label]}>
-                        Музыкотерапия - это эффективная методика коррекции 
-                        психо- эмоционального состояния. Рекомендуем использовать 
-                        приложение минимум 15 минут в день в течение 90 дней для 
-                        стабильного эффекта
+                        {(auth.translations && auth.translations['Музыкотерапия - это']) ? auth.translations['Музыкотерапия - это'] : 'Музыкотерапия - это эффективная методика коррекции психо- эмоционального состояния. Рекомендуем использовать приложение минимум 15 минут в день в течение 90 дней для стабильного эффекта'}
+                        
                     </Text>): null}
                         <View style={activeIndex === index ? styles.item_block_active : styles.item_block}>
                             <TouchableOpacity

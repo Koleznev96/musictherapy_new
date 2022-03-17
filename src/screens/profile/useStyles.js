@@ -1,4 +1,5 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform, Dimensions } from 'react-native';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { ColorsStyles } from "../../constants/ColorsStyles";
 
 export const styles = StyleSheet.create({
@@ -7,12 +8,14 @@ export const styles = StyleSheet.create({
         width: '100%',
     },
     scrollView: {
-        marginTop: 10,
+        marginTop: 0,
         alignItems: 'center',
     },
-    block: {
+    block_l: {
         alignItems: 'center',
-        width: '75%',
+        width: '100%',
+        paddingHorizontal: 40,
+        
     },
     logo: {
         width: 95,
@@ -53,6 +56,111 @@ export const styles = StyleSheet.create({
     buttonLog_text: {
         width: '100%',
         textAlign: 'center',
+        fontSize: 14,
+    },
+    
+
+    block: {
+        marginTop: '20%',
+        alignItems: 'center',
+        width: '100%',
+    },
+    block_buttons: {
+        alignItems: 'center',
+        width: '100%',
+        paddingHorizontal: 20,
+    },
+    logo: {
+        width: 95,
+        height: 109,
+    },
+    text_glav: {
+        marginTop: 25,
+        fontSize: Dimensions.get('window').width > 350 ? 32 : 28,
+    },
+    text_foot: {
+        letterSpacing: 2,
+        marginTop: 8,
+        fontSize: 14,
+        textAlign: 'center',
+        width: 300,
+    },
+    footer: {
+        position: 'absolute',
+        bottom: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    hr: {
+        width: 1,
+        height: 15,
+        backgroundColor: '#fff',
+        marginLeft: 10,
+        marginRight: 10,
+    },
+    button_footer: {
+        height: 32,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    button_footer_text: {
+        fontSize: 12,
+        letterSpacing: 1,
+    },
+    buttons_length: {
+        marginTop: 10,
+        width: 130,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    button_length: {
+        width: 32,
+        height: 32,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    block_buttons_length_text: {
+        fontSize: 14,
+        borderBottomWidth: 1,
+        borderBottomColor: '#fff',
+    },
+    block_buttons_length_text_active: {
+        fontSize: 14,
+    },
+    block_text: {
+        width: '100%',
+        paddingHorizontal: 20,
+        marginTop: '10%',
+    },
+    block_text_main: {
+        textAlign: 'center',
+        fontSize: 14,
+    },
+    header_block: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 16,
+    },
+    header_button: {
+        width: '50%',
+        height: 50,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        borderBottomColor: 'rgba(0, 0, 0, 0)'
+    },
+    header_button_active: {
+        borderBottomWidth: 1,
+        borderBottomColor: ColorsStyles.colorButton,
+    },
+    header_button_text: {
+        letterSpacing: 2,
         fontSize: 14,
     },
 });

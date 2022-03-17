@@ -60,7 +60,8 @@ function InfoScreen ({ navigation }) {
                     <>
                     <View style={styles.block_active}>
                     <Text style={[GlobalStyle.CustomFontRegular, styles.text_foot]}>
-                        На ваш e-mail было отправленно письмо с паролем
+                        {(auth.translations && auth.translations['На ваш e-mail было отправленно письмо с паролем']) ? auth.translations['На ваш e-mail было отправленно письмо с паролем'] : 'На ваш e-mail было отправленно письмо с паролем'}
+                        
                     </Text>
                     <ButtonFull data={{value: 'Войти в аккаунт', change: loginHandler, styles: {marginTop: '20%',}}} />
                         <View style={styles.footer}>
@@ -69,7 +70,7 @@ function InfoScreen ({ navigation }) {
                                 onPress={() => registerHandler()}
                             >
                                 <Text style={[GlobalStyle.CustomFontRegular, styles.button_footer_text]}>
-                                    Создать новый аккаунт 
+                                {(auth.translations && auth.translations['Создать новый аккаунт']) ? auth.translations['Создать новый аккаунт'] : 'Создать новый аккаунт'}
                                 </Text>
                             </TouchableOpacity>  
                             <View style={styles.hr} />
@@ -78,7 +79,7 @@ function InfoScreen ({ navigation }) {
                                 onPress={() => loginHandler()}
                             >
                                 <Text style={[GlobalStyle.CustomFontRegular, styles.button_footer_text]}>
-                                    Войти
+                                    {(auth.translations && auth.translations['Войти']) ? auth.translations['Войти'] : 'Войти'}
                                 </Text>
                             </TouchableOpacity>  
                         </View>
@@ -87,7 +88,8 @@ function InfoScreen ({ navigation }) {
                 ) : (
                 <>
                 <Text style={[GlobalStyle.CustomFontRegular, styles.text_foot]}>
-                    Введите e-mail от своего аккаунта
+                    {(auth.translations && auth.translations['Введите e-mail от своего аккаунта']) ? auth.translations['Введите e-mail от своего аккаунта'] : 'Введите e-mail от своего аккаунта'}
+                    
                 </Text>
                 <ScrollView style={styles.scroll} 
                     keyboardShouldPersistTaps='handled' 
@@ -95,16 +97,16 @@ function InfoScreen ({ navigation }) {
                     contentContainerStyle={styles.scrollView}
                 >
                     <View style={styles.block}>
-                        <InputFull data={{value: email, change: setEmail, placeholder: 'E-mail', error: errorField}} />
+                        <InputFull data={{value: email, change: setEmail, placeholder: (auth.translations && auth.translations['E-mail']) ? auth.translations['ВоE-mailйти'] : 'E-mail', error: errorField}} />
 
-                        <ButtonFull data={{value: 'Востановить пароль', change: AuthHandler, styles: {marginTop: '20%',}, loading: loading}} />
+                        <ButtonFull data={{value: (auth.translations && auth.translations['Востановить пароль']) ? auth.translations['ИВостановить парольмя'] : 'Востановить пароль', change: AuthHandler, styles: {marginTop: '20%',}, loading: loading}} />
                         <View style={styles.footer}>
                             <TouchableOpacity
                                 style={[styles.button_footer]}
                                 onPress={() => registerHandler()}
                             >
                                 <Text style={[GlobalStyle.CustomFontRegular, styles.button_footer_text]}>
-                                    Создать новый аккаунт 
+                                {(auth.translations && auth.translations['Создать новый аккаунт']) ? auth.translations['Создать новый аккаунт'] : 'Создать новый аккаунт'}
                                 </Text>
                             </TouchableOpacity>  
                             <View style={styles.hr} />
@@ -113,7 +115,7 @@ function InfoScreen ({ navigation }) {
                                 onPress={() => loginHandler()}
                             >
                                 <Text style={[GlobalStyle.CustomFontRegular, styles.button_footer_text]}>
-                                    Войти
+                                    {(auth.translations && auth.translations['Войти']) ? auth.translations['Войти'] : 'Войти'}
                                 </Text>
                             </TouchableOpacity>  
                         </View>

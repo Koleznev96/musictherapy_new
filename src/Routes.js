@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Platform } from 'react-native';
 
 import { createStackNavigator } from '@react-navigation/stack';
@@ -7,12 +7,13 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {MenuSvgSelector} from './assets/MenuSvgSelector';
 
 import StartScreen from './screens/start/StartScreen';
+import GoalScreen from './screens/goal/GoalScreen';
 import ProfileScreen from './screens/profile/ProfileScreen';
 import ConsultantScreen from './screens/сonsultant/ConsultantScreen';
 
-import ClassicScreen from './screens/classic/ClassicScreen';
-import MeditationScreen from './screens/meditation/MeditationScreen';
-import SoundScreen from './screens/sound/SoundScreen';
+import CardScreen from './screens/card/CardScreen';
+import VideoScreen from './screens/video/VideoScreen';
+import AudioScreen from './screens/audio/AudioScreen';
 
 import SplashScreen from './screens/auth/splash/SplashScreen';
 import LoginScreen from './screens/auth/login/LoginScreen';
@@ -23,6 +24,7 @@ import InfoScreen from './screens/auth/info/InfoScreen';
 import FullVideoScreen from './screens/fullVideo/FullVideoScreen';
 
 import { ColorsStyles } from './constants/ColorsStyles';
+import { AuthContext } from "./context/authContext";
 
 
 const Stack = createStackNavigator();
@@ -34,6 +36,19 @@ const forFade = ({ current }) => ({
   }, 
 });
 
+const GoalRoutes = () => (
+  <Stack.Navigator
+    initialRouteName='Start'
+    screenOptions={{ 
+      headerShown: false, 
+      cardStyleInterpolator: forFade, 
+    }}
+  >
+    <Tab.Screen name ='Start' component={GoalScreen} options={{ headerShown: false }}/>
+    <Tab.Screen name ='Audio' component={AudioScreen} options={{ headerShown: false }}/>
+  </Stack.Navigator>
+)
+
 const HomeRoutes = () => (
   <Stack.Navigator 
     initialRouteName='Start'
@@ -43,13 +58,14 @@ const HomeRoutes = () => (
     }}
   >
     <Tab.Screen name='Start' component={StartScreen} options={{ headerShown: false, tabBarLabel: 'Elsadchess' }}/>
-    <Tab.Screen name='Classic' component={ClassicScreen} options={{ headerShown: false, tabBarLabel: 'Elsadchess' }}/>
-    <Tab.Screen name='Meditation' component={MeditationScreen} options={{ headerShown: false, tabBarLabel: 'Elsadchess' }}/>
-    <Tab.Screen name='Sound' component={SoundScreen} options={{ headerShown: false, tabBarLabel: 'Elsadchess' }}/>
+    <Tab.Screen name='Card' component={CardScreen} options={{ headerShown: false, tabBarLabel: 'Elsadchess' }}/>
+    <Tab.Screen name='Video' component={VideoScreen} options={{ headerShown: false, tabBarLabel: 'Elsadchess' }}/>
   </Stack.Navigator>
 );
 
-const StackRoutes = () => (
+const StackRoutes = (isAuthenticated, translations) => {
+  const auth = useContext(AuthContext)
+return (
   <Tab.Navigator
     initialRouteName='Home'
     tabBarOptions={{
@@ -89,6 +105,15 @@ const StackRoutes = () => (
           return (
             <MenuSvgSelector id="сonsultant_active" />
           ); 
+        } else if (route.name === 'Goal') {
+          if (!focused)
+          return (
+            <MenuSvgSelector id="goal" />
+          ); 
+          else 
+          return (
+            <MenuSvgSelector id="goal_active" />
+          ); 
         } else if (route.name === 'Profile') {
           if (!focused)
           return (
@@ -102,13 +127,15 @@ const StackRoutes = () => (
       }
     })}
   >
-    <Tab.Screen name ='Home' component={HomeRoutes} options={{ headerShown: false, tabBarLabel: 'Главная' }}/>
-    <Tab.Screen name ='Consultant' component={ConsultantScreen} options={{ headerShown: false, tabBarLabel: 'Консультант' }}/>
-    {/* {Platform.OS !== 'ios' ? (<Tab.Screen name ='Profile' component={ProfileScreen} options={{ headerShown: false, tabBarLabel: 'Аккаунт' }}/>) : null} */}
+    <Tab.Screen name ='Home' component={HomeRoutes} options={{ headerShown: false, tabBarLabel: (translations && translations['Главная']) ? translations['Главная'] : 'Главная' }}/>
+    {isAuthenticated ? <Tab.Screen name ='Goal' component={GoalRoutes} options={{ headerShown: false, tabBarLabel: (translations && translations['Цели']) ? translations['Цели'] : 'Цели' }}/> : null}
+    <Tab.Screen name ='Consultant' component={ConsultantScreen} options={{ headerShown: false, tabBarLabel: (translations && translations['Консультант']) ? translations['Консультант'] : 'Консультант' }}/>
+    <Tab.Screen name ='Profile' component={ProfileScreen} options={{ headerShown: false, tabBarLabel: (translations && translations['Аккаунт']) ? translations['Аккаунт'] : 'Аккаунт' }}/>
   </Tab.Navigator>
 );
+  }
 
-export const Routes = isAuthenticated => {
+export const Routes = (isAuthenticated, translations) => {
   return ( 
     <NavigationContainer
       screenOptions={{ 
@@ -116,42 +143,21 @@ export const Routes = isAuthenticated => {
         cardStyleInterpolator: forFade, 
       }}
     >
-      {/* {Platform.OS !== 'ios' ? (isAuthenticated ? (
-        <Stack.Navigator 
-          initialRouteName='Root' 
-          screenOptions={{ 
-            headerShown: false, 
-            cardStyleInterpolator: forFade, 
-          }}
-        >
-          <Stack.Screen name='Root' component={StackRoutes} options={{ headerShown: false }}/>
-          <Stack.Screen name='FullVideo' component={FullVideoScreen} options={{ headerShown: false }}/>
-        </Stack.Navigator>
-      ) : ( 
-        <Stack.Navigator 
-          initialRouteName='Splash'
-          screenOptions={{ 
-            headerShown: false, 
-            cardStyleInterpolator: forFade, 
-          }}
-        >
-          <Stack.Screen name='Splash' component={SplashScreen} options={{ headerShown: false }}/>
-          <Stack.Screen name='Login' component={LoginScreen} options={{ headerShown: false }}/>
-          <Stack.Screen name='Register' component={RegisterScreen} options={{ headerShown: false }}/>
-          <Stack.Screen name='CodeCheck' component={CodeCheckScreen} options={{ headerShown: false }}/>
-          <Stack.Screen name='Info' component={InfoScreen} options={{ headerShown: false }}/>
-        </Stack.Navigator>
-      )) : ( */}
-        <Stack.Navigator 
-          initialRouteName='Root' 
-          screenOptions={{ 
-            headerShown: false, 
-            cardStyleInterpolator: forFade, 
-          }}
-        >
-          <Stack.Screen name='Root' component={StackRoutes} options={{ headerShown: false }}/>
-          <Stack.Screen name='FullVideo' component={FullVideoScreen} options={{ headerShown: false }}/>
-        </Stack.Navigator>
+      <Stack.Navigator 
+        initialRouteName='Root' 
+        screenOptions={{ 
+          headerShown: false, 
+          cardStyleInterpolator: forFade, 
+        }}
+      >
+        {/* <Tab.Screen name ='Player' component={PlayerScreen} options={{ headerShown: false }}/> */}
+        <Stack.Screen name='Root' component={() => StackRoutes(isAuthenticated, translations)} options={{ headerShown: false }}/>
+        <Stack.Screen name='FullVideo' component={FullVideoScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name='Login' component={LoginScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name='Register' component={RegisterScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name='CodeCheck' component={CodeCheckScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name='Info' component={InfoScreen} options={{ headerShown: false }}/>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

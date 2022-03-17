@@ -1252,10 +1252,10 @@ export default class VideoPlayer extends Component {
             style={[styles.player.video, this.styles.videoStyle]}
             source={this.state.status_loading ? this.props.source : null}
           />
-          {this.renderError()}
-          {this.renderLoader()}
-          {this.renderTopControls()}
-          {this.renderBottomControls()}
+          {this.props.access ? this.renderError() : null}
+          {this.props.access ? this.renderLoader() : null}
+          {this.props.access ? this.renderTopControls(): null}
+          {this.props.access ? this.renderBottomControls() : null}
         </View>
       </TouchableWithoutFeedback>
     );

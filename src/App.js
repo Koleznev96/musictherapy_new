@@ -13,26 +13,31 @@ import { useAuth } from "./hooks/auth.hook";
 import { AuthContext } from "./context/authContext";
 import { Loader } from "./components/loader/Loader";
 import { ColorsStyles } from "./constants/ColorsStyles";
+import { Popap } from "./components/popap/Popap";
+import {PopapProvider} from "./provider/PopapProvider";
 
 
 const App = () => {
-  const {token, login, logout, ready} = useAuth();
+  const {token, login, logout, ready, language, newLanguage, translations, version, labelUpdate} = useAuth();
 
   if (!ready) {
     return <Loader />
   }
 
   const isAuth = !!token;
-  const routes = Routes(isAuth);
+  const routes = Routes(isAuth, translations);
 
   // return <Loader />
 
   return (
     <SafeAreaProvider style={{backgroundColor: ColorsStyles.backgroundFooter,}}>
     <AuthContext.Provider value={{
-      token, login, logout, ready
+      token, login, logout, ready, language, newLanguage, translations, version, labelUpdate
     }}>
+      <PopapProvider>
+          <Popap />
           {routes}
+      </PopapProvider>
     </AuthContext.Provider>
     </SafeAreaProvider>
   );

@@ -21,11 +21,11 @@ function FullVideoScreen ({ navigation, route }) {
             <VideoPlayer 
                 navigation={navigation}
                 poster={httpServer + '/' + poster}
-                paused={true}
+                // paused={true}
                 pictureInPicture={true}
                 onBack={() => exitFullHandaler()}
                 showOnStart={true}
-                disableFullscreen={true}
+                // disableFullscreen={true}
                 source={{uri: httpServer + '/' + video}} 
             />
             </View>

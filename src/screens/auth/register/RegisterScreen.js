@@ -109,12 +109,14 @@ function RegisterScreen ({ navigation }) {
             if (data.errors) {
                 setErrorField({...errorField, [data.errors[0][0]]: data.errors[0][1]});
             } else {
-                const dataNew = await request(`/api/auth/code_check`, 'POST', {name, fullName, telephone, email, password, tokenCode: data.tokenCode, code: '111111'});
+                const dataNew = await request(`/api/auth/code_check`, 'POST', {name, language: auth.language === 'com' ? 'com' : 'ru', fullName, telephone, email, password, tokenCode: data.tokenCode, code: '111111'});
                 if (dataNew.errors) {
                     setErrorField(dataNew.errors[0][1]);
                 } else {
+                    navigation.navigate('Home');
                     auth.login(dataNew.token, email, password);
                 }
+                
                 // navigation.navigate({
                 //     name: 'CodeCheck',
                 //     params: {data: {name, fullName, telephone, email, password}, tokenCode: data.tokenCode},
@@ -163,7 +165,7 @@ function RegisterScreen ({ navigation }) {
         >
                 <HeaderAuth />
                 <Text style={[GlobalStyle.CustomFontRegular, styles.text_foot]}>
-                    Создать новый аккаунт
+                    {(auth.translations && auth.translations['Создать новый аккаунт']) ? auth.translations['Создать новый аккаунт'] : 'Создать новый аккаунт'}
                 </Text>
                 <ScrollView style={styles.scroll} 
                     keyboardShouldPersistTaps='handled' 
@@ -172,19 +174,20 @@ function RegisterScreen ({ navigation }) {
                     ref={scrollRef}
                 >
                     <View style={styles.block}>
-                        <InputFull data={{value: name, change: setName, placeholder: 'Имя', error: errorField.name}} />
-                        <InputFull data={{value: fullName, change: setFullName, placeholder: 'Фамилия', error: errorField.fullName}} />
-                        <InputFull data={{value: telephone, change: setTelephone, placeholder: 'Телефон', error: errorField.telephone, onFocus: onFocus, valueFocus: 0}} />
-                        <InputFull data={{value: email, change: setEmail, placeholder: 'E-mail', error: errorField.email, onFocus: onFocus, valueFocus: 1}} />
-                        <InputFull data={{value: password, change: setPassword, placeholder: 'Пароль', error: errorField.password, secret: true, onFocus: onFocus, valueFocus: 2}} />
+                        <InputFull data={{value: name, change: setName, placeholder: (auth.translations && auth.translations['Имя']) ? auth.translations['Имя'] : 'Имя', error: errorField.name}} />
+                        <InputFull data={{value: fullName, change: setFullName, placeholder: (auth.translations && auth.translations['Фамилия']) ? auth.translations['Фамилия'] : 'Фамилия', error: errorField.fullName}} />
+                        <InputFull data={{value: telephone, change: setTelephone, placeholder: (auth.translations && auth.translations['Телефон']) ? auth.translations['Телефон'] : 'Телефон', error: errorField.telephone, onFocus: onFocus, valueFocus: 0}} />
+                        <InputFull data={{value: email, change: setEmail, placeholder: (auth.translations && auth.translations['E-mail']) ? auth.translations['E-mail'] : 'E-mail', error: errorField.email, onFocus: onFocus, valueFocus: 1}} />
+                        <InputFull data={{value: password, change: setPassword, placeholder: (auth.translations && auth.translations['Пароль']) ? auth.translations['Пароль'] : 'Пароль', error: errorField.password, secret: true, onFocus: onFocus, valueFocus: 2}} />
 
-                        <ButtonFull data={{value: 'Создать новый аккаунт', change: AuthHandler, styles: {marginTop: 20,}, loading: loading}} />
+                        <ButtonFull data={{value: (auth.translations && auth.translations['Создать новый аккаунт']) ? auth.translations['Создать новый аккаунт'] : 'Создать новый аккаунт', change: AuthHandler, styles: {marginTop: 20,}, loading: loading}} />
                         <TouchableOpacity
                             style={styles.buttonLog}
                             onPress={() => loginHandler()}
                         >
                             <Text style={[GlobalStyle.CustomFontRegular, styles.buttonLog_text]}>
-                                Войти в существующий аккаунт 
+                            {(auth.translations && auth.translations['Войти в существующий аккаунт']) ? auth.translations['Войти в существующий аккаунт'] : 'Войти в существующий аккаунт'}
+                                
                             </Text>
                         </TouchableOpacity>  
                     </View>
@@ -198,7 +201,8 @@ function RegisterScreen ({ navigation }) {
                     onPress={() => Linking.openURL('https://musictherapy.by/politikakonfidentapp/').catch(err => console.error('An error occurred', err))}
                     >
                     <Text style={[GlobalStyle.CustomFontRegular, styles.button_footer_text]}>
-                        Регестрируясь, принимаю условия использования и даю согласие на хранение и обработку персональных данных 
+                    {(auth.translations && auth.translations['Регестрируясь, принимаю условия использования и даю согласие на хранение и обработку персональных данных']) ? auth.translations['Регестрируясь, принимаю условия использования и даю согласие на хранение и обработку персональных данных'] : 'Регестрируясь, принимаю условия использования и даю согласие на хранение и обработку персональных данных'}
+                         
                     </Text>
                     </TouchableOpacity>
                     ): null}

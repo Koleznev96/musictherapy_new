@@ -18,6 +18,8 @@ target 'musictherapy' do
 
   pod 'react-native-video/VideoCaching', :path => '../node_modules/react-native-video/react-native-video.podspec'
 
+  pod 'RNSound', :path => '../node_modules/react-native-sound'
+
   target 'musictherapyTests' do
     inherit! :complete
     # Pods for testing

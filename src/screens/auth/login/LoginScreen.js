@@ -58,9 +58,11 @@ function LoginScreen ({ navigation }) {
             if (data.errors) {
                 setErrorField({...errorField, [data.errors[0][0]]: data.errors[0][1]});
             } else {
+                navigation.navigate('Home');
                 auth.login(data.token, email, password);
             }
-        } catch (e) {}
+        } catch (e) {
+        }
     };
 
     const registerHandler = () => {
@@ -107,7 +109,7 @@ function LoginScreen ({ navigation }) {
             > 
                 <HeaderAuth />
                 <Text style={[GlobalStyle.CustomFontRegular, styles.text_foot]}>
-                    Введите ваши данные
+                    {(auth.translations && auth.translations['Введите ваши данные']) ? auth.translations['Введите ваши данные'] : 'Введите ваши данные'}
                 </Text>
                 <ScrollView style={styles.scroll} 
                     keyboardShouldPersistTaps='handled' 
@@ -116,17 +118,17 @@ function LoginScreen ({ navigation }) {
                     ref={scrollRef}
                 >
                     <View style={styles.block}>
-                        <InputFull data={{value: email, change: setEmail, placeholder: 'E-mail', error: errorField.email, onFocus: onFocus, valueFocus: 0}} />
-                        <InputFull data={{value: password, change: setPassword, placeholder: 'Пароль', error: errorField.password, secret: true, onFocus: onFocus, valueFocus: 1}} />
+                        <InputFull data={{value: email, change: setEmail, placeholder:  (auth.translations && auth.translations['E-mail']) ? auth.translations['E-mail'] : 'E-mail', error: errorField.email, onFocus: onFocus, valueFocus: 0}} />
+                        <InputFull data={{value: password, change: setPassword, placeholder:  (auth.translations && auth.translations['Пароль']) ? auth.translations['Пароль'] : 'Пароль', error: errorField.password, secret: true, onFocus: onFocus, valueFocus: 1}} />
 
-                        <ButtonFull data={{value: 'Войти в аккаунт', change: AuthHandler, styles: {marginTop: isKeyboardVisible ? '5%' : '30%',}, loading: loading}} />
+                        <ButtonFull data={{value: (auth.translations && auth.translations['Войти в аккаунт']) ? auth.translations['Войти в аккаунт'] : 'Войти в аккаунт', change: AuthHandler, styles: {marginTop: isKeyboardVisible ? '5%' : '30%',}, loading: loading}} />
                         <View style={styles.footer}>
                             <TouchableOpacity
                                 style={[styles.button_footer]}
                                 onPress={() => registerHandler()}
                             >
                                 <Text style={[GlobalStyle.CustomFontRegular, styles.button_footer_text]}>
-                                    Создать новый аккаунт 
+                                    {(auth.translations && auth.translations['Создать новый аккаунт']) ? auth.translations['Создать новый аккаунт'] : 'Создать новый аккаунт'}
                                 </Text>
                             </TouchableOpacity>  
                             {/* <View style={styles.hr} />

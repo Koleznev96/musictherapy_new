@@ -43,7 +43,8 @@ export const useHttp = () => {
                 body = JSON.stringify(body)
                 headers['Content-Type'] = 'application/json'
             }
-            console.log("response-", httpServer + url, {method, body, headers})
+            headers['language'] = auth.language === 'ru' ? 'ru' : 'com';
+            // console.log("response-", httpServer + url, {method, body, headers})
             let response = await fetch(httpServer + url, {method, body, headers})
             // if (Platform.OS !== 'ios') {
             //     if (!response.ok && response.status === 401) {
