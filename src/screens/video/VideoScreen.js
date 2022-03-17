@@ -49,7 +49,7 @@ function VideoScreen ({ navigation, route }) {
                 Authorization: `${auth.token}`
             });
             let new_data = data.data;
-            new_data.sort((prev, next) => {console.log('ffff-', prev.label, prev.dostup); return (next.like - prev.like)});
+            new_data.sort((prev, next) => next.like - prev.like);
             setData(data.data);
             setCounterPage(data.data.length);
             set_end_page(data.end_page);
@@ -124,7 +124,6 @@ function VideoScreen ({ navigation, route }) {
     );
 
     const accessHandler = (dostup) => {
-        console.log('kkk-', dostup)
         let text = "";
         if (dostup === "auth") {
             text = auth.language === 'ru' ? 'Этот контент доступен только после входа в систему (через меню Аккаунт)' : 
