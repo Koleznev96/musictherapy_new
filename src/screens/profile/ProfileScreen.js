@@ -20,6 +20,7 @@ import { ColorsStyles } from '../../constants/ColorsStyles';
 import { LoaderIn } from '../../components/loader/minLoader/LoaderIn';
 import { ProfileData } from './components/ProfileData';
 import { ProfileForm } from './components/ProfileForm';
+import { useCallback } from 'react/cjs/react.production.min';
 
 function ProfileScreen ({ navigation }) {
     const auth = useContext(AuthContext);
@@ -33,7 +34,7 @@ function ProfileScreen ({ navigation }) {
     const [activeMenu, setActiveMenu] = useState(true);
     const [statusNewData, setStatusNewData] = useState(false);
     const [statusNewForm, setStatusNewForm] = useState(false);
-    const [formNew, setFormNew] = useState({});
+    const [formNew, setFormNew] = useState(null);
     const [formAccNew, setFormAccNew] = useState(null);
 
     const createFields = (formAcc) => {
@@ -44,12 +45,12 @@ function ProfileScreen ({ navigation }) {
         setFormAccNew(field);
     }
 
-    const getProfile = async () => {
+    const getProfile = async() => {
         try {
             const data = await request(`/api/profile/data`, 'GET', null, {
                 Authorization: `${auth.token}`
             });
-            if (auth.language !== data.data.language) auth.newLanguage(data.data.language);
+            // if (auth.language !== data.data.language) auth.newLanguage(data.data.language);
             setFormNew({name: data.data.name, fullName: data.data.fullName, telephone: data.data.telephone, email: data.data.email});
             createFields(data.questionnaire);
             setStatusNewData(false);
@@ -58,7 +59,7 @@ function ProfileScreen ({ navigation }) {
     };
 
     useEffect(() => {
-        if (auth.token) getProfile();
+        if (auth.token && !formNew) getProfile();
     }, [auth.token]);
 
     const logoutHandler = () => {
