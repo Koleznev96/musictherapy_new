@@ -55,13 +55,18 @@ function ProfileScreen ({ navigation }) {
             createFields(data.questionnaire);
             setStatusNewData(false);
             setStatusNewForm(false);
+            // console.log('aaaaaa-', data.data.name, data.questionnaire)
         } catch (e) {
-            console.log('////', e)
+            // console.log('////', e)
         }
     };
 
     useEffect(() => {
-        if (auth.token && !formNew) getProfile();
+        // console.log('hhhh-', auth.token, formNew, !Object.keys(formNew).length)
+        if (auth.token && !Object.keys(formNew).length) {
+            // console.log('nachaaa')
+            getProfile();
+        }
     }, [auth.token]);
 
     const logoutHandler = () => {
