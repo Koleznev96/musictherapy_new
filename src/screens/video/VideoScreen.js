@@ -177,13 +177,13 @@ function VideoScreen ({ navigation, route }) {
                                     onPress={() => itemHandler(index)}
                                     >
                                         <Text style={[activeIndex === index ? GlobalStyle.CustomFontBold : GlobalStyle.CustomFontMedium, styles.item_name]}>
-                                            {checkLanguage(item.label, auth.language)}
+                                            {checkLanguage(item.label_, auth.language)}
                                         </Text>
                                         <GlobalSvgSelector id={activeIndex === index ? 'arrow_bottom' : 'arrow_top'} />
                                     </TouchableOpacity>
                                     {activeIndex === index ? (
                                         <Text style={[GlobalStyle.CustomFontRegular, styles.item_text]}>
-                                            {checkLanguage(item.text, auth.language)}
+                                            {checkLanguage(item.text_, auth.language)}
                                         </Text> 
                                     ): null}
                                 </View> 
@@ -196,7 +196,7 @@ function VideoScreen ({ navigation, route }) {
                                 }}>
                                     
                                     <ImageBackground
-                                        source={{uri: httpServer + '/' + checkLanguage(item.poster, auth.language)}}
+                                        source={{uri: httpServer + '/' + checkLanguage(item.poster_, auth.language)}}
                                         style={{width: '100%', height: '100%', alignItems: 'center', borderRadius: 16,}}
                                         imageStyle={{ borderRadius: 16, }}
                                     >  
