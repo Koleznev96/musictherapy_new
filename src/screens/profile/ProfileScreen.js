@@ -34,7 +34,7 @@ function ProfileScreen ({ navigation }) {
     const [activeMenu, setActiveMenu] = useState(true);
     const [statusNewData, setStatusNewData] = useState(false);
     const [statusNewForm, setStatusNewForm] = useState(false);
-    const [formNew, setFormNew] = useState(null);
+    const [formNew, setFormNew] = useState({});
     const [formAccNew, setFormAccNew] = useState(null);
 
     const createFields = (formAcc) => {
@@ -55,7 +55,9 @@ function ProfileScreen ({ navigation }) {
             createFields(data.questionnaire);
             setStatusNewData(false);
             setStatusNewForm(false);
-        } catch (e) {}
+        } catch (e) {
+            console.log('////', e)
+        }
     };
 
     useEffect(() => {
