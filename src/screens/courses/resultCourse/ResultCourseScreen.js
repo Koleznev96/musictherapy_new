@@ -57,7 +57,7 @@ function ResultCourseScreen ({ navigation, route }) {
                 <SafeAreaView
                     style={{width: '100%', height: '100%', alignItems: 'center'}}
                 >
-                <HeaderDop data={{label: checkLanguageConst('КУРСЫ', auth.translations), backHandler, back_text: "Все курсы"}}/>
+                <HeaderDop data={{label: checkLanguageConst('Курсы', auth.translations), backHandler, back_text: "Все курсы"}}/>
                 <View style={styles.block}>
                     {loader ? (
                         <LoaderIn />
