@@ -20,11 +20,19 @@ import LoginScreen from './screens/auth/login/LoginScreen';
 import RegisterScreen from './screens/auth/register/RegisterScreen';
 import CodeCheckScreen from './screens/auth/codeCheck/CodeCheckScreen';
 import InfoScreen from './screens/auth/info/InfoScreen';
+import TestsScreen from "./screens/tests/TestsScreen";
+import CoursesScreen from "./screens/courses/CoursesScreen";
 
 import FullVideoScreen from './screens/fullVideo/FullVideoScreen';
 
 import { ColorsStyles } from './constants/ColorsStyles';
 import { AuthContext } from "./context/authContext";
+import InfoTestsScreen from "./screens/tests/infoTest/InfoTestsScreen";
+import QuestionTestScreen from "./screens/tests/questionTest/QuestionTestScreen";
+import ResultTestScreen from "./screens/tests/resultTest/ResultTestScreen";
+import infoCourseScreen from "./screens/courses/infoCourse/infoCourseScreen";
+import LessonCourseScreen from "./screens/courses/lessonCourse/LessonCourseScreen";
+import ResultCourseScreen from "./screens/courses/resultCourse/ResultCourseScreen";
 
 
 const Stack = createStackNavigator();
@@ -57,9 +65,17 @@ const HomeRoutes = () => (
       cardStyleInterpolator: forFade, 
     }}
   >
-    <Tab.Screen name='Start' component={StartScreen} options={{ headerShown: false, tabBarLabel: 'Elsadchess' }}/>
-    <Tab.Screen name='Card' component={CardScreen} options={{ headerShown: false, tabBarLabel: 'Elsadchess' }}/>
-    <Tab.Screen name='Video' component={VideoScreen} options={{ headerShown: false, tabBarLabel: 'Elsadchess' }}/>
+    <Tab.Screen name='Start' component={StartScreen} options={{ headerShown: false }}/>
+    <Tab.Screen name='Card' component={CardScreen} options={{ headerShown: false }}/>
+    <Tab.Screen name='Video' component={VideoScreen} options={{ headerShown: false }}/>
+    <Tab.Screen name='Tests' component={TestsScreen} options={{ headerShown: false }}/>
+    <Tab.Screen name='Courses' component={CoursesScreen} options={{ headerShown: false }}/>
+    <Tab.Screen name='InfoTest' component={InfoTestsScreen} options={{ headerShown: false }}/>
+    <Tab.Screen name='InfoCourse' component={infoCourseScreen} options={{ headerShown: false }}/>
+    <Tab.Screen name='QuestionTest' component={QuestionTestScreen} options={{ headerShown: false }}/>
+    <Tab.Screen name='LessonCourse' component={LessonCourseScreen} options={{ headerShown: false }}/>
+    <Tab.Screen name='ResultTest' component={ResultTestScreen} options={{ headerShown: false }}/>
+    <Tab.Screen name='ResultCourse' component={ResultCourseScreen} options={{ headerShown: false }}/>
   </Stack.Navigator>
 );
 
@@ -81,11 +97,9 @@ return (
         paddingBottom: 10,
       },
     }}
-    screenOptions={{ 
+    screenOptions={({ route }) => ({
       headerShown: false, 
       cardStyleInterpolator: forFade, 
-    }}
-    screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, color, size }) => {
         if (route.name === 'Home') {
           if (!focused)

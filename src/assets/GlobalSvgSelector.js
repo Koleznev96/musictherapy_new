@@ -4,6 +4,27 @@ import Svg, {Path, LinearGradient, Stop, Defs} from 'react-native-svg';
 
 export const GlobalSvgSelector = ({id}) => {
     switch (id) {
+        case 'back_header':
+            return (
+                <Svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <Path d="M4.66667 1.54163L1.125 5.08329L4.66667 8.62496" stroke="white" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <Path d="M1.125 5.08325H6.79167C10.7038 5.08325 13.875 8.25446 13.875 12.1666V12.8749" stroke="white" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </Svg>
+            );
+        case 'arrow_left_t':
+            return (
+                <Svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <Path d="M4.66667 1.54163L1.125 5.08329L4.66667 8.62496" stroke="white" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <Path d="M1.125 5.08325H6.79167C10.7038 5.08325 13.875 8.25446 13.875 12.1666V12.8749" stroke="white" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </Svg>
+            );
+        case 'arrow_rigth_t':
+            return (
+                <Svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <Path d="M10.2083 1L13.75 4.54167L10.2083 8.08333" stroke="white" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <Path d="M13.75 4.54163H8.08333C4.17121 4.54163 1 7.71283 1 11.625V12.3333" stroke="white" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </Svg>
+            );
         case 'like':
             return (
                 <Svg width="28" height="25" viewBox="0 0 28 25" fill="none" xmlns="http://www.w3.org/2000/svg">

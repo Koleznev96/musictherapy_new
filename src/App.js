@@ -15,6 +15,8 @@ import { Loader } from "./components/loader/Loader";
 import { ColorsStyles } from "./constants/ColorsStyles";
 import { Popap } from "./components/popap/Popap";
 import {PopapProvider} from "./provider/PopapProvider";
+import { DataProvider } from "./provider/DataProvider";
+import { CourseProvider } from "./provider/CourseProvider";
 
 
 const App = () => {
@@ -35,8 +37,12 @@ const App = () => {
       token, login, logout, ready, language, newLanguage, translations, version, labelUpdate
     }}>
       <PopapProvider>
-          <Popap />
-          {routes}
+        <DataProvider>
+          <CourseProvider>
+            <Popap />
+            {routes}
+          </CourseProvider>
+        </DataProvider>
       </PopapProvider>
     </AuthContext.Provider>
     </SafeAreaProvider>

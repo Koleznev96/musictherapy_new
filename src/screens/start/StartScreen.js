@@ -27,8 +27,9 @@ function StartScreen ({ navigation }) {
     const popapRoot = useContext(PopapContext);
     const {loading, request, error, clearError} = useHttp();
     const [data, setData] = useState(false);
+    const [data_list, set_data_list] = useState(data_list_not_auth);
 
-    const data_list = [
+    const data_list_not_auth = [
         {
             name: (auth.translations && auth.translations['Классика HD']) ? auth.translations['Классика HD'] : 'Классика HD',
             router: 'Video',
@@ -57,7 +58,61 @@ function StartScreen ({ navigation }) {
             url: '/api/data/v2/tool/',
             url_like: '/api/data/video/',
         },
-    ]
+    ];
+    
+    
+    const data_list_auth = [
+        {
+            name: (auth.translations && auth.translations['Классика HD']) ? auth.translations['Классика HD'] : 'Классика HD',
+            router: 'Video',
+            img: require('../../assets/images/classic.jpg'),
+            url: '/api/data/v2/classic/',
+            url_like: '/api/data/video/',
+        },
+        {
+            name: (auth.translations && auth.translations['Медитации']) ? auth.translations['Медитации'] : 'Медитации',
+            router: 'Video',
+            img: require('../../assets/images/meditation.jpg'),
+            url: '/api/data/v2/meditation/',
+            url_like: '/api/data/video/',
+        },
+        {
+            name: (auth.translations && auth.translations['Живой звук']) ? auth.translations['Живой звук'] : 'Живой звук',
+            router: 'Card',
+            img: require('../../assets/images/sound.jpg'),
+            url: '/api/data/v2/live_sound/',
+            url_like: '/api/data/card/',
+        }, 
+        {
+            name: (auth.translations && auth.translations['Инструменты']) ? auth.translations['Инструменты'] : 'Инструменты',
+            router: 'Video',
+            img: require('../../assets/images/instruments.jpg'),
+            url: '/api/data/v2/tool/',
+            url_like: '/api/data/video/',
+        },
+        {
+            name: (auth.translations && auth.translations['Тесты']) ? auth.translations['Тесты'] : 'Тесты',
+            router: 'Tests',
+            img: require('../../assets/images/test.jpg'),
+            url: '/api/data/get_list_test/',
+            url_like: '/api/data/card/',
+        }, 
+        {
+            name: (auth.translations && auth.translations['Онлайн курсы']) ? auth.translations['Онлайн курсы'] : 'Онлайн курсы',
+            router: 'Courses',
+            img: require('../../assets/images/course.jpg'),
+            url: '/api/data/get_list_course/',
+            url_like: '/api/data/video/',
+        },
+    ];
+
+    useEffect(() => {
+        if (auth.token) {
+            set_data_list(data_list_auth);
+        } else {
+            set_data_list(data_list_not_auth);
+        }
+    }, [auth.token]);
 
     const nextHandler = (item) => {
         navigation.navigate({name: item.router, params: {data_root: item}});
@@ -113,7 +168,7 @@ function StartScreen ({ navigation }) {
                     contentContainerStyle={styles.scrollView}
                 >
                     <View style={styles.block}>
-                        {data_list.map((item, index) => (
+                        {data_list?.map((item, index) => (
                             <TouchableOpacity
                             style={[styles.item_button]}
                             onPress={() => nextHandler(item)}

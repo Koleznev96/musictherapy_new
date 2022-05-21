@@ -11,7 +11,6 @@ import GlobalStyle from "../../GlobalStyle";
 
 
 export const InputForm = ({label, name, change, value, styles_new, error, translations}) => {
-    console.log('999')
     return (
         <View style={styles.block}>
         <Text style={[GlobalStyle.CustomFontLite, styles.label]}>
