@@ -158,7 +158,7 @@ function StartScreen ({ navigation }) {
                 imageStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.38)'}}
             > 
                 <SafeAreaView
-                    style={{ width: '100%', height: '100%',  }}
+                    style={{ width: '100%', height: '100%', paddingBottom: -35, }}
                 >
                 
                 <HeaderAuth />
