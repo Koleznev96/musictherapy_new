@@ -206,11 +206,15 @@ function CoursesScreen ({ navigation, route }) {
                                                 (auth.translations && auth.translations['Активировать курс']) ? 
                                                 auth.translations['Активировать курс'] : 
                                                 'Активировать курс'
-                                            : 
+                                            : (item.status ? (
                                                 (auth.translations && auth.translations['Продолжить курс']) ? 
                                                 auth.translations['Продолжить курс'] : 
                                                 'Продолжить курс'
-                                            }
+                                            ) : (
+                                                (auth.translations && auth.translations['Начать курс']) ? 
+                                                auth.translations['Начать курс'] : 
+                                                'Начать курс'
+                                            ))}
                                         </Text>
                                     </TouchableOpacity>
                                 </View>

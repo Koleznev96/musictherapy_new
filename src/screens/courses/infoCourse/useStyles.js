@@ -19,6 +19,7 @@ export const styles = StyleSheet.create({
     scrollView: {
         marginTop: 10,
         alignItems: 'center',
+        paddingBottom: 140,
     },
     block_root_v: {
         width: '100%',
@@ -116,8 +117,9 @@ export const styles = StyleSheet.create({
     },
     instruction: {
         // textAlign: 'center',
-        fontSize: 16,
+        fontSize: 14,
         width: '100%',
+        color: '#FFFFFF'
     },
     button_start_test: {
         width: '43%',

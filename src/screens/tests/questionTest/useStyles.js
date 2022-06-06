@@ -13,6 +13,14 @@ export const styles = StyleSheet.create({
         top: 4,
         right: 8,
     },
+    curent_number_active: {
+        fontSize: 24,
+        color: '#FFFFFF',
+        // position: 'absolute',
+        width: '100%',
+        textAlign: 'right',
+        marginTop: -5,
+    },
     block_futer: {
         position: 'absolute',
         bottom: 0,
@@ -180,6 +188,7 @@ export const styles = StyleSheet.create({
         marginTop: 10,
         alignItems: 'center',
         paddingHorizontal: 6,
+        paddingBottom: 140,
     },
     block_root_v: {
         width: '100%',

@@ -70,9 +70,9 @@ function ResultCourseScreen ({ navigation, route }) {
                             <Text style={[GlobalStyle.CustomFontBold, styles.label]}>
                                 {checkLanguage(data_root?.label, auth.language)}
                             </Text>
-                            <Text style={[GlobalStyle.CustomFontBold, styles.label_two]}>
+                            {/* <Text style={[GlobalStyle.CustomFontBold, styles.label_two]}>
                                 {checkLanguageConst('Инструкции:', auth.translations)}
-                            </Text>
+                            </Text> */}
                             <View 
                                 style={{
                                     width: '100%', 
@@ -81,6 +81,7 @@ function ResultCourseScreen ({ navigation, route }) {
                                     borderRadius: 12, 
                                     backgroundColor: '#FFFFFF',
                                     marginBottom: 14,
+                                    marginTop: 15,
                                 }}
                             >
                                 <Text style={[GlobalStyle.CustomFontRegular, styles.text_result]}>

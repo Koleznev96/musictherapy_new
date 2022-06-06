@@ -23,6 +23,7 @@ export const styles = StyleSheet.create({
     scrollView: {
         marginTop: 10,
         alignItems: 'center',
+        paddingBottom: 140,
     },
     block_root_v: {
         width: '100%',

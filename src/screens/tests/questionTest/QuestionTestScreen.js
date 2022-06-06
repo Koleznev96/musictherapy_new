@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {
     Text,
     View,
-    FlatList,
+    Linking,
     TouchableOpacity,
     ImageBackground,
     ScrollView,
@@ -21,6 +21,7 @@ import { PopapContext } from '../../../context/PopapContext';
 import { DataContext } from '../../../context/DataContext';
 import { httpServer } from '../../../../const';
 import { GlobalSvgSelector } from '../../../assets/GlobalSvgSelector';
+import { MarkdownView } from 'react-native-markdown-view';
 
 
 function QuestionTestScreen ({ navigation, route }) {
@@ -51,6 +52,7 @@ function QuestionTestScreen ({ navigation, route }) {
             const data = await request(`/api/data/get_question_test/${data_root._id}/${data_user_test._id}/${number}`, 'GET', null, {
                 Authorization: `${auth.token}`
             });
+            console.log('question_data-', data.question_data)
             set_question_data(data.question_data);
             set_answer_question(data.answer_question);
             set_status_next(data.question_data.length_questions - 1 > number);
@@ -88,6 +90,7 @@ function QuestionTestScreen ({ navigation, route }) {
                 Authorization: `${auth.token}`
             });
             set_answer_question(data);
+            if (status_next && !status_ok_answer) menuQuestionsHandler('next');
         } catch (e) {
             console.log('err-', e)
         }
@@ -158,8 +161,9 @@ function QuestionTestScreen ({ navigation, route }) {
                                 contentContainerStyle={styles.scrollView}
                             >
                                 <Text style={[GlobalStyle.CustomFontBold, styles.label]}>
-                                    {checkLanguage(question_data?.label, auth.language).toUpperCase()}
+                                    {checkLanguage(data_root?.label, auth.language).toUpperCase()}
                                 </Text>
+                                {question_data?.img ? (
                                 <ImageBackground
                                     source={{uri: httpServer + '/' + question_data?.img}}
                                     style={{width: '100%', height: 160, alignItems: 'center', borderRadius: 16,}}
@@ -169,10 +173,25 @@ function QuestionTestScreen ({ navigation, route }) {
                                         {`${curent_number + 1} / ${question_data?.length_questions}`}
                                     </Text>
                                 </ImageBackground>
-                                <View style={styles.block_text}>
-                                    <Text style={[GlobalStyle.CustomFontMedium, styles.block_text_text]}>
-                                        {checkLanguage(question_data?.question, auth.language)}
+                                ) : (
+                                    <Text style={[GlobalStyle.CustomFontMedium, styles.curent_number_active]}>
+                                        {`${curent_number + 1} / ${question_data?.length_questions}`}
                                     </Text>
+                                )}
+                                <View style={styles.block_text}>
+                                    
+                                        {/* <Text style={{paragraph: {color: 'red'}}}> */}
+                                        <MarkdownView 
+                                            styles={{text: {...GlobalStyle.CustomFontMedium, ...styles.block_text_text}}}
+                                            onLinkPress={(url) => {
+                                                console.log('url-', url)
+                                                Linking.openURL(url).catch(err => console.error('An error occurred', err))
+                                            }}
+                                        >
+                                            {checkLanguage(question_data?.question, auth.language)}
+                                        </MarkdownView>
+                                        {/* </Text> */}
+                                    
                                 </View>
 
                                 <View style={styles.block_answers}>

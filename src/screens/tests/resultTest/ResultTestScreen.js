@@ -37,9 +37,21 @@ function ResultTestScreen ({ navigation, route }) {
     const auth = useContext(AuthContext);
     const {loading, request, error, clearError} = useHttp();
     const [loader, setLoader] = useState(false);
-    const [data, setData] = useState(false);
+    const [data, setData] = useState(null);
     const dataRoot = useContext(DataContext);
-    const [activeIndex, setActiveIndex] = useState(true);
+    const [activeIndex, setActiveIndex] = useState([0]);
+
+    const viewHandler = (index) => {
+        let list_index = [...activeIndex];
+        const delete_index = activeIndex?.indexOf(index);
+        if (delete_index !== -1) {
+            list_index.splice(delete_index, 1);
+        }
+        else {
+            list_index.push(index);
+        }
+        setActiveIndex([...list_index]);
+    }
 
     const backHandler = () => {
         dataRoot.updateHandler();
@@ -49,10 +61,12 @@ function ResultTestScreen ({ navigation, route }) {
     const getData = async () => {
         setLoader(true);
         try {
-            const data = await request(`/api/data/test_return_result/${test_id}/${user_test_id}`, 'GET', null, {
+            let result = await request(`/api/data/test_return_result/${test_id}/${user_test_id}`, 'GET', null, {
                 Authorization: `${auth.token}`
             });
-            setData(data);
+            console.log('mmnnn-', result)
+            result.result = result.result?.reverse();
+            setData(result);
         } catch (e) {
             console.log('err-', e)
         }
@@ -89,9 +103,11 @@ function ResultTestScreen ({ navigation, route }) {
                             <Text style={[GlobalStyle.CustomFontBold, styles.label]}>
                                 {checkLanguage(data?.test?.label, auth.language)}
                             </Text>
-                            <Text style={[GlobalStyle.CustomFontBold, styles.label_two]}>
+                            {/* <Text style={[GlobalStyle.CustomFontBold, styles.label_two]}>
                                 {checkLanguageConst('Инструкции:', auth.translations)}
-                            </Text>
+                            </Text> */}
+                            {data?.result?.map((result, index_r) => (
+                                <>
                             <View 
                                 style={{
                                     width: '100%', 
@@ -100,29 +116,30 @@ function ResultTestScreen ({ navigation, route }) {
                                     borderRadius: 12, 
                                     backgroundColor: '#FFFFFF',
                                     marginBottom: 14,
+                                    marginTop: 15,
                                 }}
                             >
                                 <Text style={[GlobalStyle.CustomFontRegular, styles.text_result]}>
-                                    {checkLanguageConst('Дата', auth.translations)}: {dateToString(data?.result?.date_end)}
+                                    {checkLanguageConst('Дата', auth.translations)}: {dateToString(result?.date_end)}
                                 </Text>
                                 <Text style={[GlobalStyle.CustomFontRegular, styles.text_result]}>
-                                    {checkLanguageConst('Количество набранных баллов', auth.translations)}: {data?.result?.result?.balls}
+                                    {checkLanguageConst('Количество набранных баллов', auth.translations)}: {result?.result?.balls}
                                 </Text>
                                 <Text style={[GlobalStyle.CustomFontRegular, styles.text_result]}>
-                                    {`${checkLanguageConst('Ваш результат', auth.translations)}: ${checkLanguage(data?.result?.result?.description, auth.language)}`}
+                                    {`${checkLanguageConst('Ваш результат', auth.translations)}: ${checkLanguage(result?.result?.description, auth.language)}`}
                                 </Text>
                             </View>
-                            <View style={activeIndex ? styles.item_block_active : styles.item_block}>
+                            <View style={activeIndex?.indexOf(index_r) !== -1 ? styles.item_block_active : styles.item_block}>
                                 <TouchableOpacity
                                 style={[styles.item_button]}
-                                onPress={() => setActiveIndex(!activeIndex)}
+                                onPress={() => viewHandler(index_r)}
                                 >
-                                    <Text style={[activeIndex ? GlobalStyle.CustomFontBold : GlobalStyle.CustomFontMedium, styles.item_name]}>
+                                    <Text style={[activeIndex?.indexOf(index_r) !== -1 ? GlobalStyle.CustomFontBold : GlobalStyle.CustomFontMedium, styles.item_name]}>
                                         {checkLanguageConst('Ваши ответы', auth.translations)}
                                     </Text>
-                                    <GlobalSvgSelector id={activeIndex ? 'arrow_bottom' : 'arrow_top'} />
+                                    <GlobalSvgSelector id={activeIndex?.indexOf(index_r) !== -1 ? 'arrow_bottom' : 'arrow_top'} />
                                 </TouchableOpacity>
-                                {activeIndex ? data?.questions_list?.map((item, index) => (
+                                {activeIndex?.indexOf(index_r) !== -1 ? result?.data?.map((item, index) => (
                                     <>
                                     <Text style={[GlobalStyle.CustomFontRegular, styles.item_text]}>
                                         {`Вопрос ${index + 1}. ${checkLanguage(item.question, auth.language)}`}
@@ -133,10 +150,12 @@ function ResultTestScreen ({ navigation, route }) {
                                     </>
                                 )): null}
                             </View> 
+                            </>
+                            ))}
+                            <View style={{width: '100%', height: 100}} />
                         </ScrollView>
                     )}
                     </View>
-                    <View style={{height: 50, width: '100%'}} />
                 </SafeAreaView>
             </ImageBackground>
         </ImageBackground>

@@ -22,6 +22,8 @@ import { DataContext } from '../../../context/DataContext';
 import { httpServer } from '../../../../const';
 import { GlobalSvgSelector } from '../../../assets/GlobalSvgSelector';
 import { CourseContext } from '../../../context/CourseContext';
+import { MarkdownView } from 'react-native-markdown-view';
+import Markdown from 'react-native-markdown-package';
 
 
 function LessonCourseScreen ({ navigation, route }) {
@@ -47,6 +49,7 @@ function LessonCourseScreen ({ navigation, route }) {
     const getData = async (number) => {
         setLoader(true);
         set_curent_number(number);
+        // console.log('alooo-', `/api/data/get_lesson_course/${data_root._id}/${data_user_test._id}/${number}`);
         try {
             const data = await request(`/api/data/get_lesson_course/${data_root._id}/${data_user_test._id}/${number}`, 'GET', null, {
                 Authorization: `${auth.token}`
@@ -81,6 +84,7 @@ function LessonCourseScreen ({ navigation, route }) {
                 Authorization: `${auth.token}`
             });
             set_ok_lesson(data);
+            if (status_next) menuQuestionsHandler('next');
         } catch (e) {
             console.log('err-', e)
         }
@@ -159,6 +163,7 @@ function LessonCourseScreen ({ navigation, route }) {
                                 <Text style={[GlobalStyle.CustomFontBold, styles.label]}>
                                     {checkLanguage(data_root?.label, auth.language).toUpperCase()}
                                 </Text>
+                                {lesson_data?.video ? (
                                 <View style={{
                                     width: '100%',
                                     height: 160,
@@ -185,6 +190,7 @@ function LessonCourseScreen ({ navigation, route }) {
                                     </ImageBackground>
                                     </ImageBackground>
                                 </View>
+                                ) : null}
 
                                 <View style={activeIndex ? styles.item_block_active : styles.item_block}>
                                     <TouchableOpacity
@@ -197,9 +203,22 @@ function LessonCourseScreen ({ navigation, route }) {
                                         <GlobalSvgSelector id={activeIndex ? 'arrow_bottom' : 'arrow_top'} />
                                     </TouchableOpacity>
                                     {activeIndex ? (
-                                        <Text style={[GlobalStyle.CustomFontRegular, styles.item_text]}>
+                                        // <MarkdownView 
+                                        //     styles={{text: {...GlobalStyle.CustomFontRegular, ...styles.item_text}, }}
+                                        //     onLinkPress={(url) => {
+                                        //         console.log('url-', url)
+                                        //         Linking.openURL(url).catch(err => console.error('An error occurred', err))
+                                        //     }}
+                                        // >
+                                        //     {console.log(checkLanguage(lesson_data?.text, auth.language))}
+                                        //     {checkLanguage(lesson_data?.text, auth.language)}
+                                        // </MarkdownView>
+                                        <Markdown
+                                            styles={styleMarkdoun}
+                                            onLink={(url) => Linking.openURL(url.catch(err => console.error('An error occurred', err)))}
+                                        >
                                             {checkLanguage(lesson_data?.text, auth.language)}
-                                        </Text> 
+                                        </Markdown>
                                     ): null}
                                 </View> 
                             </ScrollView>
@@ -258,3 +277,44 @@ function LessonCourseScreen ({ navigation, route }) {
 }
 
 export default LessonCourseScreen;
+
+
+const styleMarkdoun = {
+    heading1: {
+        // color: 'red'
+      },
+      heading2: {
+        // color: 'green',
+        textAlign: "right"
+      },
+      strong: {
+        // color: 'blue'
+      },
+      em: {
+        // color: 'cyan'
+      },
+      text: {
+        color: '#FFFFFF',
+        fontSize: 14,
+      },
+      blockQuoteText: {
+        // color: 'grey'
+      },
+      blockQuoteSection: {
+        flexDirection: 'row',
+      },
+      blockQuoteSectionBar: {
+        width: 3,
+        height: null,
+        backgroundColor: '#DDDDDD',
+        marginRight: 15,
+      },
+      codeBlock: {
+        fontFamily: 'Courier',
+        fontWeight: '500',
+        backgroundColor: '#DDDDDD',
+      },
+      tableHeader: {
+        backgroundColor: 'grey',
+      },
+}

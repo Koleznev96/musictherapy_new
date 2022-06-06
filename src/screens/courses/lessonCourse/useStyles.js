@@ -181,6 +181,7 @@ export const styles = StyleSheet.create({
         marginTop: 10,
         alignItems: 'center',
         paddingHorizontal: 6,
+        paddingBottom: 140,
     },
     block_root_v: {
         width: '100%',
