@@ -1,6 +1,8 @@
 import { StyleSheet, Platform, Dimensions } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { ColorsStyles } from "../../constants/ColorsStyles";
+const {width, height} = Dimensions.get('screen');
+
 
 export const styles = StyleSheet.create({
     scroll: {
@@ -76,7 +78,7 @@ export const styles = StyleSheet.create({
     },
     text_glav: {
         marginTop: 25,
-        fontSize: Dimensions.get('window').width > 350 ? 32 : 28,
+        fontSize: width > 340 ? 32 : (width > 300 ? 28 : 26),
     },
     text_foot: {
         letterSpacing: 2,

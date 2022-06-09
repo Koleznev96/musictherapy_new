@@ -1,5 +1,6 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform, Dimensions } from 'react-native';
 import { ColorsStyles } from "../../constants/ColorsStyles";
+const {width, height} = Dimensions.get('screen');
 
 export const styles = StyleSheet.create({
     button: {
@@ -13,6 +14,7 @@ export const styles = StyleSheet.create({
     button_text: {
         width: '100%',
         textAlign: 'center',
+        fontSize: width > 340 ? 18 : 16,
     },
     block_loader: {
         width: '100%',

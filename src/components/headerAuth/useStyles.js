@@ -1,4 +1,6 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform, Dimensions } from 'react-native';
+const {width, height} = Dimensions.get('screen');
+
 
 export const styles = StyleSheet.create({
     body: {
@@ -20,6 +22,6 @@ export const styles = StyleSheet.create({
     },
     text_glav: {
         marginLeft: 20,
-        fontSize: 32,
+        fontSize: width > 340 ? 32 : (width > 300 ? 28 : 26),
     },
 });
