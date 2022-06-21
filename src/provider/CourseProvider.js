@@ -23,7 +23,7 @@ export const CourseProvider = ({children, ...props}) => {
             });
             setData(data.data);
         } catch (e) {
-            console.log('err-', e)
+            // console.log('err-', e)
         }
         setLoader(false);
     };

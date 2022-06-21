@@ -64,11 +64,11 @@ function ResultTestScreen ({ navigation, route }) {
             let result = await request(`/api/data/test_return_result/${test_id}/${user_test_id}`, 'GET', null, {
                 Authorization: `${auth.token}`
             });
-            console.log('mmnnn-', result)
+            // console.log('mmnnn-', result)
             result.result = result.result?.reverse();
             setData(result);
         } catch (e) {
-            console.log('err-', e)
+            // console.log('err-', e)
         }
         setLoader(false);
     }

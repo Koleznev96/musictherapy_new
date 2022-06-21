@@ -50,7 +50,7 @@ function infoCourseScreen ({ navigation, route }) {
                 });
             }
         } catch (e) {
-            console.log('err-', e)
+            // console.log('err-', e)
         }
         setLoader(false);
     }

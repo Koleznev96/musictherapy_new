@@ -59,7 +59,7 @@ function LessonCourseScreen ({ navigation, route }) {
             set_status_next(data.lesson_data.length_lessons - 1 > number);
             set_status_prev(number !== 0);
         } catch (e) {
-            console.log('err-', e)
+            // console.log('err-', e)
         }
         setLoader(false);
     };
@@ -86,7 +86,7 @@ function LessonCourseScreen ({ navigation, route }) {
             set_ok_lesson(data);
             if (status_next) menuQuestionsHandler('next');
         } catch (e) {
-            console.log('err-', e)
+            // console.log('err-', e)
         }
     }
     
@@ -110,7 +110,7 @@ function LessonCourseScreen ({ navigation, route }) {
                 setLoader(false);
             }
         } catch (e) {
-            console.log('err-', e)
+            // console.log('err-', e)
         }
         setLoader(false);
     }
