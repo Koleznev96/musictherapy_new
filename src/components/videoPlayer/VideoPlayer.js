@@ -31,9 +31,6 @@ export default class VideoPlayer extends Component {
     volume: 1,
     title: '',
     rate: 1,
-    showTimeRemaining: true,
-    showHours: false,
-    status_loading: false,
   };
 
   constructor(props) {
@@ -50,13 +47,11 @@ export default class VideoPlayer extends Component {
       muted: this.props.muted,
       volume: this.props.volume,
       rate: this.props.rate,
-      status_loading: false,
       // Controls
 
       isFullscreen:
         this.props.isFullScreen || this.props.resizeMode === 'cover' || false,
-      showTimeRemaining: this.props.showTimeRemaining,
-      showHours: this.props.showHours,
+      showTimeRemaining: true,
       volumeTrackWidth: 0,
       volumeFillWidth: 0,
       seekerFillWidth: 0,
@@ -507,33 +502,15 @@ export default class VideoPlayer extends Component {
    */
   _togglePlayPause() {
     let state = this.state;
+    state.paused = !state.paused;
 
-    if (!state.status_loading) {
-      state.status_loading = true;
-      this.setState(state);
-      setTimeout(() => {
-        let state = this.state;
-        state.paused = !state.paused;
-
-        if (state.paused) {
-          typeof this.events.onPause === 'function' && this.events.onPause();
-        } else {
-          typeof this.events.onPlay === 'function' && this.events.onPlay();
-        }
-
-        this.setState(state);
-      }, 100);
+    if (state.paused) {
+      typeof this.events.onPause === 'function' && this.events.onPause();
     } else {
-      state.paused = !state.paused;
-
-      if (state.paused) {
-        typeof this.events.onPause === 'function' && this.events.onPause();
-      } else {
-        typeof this.events.onPlay === 'function' && this.events.onPlay();
-      }
-  
-      this.setState(state);
+      typeof this.events.onPlay === 'function' && this.events.onPlay();
     }
+
+    this.setState(state);
   }
 
   /**
@@ -585,22 +562,10 @@ export default class VideoPlayer extends Component {
     const symbol = this.state.showRemainingTime ? '-' : '';
     time = Math.min(Math.max(time, 0), this.state.duration);
 
-    if (!this.state.showHours) {
-      const formattedMinutes = padStart(Math.floor(time / 60).toFixed(0), 2, 0);
-      const formattedSeconds = padStart(Math.floor(time % 60).toFixed(0), 2, 0);
-
-      return `${symbol}${formattedMinutes}:${formattedSeconds}`;
-    }
-
-    const formattedHours = padStart(Math.floor(time / 3600).toFixed(0), 2, 0);
-    const formattedMinutes = padStart(
-      (Math.floor(time / 60) % 60).toFixed(0),
-      2,
-      0,
-    );
+    const formattedMinutes = padStart(Math.floor(time / 60).toFixed(0), 2, 0);
     const formattedSeconds = padStart(Math.floor(time % 60).toFixed(0), 2, 0);
 
-    return `${symbol}${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+    return `${symbol}${formattedMinutes}:${formattedSeconds}`;
   }
 
   /**
@@ -1046,10 +1011,10 @@ export default class VideoPlayer extends Component {
    * Render fullscreen toggle and set icon based on the fullscreen state.
    */
   renderFullscreen() {
-    let source = require('./assets/img/expand.png');
-    //   this.state.isFullscreen === true
-    //     ? require('./assets/img/shrink.png')
-    //     : require('./assets/img/expand.png');
+    let source =
+      this.state.isFullscreen === true
+        ? require('./assets/img/shrink.png')
+        : require('./assets/img/expand.png');
     return this.renderControl(
       <Image source={source} />,
       this.methods.toggleFullscreen,
@@ -1250,12 +1215,15 @@ export default class VideoPlayer extends Component {
             onEnd={this.events.onEnd}
             onSeek={this.events.onSeek}
             style={[styles.player.video, this.styles.videoStyle]}
-            source={this.state.status_loading ? this.props.source : null}
+            source={this.props.source}
+            playInBackground={true}
+            playWhenInactive={true}
+            ignoreSilentSwitch={'ignore'}
           />
-          {this.props.access ? this.renderError() : null}
-          {this.props.access ? this.renderLoader() : null}
-          {this.props.access ? this.renderTopControls(): null}
-          {this.props.access ? this.renderBottomControls() : null}
+          {this.renderError()}
+          {this.renderLoader()}
+          {this.renderTopControls()}
+          {this.renderBottomControls()}
         </View>
       </TouchableWithoutFeedback>
     );
@@ -1426,14 +1394,8 @@ const styles = {
     handle: {
       position: 'absolute',
       marginTop: -24,
-      marginLeft: -30,
+      marginLeft: -24,
       padding: 16,
-      width: 60,
-      height: 60,
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexDirection: 'row',
-      // backgroundColor: 'red'
     },
     icon: {
       marginLeft: 7,

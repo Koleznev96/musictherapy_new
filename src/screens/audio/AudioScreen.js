@@ -20,7 +20,7 @@ import AudioPlayer from "../../components/audioPlayer/AudioPlayer";
 import { ColorsStyles } from '../../constants/ColorsStyles';
 import { LoaderIn } from '../../components/loader/minLoader/LoaderIn';
 import {httpServer} from '../../../const';
-import { checkLanguage } from '../../hooks/useLanguage';
+import { checkLanguage, checkLanguageConst } from '../../hooks/useLanguage';
 const {width, height} = Dimensions.get('screen');
 
 const img_pause = require('./resources/ui_pause.png');
@@ -83,6 +83,20 @@ function AudioScreen ({ navigation, route }) {
         getData();
     }, [auth.token]);
 
+    const logData = async (data) => {
+        try {
+            await request(`/api/log/play_data`, 'POST', {
+                type: 'audio', id: data._id
+            }, {
+                Authorization: `${auth.token}`
+            });
+        } catch (e) {}
+    }
+
+    useEffect(() => {
+        if (activeItem) logData(activeItem);
+    }, [activeItem])
+
     const paginashion = async () => {
         if (end_page) {
             return 0;
@@ -132,6 +146,11 @@ function AudioScreen ({ navigation, route }) {
         } catch (e) {}
     }
 
+    const arrayToString = (array) => {
+        let new_array = array?.map(item => checkLanguageConst(item, auth.translations).toLowerCase());
+        return new_array.join(', ')
+    }
+
     return (
         <ImageBackground
             source={require('../../assets/images/background-img.jpg')}
@@ -172,7 +191,8 @@ function AudioScreen ({ navigation, route }) {
                                 justifyContent: 'center',
                                 backgroundColor:'#154073',
                                 width: '100%',
-                                height: 80,
+                                minHeight: 80,
+                                paddingVertical: 8,
                                 borderBottomWidth: 1,
                                 borderBottomColor: '#969696',
                             }}
@@ -185,7 +205,14 @@ function AudioScreen ({ navigation, route }) {
                                         >
                                             <Image source={activeIndex === index ? img_pause : img_play} style={{width:30, height:30}}/>
                                         </TouchableOpacity>
-                                        <Text style={{ color:'white', fontSize:14, width: width - 105}}>{checkLanguage(item.label, auth.language)}</Text>
+                                        <View style={{width: width - 105}}>
+                                            <Text style={{ color: 'white', fontSize:14, width: width - 105}}>{checkLanguage(item.label, auth.language)}</Text>
+                                            {item.instruments?.length ? (
+                                                <Text style={[GlobalStyle.CustomFontLite, styles.instruments]}>
+                                                    {arrayToString(item.instruments)}
+                                                </Text> 
+                                            ): null}
+                                        </View>
                                     </View>
                                     <TouchableOpacity 
                                     style={styles.button_like}

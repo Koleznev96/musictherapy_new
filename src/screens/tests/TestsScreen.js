@@ -51,7 +51,6 @@ function TestsScreen ({ navigation, route }) {
     //         const data = await request(`${data_root.url}`, 'GET', null, {
     //             Authorization: `${auth.token}`
     //         });
-    //         console.log('mmm-', data.data[0].status, data.data[0].status?.status)
     //         setData(data.data);
     //         setAccess(data.access);
     //         setLoader(false);

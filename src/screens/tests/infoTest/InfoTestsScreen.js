@@ -49,13 +49,9 @@ function InfoTestsScreen ({ navigation, route }) {
                     }
                 });
             }
-        } catch (e) {
-            // console.log('err-', e)
-        }
+        } catch (e) {}
         setLoader(false);
     }
-
-    // console.log('333333333')
 
     return (
         <ImageBackground

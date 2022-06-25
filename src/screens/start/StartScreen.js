@@ -5,7 +5,6 @@ import {
     ScrollView,
     TouchableOpacity,
     ImageBackground,
-    Keyboard,
     Linking
 } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
@@ -19,7 +18,8 @@ import { ButtonFull } from '../../components/buttonFull/ButtonFull';
 import {InputFull} from '../../components/inputFull/InputFull';
 import { appVersion } from '../../../const';
 import { PopapContext } from '../../context/PopapContext';
-import { checkLanguage } from '../../hooks/useLanguage';
+import { checkLanguage, checkLanguageConst } from '../../hooks/useLanguage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 function StartScreen ({ navigation }) {
@@ -28,6 +28,22 @@ function StartScreen ({ navigation }) {
     const {loading, request, error, clearError} = useHttp();
     const [data, setData] = useState(false);
     const [data_list, set_data_list] = useState(data_list_not_auth);
+    // const [active_menu, set_active_menu] = useState(0);
+
+    // const upload_classic_menu = (value) => {
+    //     value = value ? value : "0";
+    //     AsyncStorage.setItem("classic_menu", value);
+    //     set_active_menu(value);
+    // }
+
+    // const classic_menu_start = async () => {
+    //     const classic_menu_new = await AsyncStorage.getItem("classic_menu");
+    //     upload_classic_menu(classic_menu_new);
+    // }
+
+    // useEffect(() => {
+    //     classic_menu_start();
+    // }, [])
 
     const data_list_not_auth = [
         {
@@ -35,6 +51,7 @@ function StartScreen ({ navigation }) {
             router: 'Video',
             img: require('../../assets/images/classic.jpg'),
             url: '/api/data/v2/classic/',
+            url_: '/api/data/v2/fusion/',
             url_like: '/api/data/video/',
         },
         {
@@ -67,6 +84,7 @@ function StartScreen ({ navigation }) {
             router: 'Video',
             img: require('../../assets/images/classic.jpg'),
             url: '/api/data/v2/classic/',
+            url_: '/api/data/v2/fusion/',
             url_like: '/api/data/video/',
         },
         {
@@ -145,7 +163,7 @@ function StartScreen ({ navigation }) {
             popapRoot.dataChange(DataPopap(auth.labelUpdate));
             popapRoot.openHandler();
         }
-    }, [auth.version])
+    }, [auth.version]);
 
     return (
         
@@ -170,6 +188,7 @@ function StartScreen ({ navigation }) {
                     <View style={styles.block}>
                         {data_list?.map((item, index) => (
                             <TouchableOpacity
+                            key={index}
                             style={[styles.item_button]}
                             onPress={() => nextHandler(item)}
                             >
@@ -189,6 +208,7 @@ function StartScreen ({ navigation }) {
                                 </ImageBackground>
                             </TouchableOpacity> 
                         ))}
+                        
                     </View>
                     <View style={{height: 50, width: '100%'}} />
                 </ScrollView>

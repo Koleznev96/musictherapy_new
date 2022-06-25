@@ -33,6 +33,8 @@ import ResultTestScreen from "./screens/tests/resultTest/ResultTestScreen";
 import infoCourseScreen from "./screens/courses/infoCourse/infoCourseScreen";
 import LessonCourseScreen from "./screens/courses/lessonCourse/LessonCourseScreen";
 import ResultCourseScreen from "./screens/courses/resultCourse/ResultCourseScreen";
+import ConstructorScreen from "./screens/constructor/ConstructorScreen";
+import IndividualPlaylistScreen from "./screens/individualPlaylist/IndividualPlaylistScreen";
 
 
 const Stack = createStackNavigator();
@@ -54,6 +56,8 @@ const GoalRoutes = () => (
   >
     <Tab.Screen name ='Start' component={GoalScreen} options={{ headerShown: false }}/>
     <Tab.Screen name ='Audio' component={AudioScreen} options={{ headerShown: false }}/>
+    <Tab.Screen name ='Constructor' component={ConstructorScreen} options={{ headerShown: false }}/>
+    <Tab.Screen name ='IndividualPlaylist' component={IndividualPlaylistScreen} options={{ headerShown: false }}/>
   </Stack.Navigator>
 )
 

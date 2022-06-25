@@ -2,7 +2,7 @@ import React from 'react';
 import {
     View,
 } from 'react-native';
-import VideoPlayer from 'react-native-video-controls';
+import VideoPlayer from '../../components/videoPlayer/VideoPlayer';
 import {httpServer} from '../../../const';
 
 

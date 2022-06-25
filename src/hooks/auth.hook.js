@@ -1,6 +1,5 @@
 import React, {useState, useCallback, useEffect, useContext} from 'react';
 import {
-    AsyncStorage, 
     Platform, 
     View,
     Text,
@@ -12,6 +11,7 @@ import { PopapContext } from '../context/PopapContext';
 import {useHttp} from "./http.hook";
 import {styles} from "./useStyles";
 import GlobalStyle from "../components/GlobalStyle";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const storageName = 'JWT';
 
@@ -24,11 +24,17 @@ export const useAuth = () => {
     const [labelUpdate, setLabelUpdate] = useState(null);
     const {loading, request, error, clearError} = useHttp();
 
-    const login = useCallback((jwtToken, email, password) => {
+    const login = useCallback(async (jwtToken, email, password) => {
         setToken(jwtToken);
         AsyncStorage.setItem("JWT", jwtToken);
         AsyncStorage.setItem("email", email);
         AsyncStorage.setItem("password", password);
+
+        try {
+            await request(`/api/log/auth`, 'POST', null, {
+                Authorization: jwtToken
+            });
+        } catch (e) {}
     }, []);
 
     const logout = useCallback(async()=> {

@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from "react";
 import { AuthContext } from "../context/authContext";
 import { DataContext } from '../context/DataContext';
 import { useHttp } from "../hooks/http.hook";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export const DataProvider = ({children, ...props}) => {
@@ -10,6 +11,7 @@ export const DataProvider = ({children, ...props}) => {
     const [update, setUpdate] = useState(false);
     const [loader, setLoader] = useState(false);
     const {loading, request, error, clearError} = useHttp();
+    const [classic_menu, set_classic_menu] = useState("0");
 
     const updateHandler = () => {
         setUpdate(!update);
@@ -22,11 +24,23 @@ export const DataProvider = ({children, ...props}) => {
                 Authorization: `${auth.token}`
             });
             setData(data.data);
-        } catch (e) {
-            // console.log('err-', e)
-        }
+        } catch (e) {}
         setLoader(false);
     };
+
+    const upload_classic_menu = (value) => {
+        AsyncStorage.setItem("classic_menu", value);
+        set_classic_menu(value);
+    }
+
+    const classic_menu_start = async () => {
+        const classic_menu_new = await AsyncStorage.getItem("classic_menu");
+        upload_classic_menu(classic_menu_new ? classic_menu_new : "0");
+    }
+
+    useEffect(() => {
+        classic_menu_start();
+    }, [])
 
     useEffect(() => {
         getData();
@@ -39,6 +53,8 @@ export const DataProvider = ({children, ...props}) => {
             loader,
             updateHandler,
             getData,
+            classic_menu,
+            upload_classic_menu
         }}
         {...props}
     >

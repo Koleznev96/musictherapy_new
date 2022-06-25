@@ -49,7 +49,6 @@ function LessonCourseScreen ({ navigation, route }) {
     const getData = async (number) => {
         setLoader(true);
         set_curent_number(number);
-        // console.log('alooo-', `/api/data/get_lesson_course/${data_root._id}/${data_user_test._id}/${number}`);
         try {
             const data = await request(`/api/data/get_lesson_course/${data_root._id}/${data_user_test._id}/${number}`, 'GET', null, {
                 Authorization: `${auth.token}`
@@ -58,9 +57,7 @@ function LessonCourseScreen ({ navigation, route }) {
             set_ok_lesson(data.ok_lesson);
             set_status_next(data.lesson_data.length_lessons - 1 > number);
             set_status_prev(number !== 0);
-        } catch (e) {
-            // console.log('err-', e)
-        }
+        } catch (e) {}
         setLoader(false);
     };
 
@@ -85,9 +82,7 @@ function LessonCourseScreen ({ navigation, route }) {
             });
             set_ok_lesson(data);
             if (status_next) menuQuestionsHandler('next');
-        } catch (e) {
-            // console.log('err-', e)
-        }
+        } catch (e) {}
     }
     
     const completeHandler = async (status_ans) => {
@@ -109,9 +104,7 @@ function LessonCourseScreen ({ navigation, route }) {
                 popapRoot.openHandler();
                 setLoader(false);
             }
-        } catch (e) {
-            // console.log('err-', e)
-        }
+        } catch (e) {}
         setLoader(false);
     }
 
@@ -206,11 +199,9 @@ function LessonCourseScreen ({ navigation, route }) {
                                         // <MarkdownView 
                                         //     styles={{text: {...GlobalStyle.CustomFontRegular, ...styles.item_text}, }}
                                         //     onLinkPress={(url) => {
-                                        //         console.log('url-', url)
                                         //         Linking.openURL(url).catch(err => console.error('An error occurred', err))
                                         //     }}
                                         // >
-                                        //     {console.log(checkLanguage(lesson_data?.text, auth.language))}
                                         //     {checkLanguage(lesson_data?.text, auth.language)}
                                         // </MarkdownView>
                                         <Markdown

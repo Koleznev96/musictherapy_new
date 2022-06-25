@@ -6,6 +6,10 @@ export const styles = StyleSheet.create({
         marginTop: 10,
         width: '100%',
     },
+    instruments: {
+        fontSize: 10,
+        color: '#B9B9B9',
+    },
     button_like: {
         opacity: 0.8,
         width: 36,

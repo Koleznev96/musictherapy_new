@@ -3,62 +3,76 @@ import { ColorsStyles } from "../../constants/ColorsStyles";
 
 export const styles = StyleSheet.create({
     scroll: {
-        marginTop: 10,
+        // marginTop: 10,
         width: '100%',
+    },
+    label: {
+        fontSize: 16,
+        marginBottom: 10,
+        marginTop: 25,
+    },
+    value: {
+        fontSize: 15,
+        marginLeft: 10,
+    },
+    button_filter: {
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingVertical: 6,
+    },
+    box_clip: {
+        borderWidth: 1,
+        borderColor: ColorsStyles.colorButton,
+        width: 18,
+        height: 18,
+        // borderRadius: 100,
+        backgroundColor: '#E0E6F1',
+    },
+    box_clip_active: {
+        borderWidth: 2,
+        borderColor: ColorsStyles.colorButton,
+        width: 18,
+        height: 18,
+        // borderRadius: 100,
+        backgroundColor: ColorsStyles.colorButton,
+    },
+    bool_clip: {
+        borderWidth: 1,
+        borderColor: ColorsStyles.colorButton,
+        width: 18,
+        height: 18,
+        borderRadius: 100,
+        backgroundColor: '#E0E6F1',
+    },
+    bool_clip_active: {
+        borderWidth: 2,
+        borderColor: ColorsStyles.colorButton,
+        width: 18,
+        height: 18,
+        borderRadius: 100,
+        backgroundColor: ColorsStyles.colorButton,
     },
     instruments: {
-        fontSize: 12,
+        fontSize: 10,
         color: '#B9B9B9',
     },
-    menu: {
-        width: '100%',
-        paddingHorizontal: 8,
-        paddingTop: 10,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-    },
-    menu_el: {
-        width: '49%',
-        paddingVertical: 8,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
-        borderRadius: 6,
-    },
-    menu_el_active: {
-        width: '49%',
-        paddingVertical: 8,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
-        borderRadius: 6,
-    },
-    menu_el_text: {
-        fontSize: 15,
-        borderBottomColor: 'rgba(0, 0, 0, 0)',
-        borderBottomWidth: 1,
-    },
-    menu_el_text_active: {
-        borderBottomColor: '#FFFFFF',
-        borderBottomWidth: 1,
-        fontSize: 15,
-    },
     button_like: {
-        position: 'absolute', 
-        right: 10,
-        top: 10, 
         opacity: 0.8,
         width: 36,
         height: 36,
         alignItems: 'center',
         justifyContent: 'center',
     },
+    futter_plyer: {
+        position: 'absolute',
+        bottom: 10,
+        width: '86%',
+    },
     scrollView: {
-        marginTop: 10,
+        // marginTop: 10,
         alignItems: 'center',
+        paddingBottom: 30,
     },
     block_root_v: {
         width: '100%',
@@ -103,7 +117,7 @@ export const styles = StyleSheet.create({
     },
     block: {
         alignItems: 'center',
-        width: '90%',
+        width: '86%',
     },
     item_block_root: {
         marginBottom: 15,
@@ -137,27 +151,4 @@ export const styles = StyleSheet.create({
     item_scroll: {
         maxHeight: 80,
     },
-    block_dalate: {
-        width: '100%',
-        paddingHorizontal: 15,
-        paddingVertical: 15,
-        alignItems: 'center',
-    },
-    label_root: {
-        fontSize: 16,
-        marginBottom: 15,
-    },
-    label: {
-        textAlign: 'center',
-        fontSize: 16,
-        marginBottom: 30,
-    },
-    button_dalete: {
-        width: '60%',
-        height: 36,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: ColorsStyles.colorButton,
-        borderRadius: 20,
-    }
 });

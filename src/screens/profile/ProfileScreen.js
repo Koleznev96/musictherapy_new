@@ -50,21 +50,15 @@ function ProfileScreen ({ navigation }) {
             const data = await request(`/api/profile/data`, 'GET', null, {
                 Authorization: `${auth.token}`
             });
-            // if (auth.language !== data.data.language) auth.newLanguage(data.data.language);
             setFormNew({name: data.data.name, fullName: data.data.fullName, telephone: data.data.telephone, email: data.data.email});
             createFields(data.questionnaire);
             setStatusNewData(false);
             setStatusNewForm(false);
-            // console.log('aaaaaa-', data.data.name, data.questionnaire)
-        } catch (e) {
-            // console.log('////', e)
-        }
+        } catch (e) {}
     };
 
     useEffect(() => {
-        // console.log('hhhh-', auth.token, formNew, !Object.keys(formNew).length)
         if (auth.token && !Object.keys(formNew).length) {
-            // console.log('nachaaa')
             getProfile();
         }
     }, [auth.token]);

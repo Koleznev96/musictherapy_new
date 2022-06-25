@@ -5,7 +5,6 @@ import {
     ScrollView,
     TouchableOpacity,
     ImageBackground,
-    Keyboard
 } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import {AuthContext} from "../../context/authContext";
@@ -19,7 +18,7 @@ import {InputFull} from '../../components/inputFull/InputFull';
 import ImgRelaxation from '../../assets/images/relaxation.jpg';
 import ImgActivation from '../../assets/images/activation.jpg';
 import ImgTherapy from '../../assets/images/therapy.jpg';
-
+import { checkLanguageConst } from '../../hooks/useLanguage';
 
 function GoalScreen ({ navigation }) {
     const auth = useContext(AuthContext);
@@ -52,6 +51,10 @@ function GoalScreen ({ navigation }) {
 
     const nextHandler = (item) => {
         navigation.navigate({name: item.router, params: {data_root: item}});
+    }
+
+    const audioSessionHandler = () => {
+        navigation.navigate('Constructor');
     }
 
     return (
@@ -98,8 +101,16 @@ function GoalScreen ({ navigation }) {
                         ))}
                         <Text style={[GlobalStyle.CustomFontRegular, styles.footer_text]}>
 
-                            {(auth.translations && auth.translations['Рекомендуется прослушивать плейлисты по 30 минут в течение не менее 90 дней']) ? auth.translations['Рекомендуется прослушивать плейлисты по 30 минут в течение не менее 90 дней'] : 'Рекомендуется прослушивать плейлисты по 30 минут в течение не менее 90 дней'}
+                            {(auth.translations && auth.translations['Рекомендуется прослушивать музыку 30 минут в течение не менее 90 дней']) ? auth.translations['Рекомендуется прослушивать плейлисты по 30 минут в течение не менее 90 дней'] : 'Рекомендуется прослушивать плейлисты по 30 минут в течение не менее 90 дней'}
                         </Text>
+                        <TouchableOpacity
+                            style={styles.button_audio_session}
+                            onPress={() => audioSessionHandler()}
+                        >
+                            <Text style={[GlobalStyle.CustomFontMedium, styles.button_audio_session_text]}>
+                                {checkLanguageConst('Индивидуальная аудиосессия', auth.translations).toUpperCase()}
+                            </Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={{height: 50, width: '100%'}} />
                 </ScrollView>
