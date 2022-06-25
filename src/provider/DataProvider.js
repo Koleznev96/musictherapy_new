@@ -12,6 +12,7 @@ export const DataProvider = ({children, ...props}) => {
     const [loader, setLoader] = useState(false);
     const {loading, request, error, clearError} = useHttp();
     const [classic_menu, set_classic_menu] = useState("0");
+    const [dostup, set_dostup] = useState("Гость");
 
     const updateHandler = () => {
         setUpdate(!update);
@@ -40,7 +41,22 @@ export const DataProvider = ({children, ...props}) => {
 
     useEffect(() => {
         classic_menu_start();
-    }, [])
+    }, []);
+
+    const getDostup = async () => {
+        try {
+            const data = await request(`/api/data/dostup`, 'GET', null, {
+                Authorization: `${auth.token}`
+            });
+            set_dostup(data);
+        } catch (e) {}
+    }
+
+    useEffect(() => {
+        if (auth.token) {
+            getDostup();
+        }
+    }, [auth.token])
 
     useEffect(() => {
         getData();
@@ -54,7 +70,9 @@ export const DataProvider = ({children, ...props}) => {
             updateHandler,
             getData,
             classic_menu,
-            upload_classic_menu
+            upload_classic_menu,
+            dostup,
+            getDostup
         }}
         {...props}
     >

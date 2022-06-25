@@ -19,9 +19,11 @@ import ImgRelaxation from '../../assets/images/relaxation.jpg';
 import ImgActivation from '../../assets/images/activation.jpg';
 import ImgTherapy from '../../assets/images/therapy.jpg';
 import { checkLanguageConst } from '../../hooks/useLanguage';
+import { DataContext } from '../../context/DataContext';
 
 function GoalScreen ({ navigation }) {
     const auth = useContext(AuthContext);
+    const rootData = useContext(DataContext);
     const {loading, request, error, clearError} = useHttp();
     const [data, setData] = useState(false);
 
@@ -103,6 +105,7 @@ function GoalScreen ({ navigation }) {
 
                             {(auth.translations && auth.translations['Рекомендуется прослушивать музыку 30 минут в течение не менее 90 дней']) ? auth.translations['Рекомендуется прослушивать плейлисты по 30 минут в течение не менее 90 дней'] : 'Рекомендуется прослушивать плейлисты по 30 минут в течение не менее 90 дней'}
                         </Text>
+                        {(rootData.dostup && (rootData.dostup === "Премиум" || rootData.dostup ===  "VIP")) ? (
                         <TouchableOpacity
                             style={styles.button_audio_session}
                             onPress={() => audioSessionHandler()}
@@ -111,6 +114,7 @@ function GoalScreen ({ navigation }) {
                                 {checkLanguageConst('Индивидуальная аудиосессия', auth.translations).toUpperCase()}
                             </Text>
                         </TouchableOpacity>
+                        ): null}
                     </View>
                     <View style={{height: 50, width: '100%'}} />
                 </ScrollView>

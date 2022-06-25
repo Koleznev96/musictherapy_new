@@ -9,4 +9,6 @@ export const DataContext = createContext({
     getData: noop,
     classic_menu: null,
     upload_classic_menu: noop,
+    dostup: null,
+    getDostup: noop,
 });
