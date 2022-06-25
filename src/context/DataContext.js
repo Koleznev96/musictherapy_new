@@ -7,4 +7,6 @@ export const DataContext = createContext({
     loader: null,
     updateHandler: noop,
     getData: noop,
+    classic_menu: null,
+    upload_classic_menu: noop,
 });

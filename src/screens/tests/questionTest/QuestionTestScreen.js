@@ -42,7 +42,6 @@ function QuestionTestScreen ({ navigation, route }) {
     const backHandler = () => {
         dataRoot.updateHandler();
         navigation.navigate('Tests');
-        // navigation.goBack();
     }
 
     const getData = async (number) => {
@@ -52,15 +51,12 @@ function QuestionTestScreen ({ navigation, route }) {
             const data = await request(`/api/data/get_question_test/${data_root._id}/${data_user_test._id}/${number}`, 'GET', null, {
                 Authorization: `${auth.token}`
             });
-            // console.log('question_data-', data.question_data)
             set_question_data(data.question_data);
             set_answer_question(data.answer_question);
             set_status_next(data.question_data.length_questions - 1 > number);
             set_status_prev(number !== 0);
             set_status_ok_answer(data.question_data?.answers?.findIndex((item) => item.is_status === true) !== -1)
-        } catch (e) {
-            // console.log('err-', e)
-        }
+        } catch (e) {}
         set_curent_answer(null);
         setLoader(false);
     };
@@ -91,9 +87,7 @@ function QuestionTestScreen ({ navigation, route }) {
             });
             set_answer_question(data);
             if (status_next && !status_ok_answer) menuQuestionsHandler('next');
-        } catch (e) {
-            // console.log('err-', e)
-        }
+        } catch (e) {}
     }
     
     const completeHandler = async (status_ans) => {
@@ -116,9 +110,7 @@ function QuestionTestScreen ({ navigation, route }) {
                 setLoader(false);
             }
             // set_answer_question(data);
-        } catch (e) {
-            // console.log('err-', e)
-        }
+        } catch (e) {}
         setLoader(false);
     }
 
@@ -184,7 +176,6 @@ function QuestionTestScreen ({ navigation, route }) {
                                         <MarkdownView 
                                             styles={{text: {...GlobalStyle.CustomFontMedium, ...styles.block_text_text}}}
                                             onLinkPress={(url) => {
-                                                // console.log('url-', url)
                                                 Linking.openURL(url).catch(err => console.error('An error occurred', err))
                                             }}
                                         >

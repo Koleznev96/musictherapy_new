@@ -22,9 +22,7 @@ export const CourseProvider = ({children, ...props}) => {
                 Authorization: `${auth.token}`
             });
             setData(data.data);
-        } catch (e) {
-            // console.log('err-', e)
-        }
+        } catch (e) {}
         setLoader(false);
     };
 

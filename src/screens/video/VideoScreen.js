@@ -19,13 +19,15 @@ import VideoPlayer from "../../components/videoPlayer/VideoPlayer";
 import { ColorsStyles } from '../../constants/ColorsStyles';
 import { LoaderIn } from '../../components/loader/minLoader/LoaderIn';
 import {httpServer} from '../../../const';
-import { checkLanguage } from '../../hooks/useLanguage';
+import { checkLanguage, checkLanguageConst } from '../../hooks/useLanguage';
 import { PopapContext } from '../../context/PopapContext';
+import { DataContext } from '../../context/DataContext';
 
 
 function VideoScreen ({ navigation, route }) {
     const {data_root} = route.params;
     const popapRoot = useContext(PopapContext);
+    const dataRoot = useContext(DataContext);
     const auth = useContext(AuthContext);
     const {loading, request, error, clearError} = useHttp();
     const [data, setData] = useState([]);
@@ -36,6 +38,11 @@ function VideoScreen ({ navigation, route }) {
     const [loader, setLoader] = useState(false);
     const [access, setAccess] = useState(null);
     const [loaderPaginashion, setLoaderPaginashion] = useState(false);
+    // const [activeMenu, setActiveMenu] = useState(0);
+
+    // useEffect(() => {
+    //     setActiveMenu
+    // }, [])
 
     const itemHandler = (index) => {
         if (index === activeIndex) setActiveIndex(-1);
@@ -45,7 +52,7 @@ function VideoScreen ({ navigation, route }) {
     const getData = async () => {
         setLoader(true);
         try {
-            const data = await request(`${data_root.url}ios/0`, 'GET', null, {
+            const data = await request(`${data_root.url_ ? (dataRoot.classic_menu === "0" ? data_root.url : data_root.url_) : data_root.url}ios/0`, 'GET', null, {
                 Authorization: `${auth.token}`
             });
             let new_data = data.data;
@@ -60,29 +67,20 @@ function VideoScreen ({ navigation, route }) {
 
     useEffect(() => {
         getData();
-    }, [auth.token]);
+    }, [auth.token, dataRoot.classic_menu]);
 
-    const fullScreenHandler = (data) => {
+    const fullScreenHandler = async (data) => {
         navigation.navigate({
             name: 'FullVideo',
             params: data,
         });
-    }
-
-    const paginashion = async () => {
-        if (end_page) {
-            return 0;
-        }
 
         try {
-            setLoaderPaginashion(true);
-            const answer = await request(`${data_root.url}ios/${counterPage}`, 'GET', null, {
-                Authorization: `${auth.token}`
+            await request(`/api/log/play_data`, 'POST', {
+                type: 'video', id: data._id
+            }, {
+                Authorization: auth.token ? `${auth.token}` : null
             });
-            setData([...data, ...answer.data]);
-            setCounterPage(counterPage + answer.data.length);
-            set_end_page(answer.end_page);
-            setLoaderPaginashion(false);
         } catch (e) {}
     }
 
@@ -137,6 +135,16 @@ function VideoScreen ({ navigation, route }) {
         popapRoot.openHandler();
     }
 
+    const arrayToString = (array) => {
+        let new_array = array?.map(item => checkLanguageConst(item, auth.translations).toLowerCase());
+        return new_array.join(', ')
+    }
+
+    const activeMenuHandler = (value) => {
+        // setActiveMenu(value); 
+        dataRoot.upload_classic_menu(value);
+    }
+
     return (
         <ImageBackground
             source={require('../../assets/images/background-img.jpg')}
@@ -151,6 +159,26 @@ function VideoScreen ({ navigation, route }) {
                     style={{width: '100%', height: '100%', alignItems: 'center'}}
                 >
                 <HeaderRoot data={{label: data_root.name, backHandler}}/>
+                {data_root.url_ ? (
+                    <View style={styles.menu}>
+                        <TouchableOpacity
+                            style={dataRoot.classic_menu === 0 ? styles.menu_el_active : styles.menu_el}
+                            onPress={() => activeMenuHandler("0")}
+                        >
+                            <Text style={[GlobalStyle.CustomFontMedium, dataRoot.classic_menu === "0" ? styles.menu_el_text_active : styles.menu_el_text]}>
+                                CLASSICS
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={dataRoot.classic_menu === 1 ? styles.menu_el_active : styles.menu_el}
+                            onPress={() => activeMenuHandler("1")}
+                        >
+                            <Text style={[GlobalStyle.CustomFontMedium, dataRoot.classic_menu === "1" ? styles.menu_el_text_active : styles.menu_el_text]}>
+                                FUSION
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                ): null}
                 <View style={styles.block}>
                     {loader ? (
                         <LoaderIn />
@@ -184,6 +212,11 @@ function VideoScreen ({ navigation, route }) {
                                     {activeIndex === index ? (
                                         <Text style={[GlobalStyle.CustomFontRegular, styles.item_text]}>
                                             {checkLanguage(item.text_, auth.language)}
+                                        </Text> 
+                                    ): null}
+                                    {item.instruments?.length ? (
+                                        <Text style={[GlobalStyle.CustomFontMedium, styles.instruments]}>
+                                            {arrayToString(item.instruments)}
                                         </Text> 
                                     ): null}
                                 </View> 

@@ -50,6 +50,20 @@ static void InitializeFlipper(UIApplication *application) {
   return YES;
 }
 
+// Фоновый режим для аудио и видео
+// @import AVFoundation
+
+// - (void)setSharedAudioSessionCategory
+// {
+//   NSError *categoryError = nil;
+//   [[AVAudioSession sharedInstance]
+//     setCategory:AVAudioSessionCategoryPlayback
+//           error:&categoryError];
+//   if (categoryError) {
+//     NSLog(@"Error setting category!");
+//   }
+// }
+
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {
 #if DEBUG

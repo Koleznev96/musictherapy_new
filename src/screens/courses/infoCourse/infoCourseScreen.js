@@ -49,9 +49,7 @@ function infoCourseScreen ({ navigation, route }) {
                     }
                 });
             }
-        } catch (e) {
-            // console.log('err-', e)
-        }
+        } catch (e) {}
         setLoader(false);
     }
 
