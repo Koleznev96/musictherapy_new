@@ -36,8 +36,8 @@ function CodeCheckScreen ({ navigation, route }) {
             if (data.errors) {
                 setErrorField(data.errors[0][1]);
             } else {
+                navigation.navigate('Home');
                 auth.login(data.token, reg_data.email, reg_data.password);
-                navigation.navigate('Profile');
             }
         } catch (e) {}
     };

@@ -97,9 +97,9 @@ function InfoScreen ({ navigation }) {
                     contentContainerStyle={styles.scrollView}
                 >
                     <View style={styles.block}>
-                        <InputFull data={{value: email, change: setEmail, placeholder: (auth.translations && auth.translations['E-mail']) ? auth.translations['ВоE-mailйти'] : 'E-mail', error: errorField}} />
+                        <InputFull data={{value: email, change: setEmail, placeholder: (auth.translations && auth.translations['E-mail']) ? auth.translations['E-mail'] : 'E-mail', error: errorField}} />
 
-                        <ButtonFull data={{value: (auth.translations && auth.translations['Востановить пароль']) ? auth.translations['ИВостановить парольмя'] : 'Востановить пароль', change: AuthHandler, styles: {marginTop: '20%',}, loading: loading}} />
+                        <ButtonFull data={{value: (auth.translations && auth.translations['Востановить пароль']) ? auth.translations['Востановить пароль'] : 'Востановить пароль', change: AuthHandler, styles: {marginTop: '20%',}, loading: loading}} />
                         <View style={styles.footer}>
                             <TouchableOpacity
                                 style={[styles.button_footer]}

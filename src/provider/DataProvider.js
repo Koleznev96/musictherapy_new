@@ -45,7 +45,7 @@ export const DataProvider = ({children, ...props}) => {
 
     const getDostup = async () => {
         try {
-            const data = await request(`/api/data/dostup`, 'GET', null, {
+            const data = await request(`/api/data/access`, 'GET', null, {
                 Authorization: `${auth.token}`
             });
             set_dostup(data);

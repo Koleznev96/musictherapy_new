@@ -5,6 +5,7 @@ import {
     ScrollView,
     TouchableOpacity,
     ImageBackground,
+    RefreshControl
 } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import {AuthContext} from "../../context/authContext";
@@ -20,12 +21,14 @@ import ImgActivation from '../../assets/images/activation.jpg';
 import ImgTherapy from '../../assets/images/therapy.jpg';
 import { checkLanguageConst } from '../../hooks/useLanguage';
 import { DataContext } from '../../context/DataContext';
+import { ColorsStyles } from '../../constants/ColorsStyles';
 
 function GoalScreen ({ navigation }) {
     const auth = useContext(AuthContext);
     const rootData = useContext(DataContext);
     const {loading, request, error, clearError} = useHttp();
     const [data, setData] = useState(false);
+    const [Refreshing, setRefreshing] = useState(false);
 
     const data_list = [
         {
@@ -78,6 +81,13 @@ function GoalScreen ({ navigation }) {
                     keyboardShouldPersistTaps='handled' 
                     showsVerticalScrollIndicator={false} 
                     contentContainerStyle={styles.scrollView}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={Refreshing}
+                            onRefresh={() => rootData.getDostup()}
+                            colors={[ColorsStyles.colorTextError]}
+                        />
+                    }
                 >
                     <View style={styles.block}>
                         {data_list.map((item, index) => (

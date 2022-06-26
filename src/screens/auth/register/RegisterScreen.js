@@ -105,22 +105,14 @@ function RegisterScreen ({ navigation }) {
             password: '',
         });
         try {
-            const data = await request(`/api/auth/register`, 'POST', {name, fullName, telephone, email, password});
+            const data = await request(`/api/auth/register_new`, 'POST', {name, fullName, telephone, email, password});
             if (data.errors) {
                 setErrorField({...errorField, [data.errors[0][0]]: data.errors[0][1]});
-            } else {
-                const dataNew = await request(`/api/auth/code_check`, 'POST', {name, language: auth.language === 'com' ? 'com' : 'ru', fullName, telephone, email, password, tokenCode: data.tokenCode, code: '111111'});
-                if (dataNew.errors) {
-                    setErrorField(dataNew.errors[0][1]);
-                } else {
-                    navigation.navigate('Home');
-                    auth.login(dataNew.token, email, password);
-                }
-                
-                // navigation.navigate({
-                //     name: 'CodeCheck',
-                //     params: {data: {name, fullName, telephone, email, password}, tokenCode: data.tokenCode},
-                // });
+            } else {              
+                navigation.navigate({
+                    name: 'CodeCheck',
+                    params: {data: {name, fullName, telephone, email, password}, tokenCode: data.tokenCode},
+                });
             }
         } catch (e) {}
     };
