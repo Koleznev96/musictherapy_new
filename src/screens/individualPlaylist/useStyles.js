@@ -9,7 +9,8 @@ export const styles = StyleSheet.create({
     upload_text: {
         marginTop: 35,
         fontSize: 18,
-        color: '#FFFFFF'
+        color: '#FFFFFF',
+        textAlign: 'center',
     },
     instruments: {
         fontSize: 10,
