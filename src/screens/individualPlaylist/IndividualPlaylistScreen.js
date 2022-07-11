@@ -38,6 +38,7 @@ function IndividualPlaylistScreen ({ navigation, route }) {
     const [loader, setLoader] = useState(false);
     const [clear, setClear] = useState(false);
     const [uploadText, setUploadText] = useState('Ваш плейлист формируется!!!');
+    const [render, setRender] = useState(true);
 
     const itemHandler = (index, item) => {
         if (index !== activeIndex) {
@@ -61,6 +62,7 @@ function IndividualPlaylistScreen ({ navigation, route }) {
     }
 
     const getData = async () => {
+        setRender(true);
         setActiveIndex(-1);
         setActivItem(null);
         setLoader(true);
@@ -71,13 +73,20 @@ function IndividualPlaylistScreen ({ navigation, route }) {
                 Authorization: `${auth.token}`
             });
             setData(data.data);
+            setTimeout(() => {
+                setUploadText(data.data?.length > 0 ? 
+                    'Приятного прослушивания 😊' : 
+                    checkLanguageConst('Для данного набора параметров не получилось сформировать плейлист, попробуйте снова', auth.language));
+                    if (!(data.data?.length > 0)) setRender(false);
+                }, 1000);
+            if (data.data?.length > 0) setTimeout(() => {setUploadText(null); itemHandler(0, data.data[0]); setRender(false)}, 2000);
             setLoader(false);
         } catch (e) {}
     };
 
     useEffect(() => {
-        setTimeout(() => {setUploadText('Приятного прослушивания 😊')}, 2000);
-        setTimeout(() => {setUploadText(null)}, 3010);
+        // setTimeout(() => {setUploadText('Приятного прослушивания 😊')}, 2000);
+        // setTimeout(() => {setUploadText(null)}, 3010);
         getData();
     }, [auth.token]);
 
@@ -138,11 +147,12 @@ function IndividualPlaylistScreen ({ navigation, route }) {
                 >
                 <HeaderRoot data={{label: checkLanguageConst('Плейлист', auth.translations), backHandler}}/>
                 <View style={styles.block}>
-                    {(loader || uploadText !== null) ? (
+                        {uploadText !== null ? (
+                            <Text style={styles.upload_text}>{checkLanguageConst(uploadText, auth.language)}</Text>
+                        ): null}
+                    {(render) ? (
                         <>
-                            {uploadText !== null ? (
-                                <Text style={styles.upload_text}>{checkLanguageConst(uploadText, auth.language)}</Text>
-                            ): null}
+                            
                             <LoaderIn />
                         </>
                     ) : (data?.length ? (
@@ -201,7 +211,7 @@ function IndividualPlaylistScreen ({ navigation, route }) {
                         />
                         ): (
                             <Text style={{width: '100%', fontSize: 16, textAlign: 'center', marginTop: 25,}}>
-                                {checkLanguageConst('Для данного набора параметров не получилось сформировать плейлист, попробуйте снова', auth.language)}
+                                {/* {checkLanguageConst('Для данного набора параметров не получилось сформировать плейлист, попробуйте снова', auth.language)} */}
                             </Text>
                         )
                     )}
