@@ -134,8 +134,8 @@ android {
         applicationId "by.musictherapy"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 6 // 07.07.2022
-        versionName "1.5" // 07.07.2022
+        versionCode 7 // 12.07.2022
+        versionName "1.7" // 12.07.2022
     }
     splits {
         abi {
