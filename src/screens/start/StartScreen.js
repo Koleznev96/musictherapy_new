@@ -138,7 +138,7 @@ function StartScreen ({ navigation }) {
 
     const updateHandler = () => {
         if (Platform.OS === 'ios') 
-        Linking.openURL('https://play.google.com/store/apps/details?id=by.musictherapy').catch(err => console.error('An error occurred', err)) 
+        Linking.openURL('https://apps.apple.com/by/app/музыкотерапия/id1608306469').catch(err => console.error('An error occurred', err)) 
         else
         Linking.openURL('https://play.google.com/store/apps/details?id=by.musictherapy').catch(err => console.error('An error occurred', err))
     }
