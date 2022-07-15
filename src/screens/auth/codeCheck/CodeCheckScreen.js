@@ -44,7 +44,7 @@ function CodeCheckScreen ({ navigation, route }) {
 
     const newCode = async () => {
         try {
-            const data = await request(`/api/auth/register`, 'POST', {...reg_data});
+            const data = await request(`/api/auth/register_new`, 'POST', {...reg_data});
             setTokenCode(data.tokenCode);
         } catch (e) {}
         setStatus(false);
