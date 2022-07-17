@@ -1,4 +1,5 @@
 import { StyleSheet, Platform, Dimensions } from 'react-native';
+import { scaleModerate } from '../../provider/SizeFont';
 const {width, height} = Dimensions.get('screen');
 const width_logo = width * 0.88;
 
@@ -12,7 +13,7 @@ export const styles = StyleSheet.create({
     },
     text_glav: {
         marginTop: 25,
-        fontSize: 32,
+        fontSize: scaleModerate(32, 1.8),
     },
     text_foot: {
         letterSpacing: 2,

@@ -22,6 +22,8 @@ import { CourseProvider } from "./provider/CourseProvider";
 const App = () => {
   const {token, login, logout, ready, language, newLanguage, translations, version, labelUpdate} = useAuth();
 
+  // return <Loader />;
+
   if (!ready) {
     return <Loader />
   }

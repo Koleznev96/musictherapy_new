@@ -27,8 +27,12 @@ export const Loader = () => {
                     <View style={styles.block}>
                         <Image source={require('../../assets/images/logo.png')} style={styles.logo}/>
                     </View>
-                    <Text style={[GlobalStyle.BellotaFontRegular, styles.text_glav]}>
-                    {(auth.translations && auth.translations['Музыкотерапия']) ? auth.translations['Музыкотерапия'].toUpperCase() : 'МУЗЫКОТЕРАПИЯ'}
+                    <Text 
+                        // numberOfLines={1}
+                        // abjustsFontSizeToFit={true} // подбирает размер текста до того, как все содержимое будет влезать в область
+                        style={[GlobalStyle.BellotaFontRegular, styles.text_glav]}
+                    >
+                        {(auth.translations && auth.translations['Музыкотерапия']) ? auth.translations['Музыкотерапия'].toUpperCase() : 'МУЗЫКОТЕРАПИЯ'}
                     </Text>
                     <Text style={[GlobalStyle.BellotaFontRegular, styles.text_foot]}>
                         Гармония и совершенство
