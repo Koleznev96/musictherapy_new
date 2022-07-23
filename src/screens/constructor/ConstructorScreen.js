@@ -18,52 +18,84 @@ import { checkLanguage, checkLanguageConst } from '../../hooks/useLanguage';
 import { ButtonFull } from '../../components/buttonFull/ButtonFull';
 
 
-const filter_data = [
-    {
-        label: 'Чего хотелось бы?',
-        value: 'goal',
-        function_name: 'bool',
-        list: [
-            {
-                label: 'Релакс, снятие напряжения / стресса / тревожности, глубокий отдых',
-                value: 1
-            },
-            {
-                label: 'Активация, поднятие энергетики',
-                value: 2
-            },
-            {
-                label: 'Уменьшение боли, анальгетик во время/после операций, при болезненных состояниях',
-                value: 3
-            },
-            {
-                label: 'Снижение агрессии',
-                value: 4
-            },
-            {
-                label: 'Развитие',
-                value: 5
-            },
-        ]
-    },
-    {
-        label: 'Какие инструменты хотите включить?',
-        value: 'instruments',
-        function_name: 'box',
-        list: [{label: 'Рояль', value: 'Рояль'}, {label: 'Флейта', value: 'Флейта'}, {label: 'Виолончель', value: 'Виолончель'}, {label: 'Скрипка', value: 'Скрипка'},
-        {label: 'Вокал', value: 'Вокал'}, {label: 'Арфа', value: 'Арфа'}, {label: 'Клавесин', value: 'Клавесин'}, {label: 'Орган', value: 'Орган'},
-        {label: 'Гонг', value: 'Гонг'}, {label: 'Тибетские поющие чаши', value: 'Тибетские поющие чаши'}, {label: 'Караталы', value: 'Караталы'}, {label: 'Чакрофоны', value: 'Чакрофоны'},
-        {label: 'Шум дождя', value: 'Шум дождя'}, {label: 'Шум ручья', value: 'Шум ручья'}, {label: 'Шум океана', value: 'Шум океана'}, {label: 'Калимба', value: 'Калимба'},
-        {label: 'Глюкофон', value: 'Глюкофон'}, {label: 'Барчаймс', value: 'Барчаймс'}, {label: 'Колокольчики Коши', value: 'Колокольчики Коши'}, {label: 'Колокольчики Нада', value: 'Колокольчики Нада'},
-        {label: 'Валдайские колокольчики', value: 'Валдайские колокольчики'}, {label: 'Этническая погремушка', value: 'Этническая погремушка'}, {label: 'Гитара', value: 'Гитара'}, {label: 'Контрабас', value: 'Контрабас'}]
-    }
-]
+
 
 
 function ConstructorScreen ({ navigation, route }) {
     const auth = useContext(AuthContext);
     const {loading, request, error, clearError} = useHttp();
-    const [data, setData] = useState({goal: 0, instruments: []});
+    const [data, setData] = useState({goal: 0, instruments: [], styles: [], levels: []});
+    const [filter_data, set_filter_data] = useState([
+        {
+            label: 'Чего хотелось бы?',
+            value: 'goal',
+            function_name: 'bool',
+            list: [
+                {
+                    label: 'Релакс, снятие напряжения / стресса / тревожности, глубокий отдых',
+                    value: 1
+                },
+                {
+                    label: 'Активация, поднятие энергетики',
+                    value: 2
+                },
+                {
+                    label: 'Уменьшение боли, анальгетик во время/после операций, при болезненных состояниях',
+                    value: 3
+                },
+                {
+                    label: 'Снижение агрессии',
+                    value: 4
+                },
+                {
+                    label: 'Развитие',
+                    value: 5
+                },
+            ]
+        },
+        {
+            label: 'Какие инструменты хотите включить?',
+            value: 'instruments',
+            function_name: 'box',
+            list: []
+            // [{label: 'Рояль', value: 'Рояль'}, {label: 'Флейта', value: 'Флейта'}, {label: 'Виолончель', value: 'Виолончель'}, {label: 'Скрипка', value: 'Скрипка'},
+            // {label: 'Вокал', value: 'Вокал'}, {label: 'Арфа', value: 'Арфа'}, {label: 'Клавесин', value: 'Клавесин'}, {label: 'Орган', value: 'Орган'},
+            // {label: 'Гонг', value: 'Гонг'}, {label: 'Тибетские поющие чаши', value: 'Тибетские поющие чаши'}, {label: 'Караталы', value: 'Караталы'}, {label: 'Чакрофоны', value: 'Чакрофоны'},
+            // {label: 'Шум дождя', value: 'Шум дождя'}, {label: 'Шум ручья', value: 'Шум ручья'}, {label: 'Шум океана', value: 'Шум океана'}, {label: 'Калимба', value: 'Калимба'},
+            // {label: 'Глюкофон', value: 'Глюкофон'}, {label: 'Барчаймс', value: 'Барчаймс'}, {label: 'Колокольчики Коши', value: 'Колокольчики Коши'}, {label: 'Колокольчики Нада', value: 'Колокольчики Нада'},
+            // {label: 'Валдайские колокольчики', value: 'Валдайские колокольчики'}, {label: 'Этническая погремушка', value: 'Этническая погремушка'}, {label: 'Гитара', value: 'Гитара'}, {label: 'Контрабас', value: 'Контрабас'}]
+        },
+        {
+            label: 'Стиль?',
+            value: 'styles',
+            function_name: 'box',
+            list: [{label: 'Барокко', value: 'Барокко'}, {label: 'Классицизм', value: 'Классицизм'}, {label: 'Романтизм', value: 'Романтизм'},
+            {label: 'Импрессионизм', value: 'Импрессионизм'}, {label: 'Авангард', value: 'Авангард'}, {label: 'Кроссовер', value: 'Кроссовер'}, {label: 'Современная', value: 'Современная'}]
+        },
+        {
+            label: 'Уровень?',
+            value: 'levels',
+            function_name: 'box',
+            list: [{label: '1. Популярная классика', value: 1}, {label: '2. Легкая классика', value: 2}, {label: '3. Академическая классика', value: 3},
+            {label: '4. Сложная классика', value: 4}]
+        },
+    ]);
+
+    const getInstrument = async () => {
+        try {
+            const data = await request(`/api/data/tools`, 'GET', null, {
+                Authorization: `${auth.token}`
+            });
+            let new_filter = [...filter_data];
+            new_filter[1].list = data;
+            set_filter_data([...new_filter]);
+        } catch (error) {
+        }
+    }
+
+    useEffect(() => {
+        getInstrument();
+    }, []);
 
     const backHandler = () => {
         navigation.goBack();
@@ -139,7 +171,8 @@ function ConstructorScreen ({ navigation, route }) {
                         {filter_data?.map((item, index) => (
                             <View key={index} style={{width: '100%'}}>
                                 <Text style={[GlobalStyle.CustomFontRegular, styles.label]}>
-                                    {item.label}
+                                    {/* {item.label} */}
+                                    {checkLanguageConst(item.label, auth.translations)}
                                 </Text>
                                 {item?.list?.map((list_item, list_index) => (
                                     <TouchableOpacity
@@ -149,7 +182,8 @@ function ConstructorScreen ({ navigation, route }) {
                                     >
                                         {FieldFunction(item.function_name, item.value, list_item.value, data, list_index + 1)}
                                         <Text style={[GlobalStyle.CustomFontRegular, styles.value]}>
-                                            {list_item.label}
+                                            {/* {list_item.label} */}
+                                            {checkLanguageConst(list_item.label, auth.translations)}
                                         </Text>
                                     </TouchableOpacity>
                                 ))}

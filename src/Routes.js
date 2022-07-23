@@ -146,7 +146,8 @@ return (
     })}
   >
     <Tab.Screen name ='Home' component={HomeRoutes} options={{ headerShown: false, tabBarLabel: (translations && translations['Главная']) ? translations['Главная'] : 'Главная' }}/>
-    {isAuthenticated ? <Tab.Screen name ='Goal' component={GoalRoutes} options={{ headerShown: false, tabBarLabel: (translations && translations['Цели']) ? translations['Цели'] : 'Цели' }}/> : null}
+    <Tab.Screen name ='Goal' component={GoalRoutes} options={{ headerShown: false, tabBarLabel: (translations && translations['Цели']) ? translations['Цели'] : 'Цели' }}/>
+    {/* {isAuthenticated ? <Tab.Screen name ='Goal' component={GoalRoutes} options={{ headerShown: false, tabBarLabel: (translations && translations['Цели']) ? translations['Цели'] : 'Цели' }}/> : null} */}
     <Tab.Screen name ='Consultant' component={ConsultantScreen} options={{ headerShown: false, tabBarLabel: (translations && translations['Консультант']) ? translations['Консультант'] : 'Консультант' }}/>
     <Tab.Screen name ='Profile' component={ProfileScreen} options={{ headerShown: false, tabBarLabel: (translations && translations['Аккаунт']) ? translations['Аккаунт'] : 'Аккаунт' }}/>
   </Tab.Navigator>

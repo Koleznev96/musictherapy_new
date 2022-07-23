@@ -32,21 +32,21 @@ function GoalScreen ({ navigation }) {
 
     const data_list = [
         {
-            name: (auth.translations && auth.translations['Релакс']) ? auth.translations['Релакс'] : 'Релакс',
+            name: checkLanguageConst('Релакс', auth.translations),
             router: 'Audio',
             img: ImgRelaxation,
             url: '/api/data/audio/Релакс/',
             url_like: '/api/data/audio/',
         },
         {
-            name: (auth.translations && auth.translations['Активация']) ? auth.translations['Активация'] : 'Активация',
+            name: checkLanguageConst('Активация', auth.translations),
             router: 'Audio',
             img: ImgActivation,
             url: '/api/data/audio/Активация/',
             url_like: '/api/data/audio/',
         },
         {
-            name: (auth.translations && auth.translations['Терапия']) ? auth.translations['Терапия'] : 'Терапия',
+            name: checkLanguageConst('Терапия', auth.translations),
             router: 'Audio',
             img: ImgTherapy,
             url: '/api/data/audio/Терапия/',
@@ -112,10 +112,12 @@ function GoalScreen ({ navigation }) {
                             </TouchableOpacity> 
                         ))}
                         <Text style={[GlobalStyle.CustomFontRegular, styles.footer_text]}>
-
-                            {(auth.translations && auth.translations['Рекомендуется прослушивать музыку 30 минут в течение не менее 90 дней']) ? auth.translations['Рекомендуется прослушивать плейлисты по 30 минут в течение не менее 90 дней'] : 'Рекомендуется прослушивать плейлисты по 30 минут в течение не менее 90 дней'}
+                            {checkLanguageConst('Рекомендуется прослушивать музыку 30 минут в течение не менее 90 дней', auth.translations)}
                         </Text>
-                        {(rootData.dostup && (rootData.dostup === "Премиум" || rootData.dostup ===  "VIP")) ? (
+                        {(
+                            auth.token
+                            // rootData.dostup && (rootData.dostup === "Премиум" || rootData.dostup ===  "VIP")
+                        ) ? (
                         <TouchableOpacity
                             style={styles.button_audio_session}
                             onPress={() => audioSessionHandler()}
@@ -124,6 +126,39 @@ function GoalScreen ({ navigation }) {
                                 {checkLanguageConst('Индивидуальная аудиосессия', auth.translations).toUpperCase()}
                             </Text>
                         </TouchableOpacity>
+                        ): null}
+
+                        {!auth.token ? (
+                            <Text style={[GlobalStyle.CustomFontRegular, styles.text_auth_block]}>
+                                {/* <TouchableOpacity
+                                    style={styles.button_text}
+                                    onPress={() => regHandler()}
+                                > */}
+                                    <Text 
+                                        style={[GlobalStyle.CustomFontRegular, styles.text_auth_button]}
+                                        onPress={() => navigation.navigate('Register')}
+                                    >
+                                        {checkLanguageConst('Зарегистрируйтесь', auth.translations)}
+                                    </Text>
+                                {/* </TouchableOpacity> */}
+                                {/* <Text style={[GlobalStyle.CustomFontMedium, styles.text_auth]}> */}
+                                    {` ${checkLanguageConst('или', auth.translations)} `}
+                                {/* </Text> */}
+                                {/* <TouchableOpacity
+                                    style={styles.button_text}
+                                    onPress={() => authHandler()}
+                                > */}
+                                    <Text 
+                                        style={[GlobalStyle.CustomFontRegular, styles.text_auth_button]}
+                                        onPress={() => navigation.navigate('Login')}
+                                    >
+                                        {checkLanguageConst('войдите в аккаунт', auth.translations)}
+                                    </Text>
+                                {/* </TouchableOpacity> */}
+                                {/* <Text style={[GlobalStyle.CustomFontMedium, styles.text_auth]}> */}
+                                    {` ${checkLanguageConst('для возможности формирования индивидуального плейлиста', auth.translations)}`}
+                                {/* </Text> */}
+                            </Text>
                         ): null}
                     </View>
                     <View style={{height: 50, width: '100%'}} />

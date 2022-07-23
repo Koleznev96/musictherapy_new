@@ -117,7 +117,6 @@ function CoursesScreen ({ navigation, route }) {
                     style={{width: '100%', height: '100%', alignItems: 'center'}}
                 >
                 <HeaderDop data={{label: checkLanguageConst('Курсы', auth.translations), backHandler, back_text: ""}}/>
-                {/* <HeaderRoot data={{label: (auth.translations && auth.translations['Курсы']) ? auth.translations['Курсы'] : 'Курсы', backHandler}}/> */}
                 <View style={styles.block}>
                     {courseRoot?.loader ? (
                         <LoaderIn />
@@ -177,15 +176,9 @@ function CoursesScreen ({ navigation, route }) {
                                 </View>
                                 <Text style={[GlobalStyle.CustomFontRegular, styles.item_desc_text]}>
                                     {item.avalibel ? 
-                                        `${(auth.translations && auth.translations['Курс активирован на период с']) ? 
-                                        auth.translations['Курс активирован на период с'] : 
-                                        'Курс активирован на период с'} ${dateToString(item.object_date?.start_date)} ${(auth.translations && auth.translations['по']) ? 
-                                        auth.translations['по'] : 
-                                        'по'} ${dateToString(item.object_date?.end_date)}`
+                                        `${checkLanguageConst('Курс активирован на период с', auth.translations)} ${dateToString(item.object_date?.start_date)} ${checkLanguageConst('по', auth.translations)} ${dateToString(item.object_date?.end_date)}`
                                     : 
-                                        (auth.translations && auth.translations['Для активации курса, пожалуйста, свяжитесь с администратором по телефону +375(44)464-73-47 или e-mail info@musictherapy.by']) ? 
-                                        auth.translations['Для активации курса, пожалуйста, свяжитесь с администратором по телефону +375(44)464-73-47 или e-mail info@musictherapy.by'] : 
-                                        'Для активации курса, пожалуйста, свяжитесь с администратором по телефону +375(44)464-73-47 или e-mail info@musictherapy.by'
+                                        checkLanguageConst('Для активации курса, пожалуйста, свяжитесь с администратором по телефону +375(44)464-73-47 или e-mail info@musictherapy.by', auth.translations)
                                     }
                                 </Text> 
                                 <View 
@@ -203,17 +196,11 @@ function CoursesScreen ({ navigation, route }) {
                                     >
                                         <Text style={[GlobalStyle.CustomFontRegular, styles.button_start_test_text]}>
                                             {!item.avalibel ? 
-                                                (auth.translations && auth.translations['Активировать курс']) ? 
-                                                auth.translations['Активировать курс'] : 
-                                                'Активировать курс'
+                                                checkLanguageConst('Активировать курс', auth.translations)
                                             : (item.status ? (
-                                                (auth.translations && auth.translations['Продолжить курс']) ? 
-                                                auth.translations['Продолжить курс'] : 
-                                                'Продолжить курс'
+                                                checkLanguageConst('Продолжить курс', auth.translations)
                                             ) : (
-                                                (auth.translations && auth.translations['Начать курс']) ? 
-                                                auth.translations['Начать курс'] : 
-                                                'Начать курс'
+                                                checkLanguageConst('Начать курс', auth.translations)
                                             ))}
                                         </Text>
                                     </TouchableOpacity>

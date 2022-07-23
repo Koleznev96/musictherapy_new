@@ -15,6 +15,7 @@ import { BoolFull } from '../../../components/form/boolFull/BoolFull';
 import { DateFull } from '../../../components/form/dateFull/DateFull';
 import { InputForm } from '../../../components/form/inputForm/InputForm';
 import { AuthContext } from '../../../context/authContext';
+import { checkLanguageConst } from '../../../hooks/useLanguage';
 
 
 export const ProfileForm = ({ form, setRoot, errorField, statusNewData, saveHandler, logoutHandler }) => {
@@ -37,7 +38,7 @@ export const ProfileForm = ({ form, setRoot, errorField, statusNewData, saveHand
                 })) : null
             }
         
-            <ButtonFull data={{value: (auth.translations && auth.translations['Сохранить изменения']) ? auth.translations['Сохранить изменения'] : 'Сохранить изменения', change: saveHandler, styles_text: {color: !statusNewData ? ColorsStyles.colorHr : '#FFF'}, styles: !statusNewData ? {marginTop: 30, backgroundColor: 'rgba(0, 0, 0, 0)', borderWidth: 1, borderColor: ColorsStyles.colorHr} : {marginTop: 40,}}} />
+            <ButtonFull data={{value: checkLanguageConst('Сохранить изменения', auth.translations), change: saveHandler, styles_text: {color: !statusNewData ? ColorsStyles.colorHr : '#FFF'}, styles: !statusNewData ? {marginTop: 30, backgroundColor: 'rgba(0, 0, 0, 0)', borderWidth: 1, borderColor: ColorsStyles.colorHr} : {marginTop: 40,}}} />
         </View>   
     );
 }

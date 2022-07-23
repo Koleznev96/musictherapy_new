@@ -214,12 +214,14 @@ function AudioScreen ({ navigation, route }) {
                                             ): null}
                                         </View>
                                     </View>
+                                    {auth.token ? (
                                     <TouchableOpacity 
                                     style={styles.button_like}
                                     onPress={() => likeHandler(item, index)}
                                     >
                                         <GlobalSvgSelector id={item.like === 1 ? "like_active" : "like"} />
                                     </TouchableOpacity>
+                                    ): null}
                                 </View>
                             </View>
                         )}

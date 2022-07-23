@@ -21,6 +21,7 @@ import { LoaderIn } from '../../components/loader/minLoader/LoaderIn';
 import { ProfileData } from './components/ProfileData';
 import { ProfileForm } from './components/ProfileForm';
 import { useCallback } from 'react/cjs/react.production.min';
+import { checkLanguageConst } from '../../hooks/useLanguage';
 
 function ProfileScreen ({ navigation }) {
     const auth = useContext(AuthContext);
@@ -124,10 +125,10 @@ function ProfileScreen ({ navigation }) {
                     <Image source={require('../../assets/images/logo.png')} style={styles.logo}/>
                 
                     <Text style={[GlobalStyle.BellotaFontRegular, styles.text_glav]}>
-                        {(auth.translations && auth.translations['Музыкотерапия']) ? auth.translations['Музыкотерапия'].toUpperCase() : 'МУЗЫКОТЕРАПИЯ'}
+                        {checkLanguageConst('Музыкотерапия', auth.translations)}
                     </Text>
                     <Text style={[GlobalStyle.BellotaFontRegular, styles.text_foot]}>
-                    {(auth.translations && auth.translations['Уникальные программы востановления и отдыха']) ? auth.translations['Уникальные программы востановления и отдыха'] : 'Уникальные программы востановления и отдыха'}
+                    {checkLanguageConst('Уникальные программы востановления и отдыха', auth.translations)}
                     </Text>
                     <View style={styles.buttons_length}>
                         <TouchableOpacity
@@ -149,12 +150,12 @@ function ProfileScreen ({ navigation }) {
                     </View>
                     <View style={styles.block_text}>
                         <Text style={[GlobalStyle.CustomFontRegular, styles.block_text_main]}>
-                            {(auth.translations && auth.translations['Предлагаем зарегистрироваться для доступа к расширенным функциям приложения и персональному подбору плейлистов.']) ? auth.translations['Предлагаем зарегистрироваться для доступа к расширенным функциям приложения и персональному подбору плейлистов.'] : 'Предлагаем зарегистрироваться для доступа к расширенным функциям приложения и персональному подбору плейлистов.'}
+                            {checkLanguageConst('Предлагаем зарегистрироваться для доступа к расширенным функциям приложения и персональному подбору плейлистов.', auth.translations)}
                         </Text>
                     </View>
                     <View style={styles.block_buttons}>
-                        <ButtonFull data={{value: (auth.translations && auth.translations['Создать новый аккаунт']) ? auth.translations['Создать новый аккаунт'] : 'Создать новый аккаунт', change: registerHandler, styles: {marginTop: 30,}}} />
-                        <ButtonFull data={{value: (auth.translations && auth.translations['Войти']) ? auth.translations['Войти'] : 'Войти', change: loginHandler, styles: {marginTop: 25,}}} />
+                        <ButtonFull data={{value: checkLanguageConst('Создать новый аккаунт', auth.translations), change: registerHandler, styles: {marginTop: 30,}}} />
+                        <ButtonFull data={{value: checkLanguageConst('Войти', auth.translations), change: loginHandler, styles: {marginTop: 25,}}} />
                     </View>
                 </View>
             </SafeAreaView>
@@ -170,14 +171,14 @@ function ProfileScreen ({ navigation }) {
             <SafeAreaView
             style={{width: '100%', height: '100%', alignItems: 'center'}}
             >
-                <HeaderRoot data={{label: 'АККАУНТ', backHandler: backHandler}}/>
+                <HeaderRoot data={{label: checkLanguageConst('Аккаунт', auth.translations).toUpperCase(), backHandler: backHandler}}/>
                     <View style={styles.header_block}>
                         <TouchableOpacity 
                         style={[styles.header_button, activeMenu ? styles.header_button_active : null]}
                         onPress={() => activeMenuHandler(true)}
                         >
                             <Text style={[GlobalStyle.CustomFontRegular, styles.header_button_text]}>
-                                {(auth.translations && auth.translations['Ваши данные']) ? auth.translations['Ваши данные'] : 'Ваши данные'}
+                                {checkLanguageConst('Ваши данные', auth.translations)}
                             </Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
@@ -185,8 +186,7 @@ function ProfileScreen ({ navigation }) {
                         onPress={() => activeMenuHandler(false)}
                         >
                             <Text style={[GlobalStyle.CustomFontRegular, styles.header_button_text]}>
-                                {(auth.translations && auth.translations['Анкета']) ? auth.translations['Анкета'] : 'Анкета'}
-                                
+                                {checkLanguageConst('Анкета', auth.translations)}                                
                             </Text>
                         </TouchableOpacity>
                     </View>

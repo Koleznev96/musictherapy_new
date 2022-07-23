@@ -11,9 +11,10 @@ import {useHttp} from "../../hooks/http.hook";
 import {styles} from "./useStyles";
 import GlobalStyle from "../GlobalStyle";
 import {Colors} from "../../utils/Colors";
+import { checkLanguageConst } from '../../hooks/useLanguage';
 
 
-export const InputFull = ({ data }) => {
+export const InputFull = ({ data, translations }) => {
     return (
         <>
         <TextInput 
@@ -27,7 +28,8 @@ export const InputFull = ({ data }) => {
         secureTextEntry={data.secret}
         />
         {data.error?.length ? <Text style={[GlobalStyle.CustomFontLite, styles.error_text]}>
-                {data.error}
+                {/* {data.error} */}
+                {checkLanguageConst(data.erro, translations)}
         </Text> : null}
         </>
     );
