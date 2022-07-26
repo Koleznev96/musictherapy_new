@@ -7,4 +7,4 @@ export const httpServer = "https://admin.musictherapy.by";
 // localhost
 // export const httpServer = "http://192.168.0.167:5000";
 
-export const appVersion = "4"; // 25.06.2022
+export const appVersion = "5"; // 26.07.2022
