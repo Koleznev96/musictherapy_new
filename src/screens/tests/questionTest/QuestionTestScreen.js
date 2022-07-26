@@ -123,7 +123,7 @@ function QuestionTestScreen ({ navigation, route }) {
             onPress={() => {popapRoot.exitHandler(); completeHandler(true)}}
             >
                 <Text style={[GlobalStyle.CustomFontRegular, styles.item_text]}>
-                    {(auth.translations && auth.translations['Да']) ? auth.translations['Да'] : 'Да'}
+                    {checkLanguageConst('Да', auth.translations)}
                 </Text>
             </TouchableOpacity>
         </View>

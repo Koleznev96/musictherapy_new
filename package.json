@@ -25,6 +25,7 @@
     "react-native-markdown-display": "^7.0.0-alpha.2",
     "react-native-markdown-package": "^1.8.1",
     "react-native-markdown-view": "^1.1.4",
+    "react-native-modal-datetime-picker": "^13.1.2",
     "react-native-rename": "^2.9.0",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.10.2",

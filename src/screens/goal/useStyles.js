@@ -40,5 +40,24 @@ export const styles = StyleSheet.create({
     footer_text: {
         marginTop: 15,
         fontSize: 15,
+        width: '100%',
+    },
+    text_auth_block: {
+        marginTop: 12,
+        width: '100%',
+        fontSize: 13.5,
+        color: 'red',
+        lineHeight: 20,
+        // alignItems: 'center',
+        // flexDirection: 'row',
+    },
+    text_auth_button: {
+        fontSize: 13.5,
+        color: 'red',
+        textDecorationLine: 'underline',
+    },
+    button_text: {
+        marginTop: 100,
+        paddingTop: 10,
     },
 });

@@ -9,6 +9,7 @@ import {styles} from "./useStyles";
 import GlobalStyle from "../GlobalStyle";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthContext } from '../../context/authContext';
+import { checkLanguageConst } from '../../hooks/useLanguage';
 
 export const Loader = () => {
     const auth = useContext(AuthContext);
@@ -27,11 +28,15 @@ export const Loader = () => {
                     <View style={styles.block}>
                         <Image source={require('../../assets/images/logo.png')} style={styles.logo}/>
                     </View>
-                    <Text style={[GlobalStyle.BellotaFontRegular, styles.text_glav]}>
-                    {(auth.translations && auth.translations['Музыкотерапия']) ? auth.translations['Музыкотерапия'].toUpperCase() : 'МУЗЫКОТЕРАПИЯ'}
+                    <Text 
+                        // numberOfLines={1}
+                        // abjustsFontSizeToFit={true} // подбирает размер текста до того, как все содержимое будет влезать в область
+                        style={[GlobalStyle.BellotaFontRegular, styles.text_glav]}
+                    >
+                        {checkLanguageConst('Музыкотерапия', auth.translations)} 
                     </Text>
                     <Text style={[GlobalStyle.BellotaFontRegular, styles.text_foot]}>
-                        Гармония и совершенство
+                        {checkLanguageConst('Гармония и совершенство', auth.translations)} 
                     </Text>
                 </SafeAreaView>
             </ImageBackground>

@@ -47,7 +47,7 @@ function StartScreen ({ navigation }) {
 
     const data_list_not_auth = [
         {
-            name: (auth.translations && auth.translations['Классика HD']) ? auth.translations['Классика HD'] : 'Классика HD',
+            name: checkLanguageConst('Классика HD', auth.translations),
             router: 'Video',
             img: require('../../assets/images/classic.jpg'),
             url: '/api/data/v2/classic/',
@@ -55,21 +55,21 @@ function StartScreen ({ navigation }) {
             url_like: '/api/data/video/',
         },
         {
-            name: (auth.translations && auth.translations['Медитации']) ? auth.translations['Медитации'] : 'Медитации',
+            name: checkLanguageConst('Медитации', auth.translations),
             router: 'Video',
             img: require('../../assets/images/meditation.jpg'),
             url: '/api/data/v2/meditation/',
             url_like: '/api/data/video/',
         },
         {
-            name: (auth.translations && auth.translations['Живой звук']) ? auth.translations['Живой звук'] : 'Живой звук',
+            name: checkLanguageConst('Живой звук', auth.translations),
             router: 'Card',
             img: require('../../assets/images/sound.jpg'),
             url: '/api/data/v2/live_sound/',
             url_like: '/api/data/card/',
         }, 
         {
-            name: (auth.translations && auth.translations['Инструменты']) ? auth.translations['Инструменты'] : 'Инструменты',
+            name: checkLanguageConst('Инструменты', auth.translations),
             router: 'Video',
             img: require('../../assets/images/instruments.jpg'),
             url: '/api/data/v2/tool/',
@@ -80,7 +80,7 @@ function StartScreen ({ navigation }) {
     
     const data_list_auth = [
         {
-            name: (auth.translations && auth.translations['Классика HD']) ? auth.translations['Классика HD'] : 'Классика HD',
+            name: checkLanguageConst('Классика HD', auth.translations),
             router: 'Video',
             img: require('../../assets/images/classic.jpg'),
             url: '/api/data/v2/classic/',
@@ -88,35 +88,35 @@ function StartScreen ({ navigation }) {
             url_like: '/api/data/video/',
         },
         {
-            name: (auth.translations && auth.translations['Медитации']) ? auth.translations['Медитации'] : 'Медитации',
+            name: checkLanguageConst('Медитации', auth.translations),
             router: 'Video',
             img: require('../../assets/images/meditation.jpg'),
             url: '/api/data/v2/meditation/',
             url_like: '/api/data/video/',
         },
         {
-            name: (auth.translations && auth.translations['Живой звук']) ? auth.translations['Живой звук'] : 'Живой звук',
+            name: checkLanguageConst('Живой звук', auth.translations),
             router: 'Card',
             img: require('../../assets/images/sound.jpg'),
             url: '/api/data/v2/live_sound/',
             url_like: '/api/data/card/',
         }, 
         {
-            name: (auth.translations && auth.translations['Инструменты']) ? auth.translations['Инструменты'] : 'Инструменты',
+            name: checkLanguageConst('Инструменты', auth.translations),
             router: 'Video',
             img: require('../../assets/images/instruments.jpg'),
             url: '/api/data/v2/tool/',
             url_like: '/api/data/video/',
         },
         {
-            name: (auth.translations && auth.translations['Тесты']) ? auth.translations['Тесты'] : 'Тесты',
+            name: checkLanguageConst('Тесты', auth.translations),
             router: 'Tests',
             img: require('../../assets/images/test.jpg'),
             url: '/api/data/get_list_test/',
             url_like: '/api/data/card/',
         }, 
         {
-            name: (auth.translations && auth.translations['Онлайн курсы']) ? auth.translations['Онлайн курсы'] : 'Онлайн курсы',
+            name: checkLanguageConst('Онлайн курсы', auth.translations),
             router: 'Courses',
             img: require('../../assets/images/course.jpg'),
             url: '/api/data/get_list_course/',

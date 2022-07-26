@@ -8,6 +8,7 @@ import {
 import {styles} from "./useStyles";
 import GlobalStyle from "../../GlobalStyle";
 import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 
 export const DateFull = ({ label, name, change, value, styles_new, error, translations }) => {
@@ -26,6 +27,7 @@ export const DateFull = ({ label, name, change, value, styles_new, error, transl
     };
     
     const showDatepicker = () => {
+        console.log('aaaaaddd')
         showMode('date');
     };
 
@@ -37,6 +39,16 @@ export const DateFull = ({ label, name, change, value, styles_new, error, transl
 
         return `${day}-${month}-${year}`;
     }
+
+    const hideDatePicker = () => {
+        setShow(false);
+    };
+    
+    const handleConfirm = (date) => {
+        change({name, value: date.toString()})
+        console.warn("A date has been picked: ", date);
+        hideDatePicker();
+    };
 
     return (
         <View style={styles.block}>
@@ -50,16 +62,31 @@ export const DateFull = ({ label, name, change, value, styles_new, error, transl
             <Text style={[GlobalStyle.CustomFontRegular, styles.value]}>
                 {value ? stringDate(value) : ''}
             </Text>
-            {show && (
+            <DateTimePickerModal
+                isVisible={show}
+                mode="date"
+                onConfirm={handleConfirm}
+                onCancel={hideDatePicker}
+            />
+            {/* {show && (
                 <DateTimePicker
                 testID="dateTimePicker"
                 value={value ? (value.length ? new Date(value) : new Date()): new Date}
                 mode={mode}
                 is24Hour={true}
-                display="default"
+                // display="default"
                 onChange={onChange}
+                style={{justifyContent: 'center',
+                alignItems: 'flex-start',
+                width: 320,
+                height: 260,
+                display: 'flex',}}
+                // style={{position: 'absolute', zIndex: 4000}}
+
+                // mode={'date'}
+                // display={Platform.OS === 'ios' ? 'spinner' : 'default'}
                 />
-            )}
+            )} */}
         </Pressable>
         {error?.length ? <Text style={[GlobalStyle.CustomFontLite, styles.error_text]}>
                 {error}

@@ -18,6 +18,7 @@ import {HeaderRoot} from "../../components/headerRoot/HeaderRoot";
 import { ColorsStyles } from '../../constants/ColorsStyles';
 import { LoaderIn } from '../../components/loader/minLoader/LoaderIn';
 import {httpServer} from '../../../const';
+import { checkLanguageConst } from '../../hooks/useLanguage';
 
 
 function CardScreen ({ navigation, route }) {
@@ -90,7 +91,7 @@ function CardScreen ({ navigation, route }) {
                 <HeaderRoot data={{label: data_root.name, backHandler}}/>
                     <View style={styles.block}>
                         <Text style={[GlobalStyle.CustomFontRegular, styles.label]}>
-                            {(auth.translations && auth.translations['Приглашаем на ЖИВЫЕ концерты!']) ? auth.translations['Приглашаем на ЖИВЫЕ концерты!'] : 'Приглашаем на ЖИВЫЕ концерты!'}
+                            {checkLanguageConst('Приглашаем на ЖИВЫЕ концерты!', auth.translations)}
                         </Text>
                         {loader ? (
                             <LoaderIn />
@@ -120,7 +121,7 @@ function CardScreen ({ navigation, route }) {
                                 onPress={() => nextHandler(item.url)}
                                 >
                                     <Text style={[GlobalStyle.CustomFontRegular, styles.item_button_text]}>
-                                        {(auth.translations && auth.translations['Купить билеты']) ? auth.translations['Купить билеты'] : 'Купить билеты'}
+                                        {checkLanguageConst('Купить билеты', auth.translations)}
                                     </Text>
                                 </TouchableOpacity>
                                 </View>

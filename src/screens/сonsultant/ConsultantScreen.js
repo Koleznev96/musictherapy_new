@@ -15,6 +15,7 @@ import GlobalStyle from "../../components/GlobalStyle";
 import { GlobalSvgSelector } from '../../assets/GlobalSvgSelector';
 import {HeaderRoot} from "../../components/headerRoot/HeaderRoot";
 import { ColorsStyles } from '../../constants/ColorsStyles';
+import { checkLanguageConst } from '../../hooks/useLanguage';
 
 const data_list = [
     {
@@ -77,18 +78,17 @@ function ConsultantScreen ({ navigation }) {
             <SafeAreaView
                 style={{width: '100%', height: '100%', alignItems: 'center'}}
             > 
-                <HeaderRoot data={{label: (auth.translations && auth.translations['Консультант']) ? auth.translations['Консультант'].toUpperCase() : 'КОНСУЛЬТАНТ', backHandler: backHandler}}/>
+                <HeaderRoot data={{label: checkLanguageConst('Консультант', auth.translations).toUpperCase(), backHandler: backHandler}}/>
                 <View style={styles.block}>
                 <FlatList
                 style={{width: '100%', height: '95%'}}
                 contentContainerStyle={{paddingBottom: 100}}
                 showsVerticalScrollIndicator={false}
-                data={(auth.translations && auth.translations['consultations']) ? auth.translations['consultations'] : data_list}
+                data={checkLanguageConst('consultations', auth.translations)}
                 renderItem={({item, index}) => (
                     <>
                     {index === 0 ? (<Text style={[GlobalStyle.CustomFontRegular, styles.label]}>
-                        {(auth.translations && auth.translations['Музыкотерапия - это']) ? auth.translations['Музыкотерапия - это'] : 'Музыкотерапия - это эффективная методика коррекции психо- эмоционального состояния. Рекомендуем использовать приложение минимум 15 минут в день в течение 90 дней для стабильного эффекта'}
-                        
+                        {checkLanguageConst('Музыкотерапия - это', auth.translations)}
                     </Text>): null}
                         <View style={activeIndex === index ? styles.item_block_active : styles.item_block}>
                             <TouchableOpacity

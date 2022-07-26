@@ -8,6 +8,7 @@ import {styles} from "./useStyles";
 import GlobalStyle from "../GlobalStyle";
 import { GlobalSvgSelector } from '../../assets/GlobalSvgSelector';
 import {AuthContext} from "../../context/authContext";
+import { checkLanguageConst } from '../../hooks/useLanguage';
 
 
 export const HeaderAuth = () => {
@@ -18,7 +19,7 @@ export const HeaderAuth = () => {
             <Image source={require('../../assets/images/logo.png')} style={styles.logo}/>
                 
             <Text style={[GlobalStyle.BellotaFontBold, styles.text_glav]}>
-                {(auth.translations && auth.translations['Музыкотерапия']) ? auth.translations['Музыкотерапия'] : 'МУЗЫКОТЕРАПИЯ'}
+                {checkLanguageConst('Музыкотерапия', auth.translations)}  
             </Text>
             </View>
         </View>

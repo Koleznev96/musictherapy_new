@@ -16,6 +16,7 @@ import GlobalStyle from "../../../components/GlobalStyle";
 import {HeaderAuth} from "../../../components/headerAuth/HeaderAuth";
 import {ButtonFull} from '../../../components/buttonFull/ButtonFull';
 import {InputFull} from '../../../components/inputFull/InputFull';
+import { checkLanguageConst } from '../../../hooks/useLanguage';
 
 
 function RegisterScreen ({ navigation }) {
@@ -157,7 +158,7 @@ function RegisterScreen ({ navigation }) {
         >
                 <HeaderAuth />
                 <Text style={[GlobalStyle.CustomFontRegular, styles.text_foot]}>
-                    {(auth.translations && auth.translations['Создать новый аккаунт']) ? auth.translations['Создать новый аккаунт'] : 'Создать новый аккаунт'}
+                    {checkLanguageConst('Создать новый аккаунт', auth.translations)}  
                 </Text>
                 <ScrollView style={styles.scroll} 
                     keyboardShouldPersistTaps='handled' 
@@ -166,20 +167,19 @@ function RegisterScreen ({ navigation }) {
                     ref={scrollRef}
                 >
                     <View style={styles.block}>
-                        <InputFull data={{value: name, change: setName, placeholder: (auth.translations && auth.translations['Имя']) ? auth.translations['Имя'] : 'Имя', error: errorField.name}} />
-                        <InputFull data={{value: fullName, change: setFullName, placeholder: (auth.translations && auth.translations['Фамилия']) ? auth.translations['Фамилия'] : 'Фамилия', error: errorField.fullName}} />
-                        <InputFull data={{value: telephone, change: setTelephone, placeholder: (auth.translations && auth.translations['Телефон']) ? auth.translations['Телефон'] : 'Телефон', error: errorField.telephone, onFocus: onFocus, valueFocus: 0}} />
-                        <InputFull data={{value: email, change: setEmail, placeholder: (auth.translations && auth.translations['E-mail']) ? auth.translations['E-mail'] : 'E-mail', error: errorField.email, onFocus: onFocus, valueFocus: 1}} />
-                        <InputFull data={{value: password, change: setPassword, placeholder: (auth.translations && auth.translations['Пароль']) ? auth.translations['Пароль'] : 'Пароль', error: errorField.password, secret: true, onFocus: onFocus, valueFocus: 2}} />
+                        <InputFull translations={auth.translations} data={{value: name, change: setName, placeholder: checkLanguageConst('Имя', auth.translations), error: errorField.name}} />
+                        <InputFull translations={auth.translations} data={{value: fullName, change: setFullName, placeholder: checkLanguageConst('Фамилия', auth.translations), error: errorField.fullName}} />
+                        <InputFull translations={auth.translations} data={{value: telephone, change: setTelephone, placeholder: checkLanguageConst('Телефон', auth.translations), error: errorField.telephone, onFocus: onFocus, valueFocus: 0}} />
+                        <InputFull translations={auth.translations} data={{value: email, change: setEmail, placeholder: checkLanguageConst('E-mail', auth.translations), error: errorField.email, onFocus: onFocus, valueFocus: 1}} />
+                        <InputFull translations={auth.translations} data={{value: password, change: setPassword, placeholder: checkLanguageConst('Пароль', auth.translations), error: errorField.password, secret: true, onFocus: onFocus, valueFocus: 2}} />
 
-                        <ButtonFull data={{value: (auth.translations && auth.translations['Создать новый аккаунт']) ? auth.translations['Создать новый аккаунт'] : 'Создать новый аккаунт', change: AuthHandler, styles: {marginTop: 20,}, loading: loading}} />
+                        <ButtonFull data={{value: checkLanguageConst('Создать новый аккаунт', auth.translations), change: AuthHandler, styles: {marginTop: 20,}, loading: loading}} />
                         <TouchableOpacity
                             style={styles.buttonLog}
                             onPress={() => loginHandler()}
                         >
                             <Text style={[GlobalStyle.CustomFontRegular, styles.buttonLog_text]}>
-                            {(auth.translations && auth.translations['Войти в существующий аккаунт']) ? auth.translations['Войти в существующий аккаунт'] : 'Войти в существующий аккаунт'}
-                                
+                            {checkLanguageConst('Войти в существующий аккаунт', auth.translations)}                                
                             </Text>
                         </TouchableOpacity>  
                     </View>
@@ -193,8 +193,7 @@ function RegisterScreen ({ navigation }) {
                     onPress={() => Linking.openURL('https://musictherapy.by/politikakonfidentapp/').catch(err => console.error('An error occurred', err))}
                     >
                     <Text style={[GlobalStyle.CustomFontRegular, styles.button_footer_text]}>
-                    {(auth.translations && auth.translations['Регестрируясь, принимаю условия использования и даю согласие на хранение и обработку персональных данных']) ? auth.translations['Регестрируясь, принимаю условия использования и даю согласие на хранение и обработку персональных данных'] : 'Регестрируясь, принимаю условия использования и даю согласие на хранение и обработку персональных данных'}
-                         
+                        {checkLanguageConst('Регестрируясь, принимаю условия использования и даю согласие на хранение и обработку персональных данных', auth.translations)}                         
                     </Text>
                     </TouchableOpacity>
                     ): null}

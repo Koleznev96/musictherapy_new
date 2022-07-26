@@ -9,6 +9,7 @@ import GlobalStyle from "../GlobalStyle";
 import { GlobalSvgSelector } from '../../assets/GlobalSvgSelector';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { AuthContext } from '../../context/authContext';
+import { checkLanguageConst } from '../../hooks/useLanguage';
 
 
 export const HeaderRoot = ({ data }) => {
@@ -27,7 +28,7 @@ export const HeaderRoot = ({ data }) => {
             onPress={() => data?.backHandler()}
             >
                 <Text style={[GlobalStyle.CustomFontRegular, styles.back_button_text]}>
-                    {(auth.translations && auth.translations['Назад']) ? auth.translations['Назад'] : 'Назад'}
+                    {checkLanguageConst('Назад', auth.translations)} 
                 </Text>
             </TouchableOpacity>}
         </View>

@@ -206,7 +206,7 @@ function TestsScreen ({ navigation, route }) {
                                             onPress={() => nextTestHandler(item)}
                                         >
                                             <Text style={[GlobalStyle.CustomFontRegular, styles.button_start_test_text]}>
-                                                {(auth.translations && auth.translations['Продолжить тест']) ? auth.translations['Продолжить тест'] : 'Продолжить тест'}
+                                                {checkLanguageConst('Продолжить тест', auth.translations)}
                                             </Text>
                                         </TouchableOpacity>
                                     ) : (
@@ -215,7 +215,7 @@ function TestsScreen ({ navigation, route }) {
                                             onPress={() => startTestHandler(item)}
                                         >
                                             <Text style={[GlobalStyle.CustomFontRegular, styles.button_start_test_text]}>
-                                                {(auth.translations && auth.translations['Пройти тест']) ? auth.translations['Пройти тест'] : 'Пройти тест'}
+                                                {checkLanguageConst('Пройти тест', auth.translations)}
                                             </Text>
                                         </TouchableOpacity>
                                     )}
@@ -225,7 +225,7 @@ function TestsScreen ({ navigation, route }) {
                                             onPress={() => viewResultTestHandler(item)}
                                         >
                                             <Text style={[GlobalStyle.CustomFontRegular, styles.button_view_test_text]}>
-                                                {(auth.translations && auth.translations['Посмотреть результаты']) ? auth.translations['Посмотреть результаты'] : 'Посмотреть результаты'}
+                                                {checkLanguageConst('Посмотреть результаты', auth.translations)}
                                             </Text>
                                         </TouchableOpacity>
                                     ): null}
