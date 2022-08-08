@@ -129,8 +129,10 @@ export default class AudioPlayer extends React.Component{
             if (success) {
                 this.props.nextSound();
             } else {
-                Alert.alert('Notice', 'audio file error. (Error code : 2)');
+                // Alert.alert('Notice', 'audio file error. (Error code : 2)');
             }
+            // this.props.nextSound();
+            
             this.setState({playState:'paused', playSeconds:0});
             this.sound.setCurrentTime(0);
         }
