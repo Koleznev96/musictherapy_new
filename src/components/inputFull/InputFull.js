@@ -29,7 +29,7 @@ export const InputFull = ({ data, translations }) => {
         />
         {data.error?.length ? <Text style={[GlobalStyle.CustomFontLite, styles.error_text]}>
                 {/* {data.error} */}
-                {checkLanguageConst(data.erro, translations)}
+                {checkLanguageConst(data.error, translations)}
         </Text> : null}
         </>
     );
