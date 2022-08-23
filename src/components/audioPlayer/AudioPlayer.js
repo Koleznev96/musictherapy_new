@@ -19,6 +19,9 @@ const img_playjumpleft = require('./resources/ui_playjumpleft.png');
 const img_playjumpright = require('./resources/ui_playjumpright.png');
 
 
+Sound.setCategory('Playback');
+
+
 export default class AudioPlayer extends React.Component{
     
     static navigationOptions = props => ({
