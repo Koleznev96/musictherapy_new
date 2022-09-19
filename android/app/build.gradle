@@ -134,8 +134,8 @@ android {
         applicationId "by.musictherapy"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 10 // 23.08.2022
-        versionName "1.9.1" // 23.08.2022
+        versionCode 11 // 19.09.2022
+        versionName "1.9.2" // 19.09.2022
     }
     splits {
         abi {
@@ -194,6 +194,8 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+
+    implementation 'com.facebook.android:facebook-android-sdk:[8,9)'
 
     compile project(':react-native-video')
     implementation "androidx.appcompat:appcompat:1.0.0"
