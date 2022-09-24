@@ -10,6 +10,12 @@ export const styles = StyleSheet.create({
     paddingVertical: 15,
     alignItems: 'center',
   },
+  button_text_delete_ac: {
+    color: '#FFF',
+    fontSize: 13,
+    textDecorationLine: 'underline',
+    textAlign: 'center',
+  },
   block_btn: {
     width: '100%',
     alignItems: 'center',
