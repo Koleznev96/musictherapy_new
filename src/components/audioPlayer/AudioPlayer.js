@@ -4,6 +4,8 @@ import {Alert} from 'react-native';
 import Sound from 'react-native-sound';
 import {settingsRoutes} from '../../../Settings/routes/settingsRoutes';
 
+Sound.setCategory('Playback');
+
 export default class AudioPlayer extends React.Component {
   static navigationOptions = props => ({
     title: this.props.title,
@@ -13,7 +15,6 @@ export default class AudioPlayer extends React.Component {
     super(props);
     this.state = {
       index: this.props.activeIndex,
-
       playState: 'paused', //playing, paused
       playSeconds: 0,
       duration: 0,

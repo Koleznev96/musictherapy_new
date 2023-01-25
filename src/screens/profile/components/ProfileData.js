@@ -94,6 +94,7 @@ export const ProfileData = ({
         style={{
           // width: '100%',
           position: 'absolute',
+          zIndex: 1000,
           bottom: -10,
           left: 0,
           right: 0,
@@ -111,6 +112,8 @@ export const ProfileData = ({
             justifyContent: 'center',
             paddingTop: 12,
             backgroundColor: '#1D293C',
+            zIndex: 1001,
+            backgroundColor: 'red',
           }}>
           <Text
             style={[
