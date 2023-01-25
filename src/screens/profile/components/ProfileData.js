@@ -1,13 +1,12 @@
 import React, {useContext} from 'react';
-import {Text, ActivityIndicator, TouchableOpacity, View} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import {styles} from '../useStyles';
-import GlobalStyle from '../../../components/GlobalStyle';
 import {ColorsStyles} from '../../../constants/ColorsStyles';
 import {ButtonFull} from '../../../components/buttonFull/ButtonFull';
-import {TextFull} from '../../../components/textFull/TextFull';
 import {InputFull} from '../../../components/form/inputFull/InputFull';
 import {AuthContext} from '../../../context/authContext';
 import {checkLanguageConst} from '../../../hooks/useLanguage';
+import {settingsRoutes} from '../../../../Settings/routes/settingsRoutes';
 
 export const ProfileData = ({
   form,
@@ -28,9 +27,10 @@ export const ProfileData = ({
             value: form?.name,
             name: 'name',
             change: setRoot,
-            placeholder: checkLanguageConst('Имя', auth.translations),
+            placeholder: checkLanguageConst('Name', auth.translations),
             error: errorField?.name,
           }}
+          theme={auth.theme}
         />
         <InputFull
           translations={auth.translations}
@@ -38,9 +38,10 @@ export const ProfileData = ({
             value: form?.fullName,
             name: 'fullName',
             change: setRoot,
-            placeholder: checkLanguageConst('Фамилия', auth.translations),
+            placeholder: checkLanguageConst('Surname', auth.translations),
             error: errorField?.fullName,
           }}
+          theme={auth.theme}
         />
         <InputFull
           translations={auth.translations}
@@ -48,9 +49,10 @@ export const ProfileData = ({
             value: form?.telephone,
             name: 'telephone',
             change: setRoot,
-            placeholder: checkLanguageConst('Телефон', auth.translations),
+            placeholder: checkLanguageConst('Phone', auth.translations),
             error: errorField?.telephone,
           }}
+          theme={auth.theme}
         />
         <InputFull
           translations={auth.translations}
@@ -61,11 +63,11 @@ export const ProfileData = ({
             placeholder: checkLanguageConst('E-mail', auth.translations),
             error: errorField?.email,
           }}
+          theme={auth.theme}
         />
-
-        <ButtonFull
-          data={{
-            value: checkLanguageConst('Сохранить изменения', auth.translations),
+        {settingsRoutes[auth.theme].ButtonFull({
+          data: {
+            value: checkLanguageConst('SaveChanges', auth.translations),
             change: saveHandler,
             styles_text: {
               color: !statusNewData ? ColorsStyles.colorHr : '#FFF',
@@ -78,29 +80,15 @@ export const ProfileData = ({
                   borderColor: ColorsStyles.colorHr,
                 }
               : {marginTop: 40},
-          }}
-        />
-        <ButtonFull
-          data={{
-            value: checkLanguageConst('Выйти из аккаунта', auth.translations),
+          },
+        })}
+        {settingsRoutes[auth.theme].ButtonLogout({
+          data: {
+            value: checkLanguageConst('Logout', auth.translations),
             change: logoutHandler,
             styles: {marginTop: 10, marginBottom: 60},
-          }}
-        />
-
-        {/* <ButtonFull
-        data={{
-          value: checkLanguageConst('Удалить аккаунт', auth.translations),
-          change: deleteHandler,
-          styles_text: {color: ColorsStyles.colorHr},
-          styles: {
-            marginTop: 30,
-            backgroundColor: 'rgba(0, 0, 0, 0)',
-            borderWidth: 1,
-            borderColor: ColorsStyles.colorHr,
           },
-        }}
-      /> */}
+        })}
       </View>
       <View
         style={{
@@ -126,11 +114,11 @@ export const ProfileData = ({
           }}>
           <Text
             style={[
-              GlobalStyle.CustomFontRegular,
+              settingsRoutes[auth.theme].GlobalStyle.CustomFontRegular,
               styles.button_text_delete_ac,
             ]}>
             {checkLanguageConst(
-              'Удалить аккаунт',
+              'DeleteAccount',
               auth.translations,
             ).toLowerCase()}
           </Text>

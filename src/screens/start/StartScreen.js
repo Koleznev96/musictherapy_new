@@ -1,222 +1,128 @@
-import React, {useContext, useCallback, useEffect, useState} from 'react';
+import React, {useContext} from 'react';
 import {
-    Text,
-    View,
-    ScrollView,
-    TouchableOpacity,
-    ImageBackground,
-    Linking
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  ImageBackground,
+  Linking,
 } from 'react-native';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import {AuthContext} from "../../context/authContext";
-import {useHttp} from "../../hooks/http.hook";
-import {styles} from "./useStyles";
-import GlobalStyle from "../../components/GlobalStyle";
-import { GlobalSvgSelector } from '../../assets/GlobalSvgSelector';
-import {HeaderAuth} from "../../components/headerAuth/HeaderAuth";
-import { ButtonFull } from '../../components/buttonFull/ButtonFull';
-import {InputFull} from '../../components/inputFull/InputFull';
-import { appVersion } from '../../../const';
-import { PopapContext } from '../../context/PopapContext';
-import { checkLanguage, checkLanguageConst } from '../../hooks/useLanguage';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {AuthContext} from '../../context/authContext';
+import {styles} from './useStyles';
+import {HeaderAuth} from '../../components/headerAuth/HeaderAuth';
+import {checkLanguage} from '../../hooks/useLanguage';
+import {settingsRoutes} from '../../../Settings/routes/settingsRoutes';
 
+function StartScreen({navigation}) {
+  const auth = useContext(AuthContext);
 
-function StartScreen ({ navigation }) {
-    const auth = useContext(AuthContext);
-    const popapRoot = useContext(PopapContext);
-    const {loading, request, error, clearError} = useHttp();
-    const [data, setData] = useState(false);
-    const [data_list, set_data_list] = useState(data_list_not_auth);
-    // const [active_menu, set_active_menu] = useState(0);
+  const nextHandler = item => {
+    navigation.navigate({name: item.router, params: {data_root: item}});
+  };
 
-    // const upload_classic_menu = (value) => {
-    //     value = value ? value : "0";
-    //     AsyncStorage.setItem("classic_menu", value);
-    //     set_active_menu(value);
-    // }
+  const updateHandler = () => {
+    if (Platform.OS === 'ios')
+      Linking.openURL(
+        'https://apps.apple.com/by/app/музыкотерапия/id1608306469',
+      ).catch(err => console.error('An error occurred', err));
+    else
+      Linking.openURL(
+        'https://play.google.com/store/apps/details?id=by.musictherapy',
+      ).catch(err => console.error('An error occurred', err));
+  };
 
-    // const classic_menu_start = async () => {
-    //     const classic_menu_new = await AsyncStorage.getItem("classic_menu");
-    //     upload_classic_menu(classic_menu_new);
-    // }
+  const DataPopap = label => (
+    <View style={styles.block_dalate}>
+      <Text
+        style={[
+          settingsRoutes[auth.theme].GlobalStyle.CustomFontBold,
+          styles.label_root,
+        ]}>
+        Обновление приложения
+      </Text>
 
-    // useEffect(() => {
-    //     classic_menu_start();
-    // }, [])
+      <Text
+        style={[
+          settingsRoutes[auth.theme].GlobalStyle.CustomFontRegular,
+          styles.label,
+        ]}>
+        {checkLanguage(label, auth.language)}
+      </Text>
 
-    const data_list_not_auth = [
-        {
-            name: checkLanguageConst('Классика HD', auth.translations),
-            router: 'Video',
-            img: require('../../assets/images/classic.jpg'),
-            url: '/api/data/v2/classic/',
-            url_: '/api/data/v2/fusion/',
-            url_like: '/api/data/video/',
-        },
-        {
-            name: checkLanguageConst('Медитации', auth.translations),
-            router: 'Video',
-            img: require('../../assets/images/meditation.jpg'),
-            url: '/api/data/v2/meditation/',
-            url_like: '/api/data/video/',
-        },
-        {
-            name: checkLanguageConst('Живой звук', auth.translations),
-            router: 'Card',
-            img: require('../../assets/images/sound.jpg'),
-            url: '/api/data/v2/live_sound/',
-            url_like: '/api/data/card/',
-        }, 
-        {
-            name: checkLanguageConst('Инструменты', auth.translations),
-            router: 'Video',
-            img: require('../../assets/images/instruments.jpg'),
-            url: '/api/data/v2/tool/',
-            url_like: '/api/data/video/',
-        },
-    ];
-    
-    
-    const data_list_auth = [
-        {
-            name: checkLanguageConst('Классика HD', auth.translations),
-            router: 'Video',
-            img: require('../../assets/images/classic.jpg'),
-            url: '/api/data/v2/classic/',
-            url_: '/api/data/v2/fusion/',
-            url_like: '/api/data/video/',
-        },
-        {
-            name: checkLanguageConst('Медитации', auth.translations),
-            router: 'Video',
-            img: require('../../assets/images/meditation.jpg'),
-            url: '/api/data/v2/meditation/',
-            url_like: '/api/data/video/',
-        },
-        {
-            name: checkLanguageConst('Живой звук', auth.translations),
-            router: 'Card',
-            img: require('../../assets/images/sound.jpg'),
-            url: '/api/data/v2/live_sound/',
-            url_like: '/api/data/card/',
-        }, 
-        {
-            name: checkLanguageConst('Инструменты', auth.translations),
-            router: 'Video',
-            img: require('../../assets/images/instruments.jpg'),
-            url: '/api/data/v2/tool/',
-            url_like: '/api/data/video/',
-        },
-        {
-            name: checkLanguageConst('Тесты', auth.translations),
-            router: 'Tests',
-            img: require('../../assets/images/test.jpg'),
-            url: '/api/data/get_list_test/',
-            url_like: '/api/data/card/',
-        }, 
-        {
-            name: checkLanguageConst('Онлайн курсы', auth.translations),
-            router: 'Courses',
-            img: require('../../assets/images/course.jpg'),
-            url: '/api/data/get_list_course/',
-            url_like: '/api/data/video/',
-        },
-    ];
+      <TouchableOpacity
+        style={styles.button_dalete}
+        onPress={() => updateHandler()}>
+        <Text
+          style={[
+            settingsRoutes[auth.theme].GlobalStyle.CustomFontRegular,
+            styles.item_text,
+          ]}>
+          Обновить
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
 
-    useEffect(() => {
-        if (auth.token) {
-            set_data_list(data_list_auth);
-        } else {
-            set_data_list(data_list_not_auth);
-        }
-    }, [auth.token]);
+  //   useEffect(() => {
+  //     if (auth.version !== null && auth.version !== appVersion) {
+  //       popapRoot.dataChange(DataPopap(auth.labelUpdate));
+  //       popapRoot.openHandler();
+  //     }
+  //   }, [auth.version]);
 
-    const nextHandler = (item) => {
-        navigation.navigate({name: item.router, params: {data_root: item}});
-    }
-
-    const updateHandler = () => {
-        if (Platform.OS === 'ios') 
-        Linking.openURL('https://apps.apple.com/by/app/музыкотерапия/id1608306469').catch(err => console.error('An error occurred', err)) 
-        else
-        Linking.openURL('https://play.google.com/store/apps/details?id=by.musictherapy').catch(err => console.error('An error occurred', err))
-    }
-
-    const DataPopap = (label) =>(
-        <View style={styles.block_dalate}>
-            <Text style={[GlobalStyle.CustomFontBold, styles.label_root]}>Обновление приложения</Text>
-
-            <Text style={[GlobalStyle.CustomFontRegular, styles.label]}>{checkLanguage(label, auth.language)}</Text>
-
-            <TouchableOpacity
-            style={styles.button_dalete}
-            onPress={() => updateHandler()}
-            >
-                <Text style={[GlobalStyle.CustomFontRegular, styles.item_text]}>Обновить</Text>
-            </TouchableOpacity>
-        </View>
-    );
-
-    useEffect(() => {
-        if (auth.version !== null && auth.version !== appVersion) {
-            popapRoot.dataChange(DataPopap(auth.labelUpdate));
-            popapRoot.openHandler();
-        }
-    }, [auth.version]);
-
-    return (
-        
-        <ImageBackground
-            source={require('../../assets/images/background-img.jpg')}
-            style={{flex: 1, justifyContent: 'space-between', alignItems: 'center'}}
-        > 
-            <ImageBackground
-                style={{width: '100%', height: '100%', alignItems: 'center'}}
-                imageStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.38)'}}
-            > 
-                <SafeAreaView
-                    style={{ width: '100%', height: '100%', paddingBottom: -35, }}
-                >
-                
-                <HeaderAuth />
-                <ScrollView style={styles.scroll} 
-                    keyboardShouldPersistTaps='handled' 
-                    showsVerticalScrollIndicator={false} 
-                    contentContainerStyle={styles.scrollView}
-                >
-                    <View style={styles.block}>
-                        {data_list?.map((item, index) => (
-                            <TouchableOpacity
-                            key={index}
-                            style={[styles.item_button]}
-                            onPress={() => nextHandler(item)}
-                            >
-                                <ImageBackground
-                                    source={item.img}
-                                    style={{width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center'}}
-                                    imageStyle={{ borderRadius: 16, backgroundColor: '#000'}}
-                                > 
-                                    <ImageBackground
-                                        style={{width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center'}}
-                                        imageStyle={{ borderRadius: 16, backgroundColor: 'rgba(0, 0, 0, 0.3)'}}
-                                    > 
-                                        <Text style={[GlobalStyle.CustomFontMedium, styles.item_name]}>
-                                            {item.name?.toUpperCase()}
-                                        </Text>
-                                    </ImageBackground>
-                                </ImageBackground>
-                            </TouchableOpacity> 
-                        ))}
-                        
-                    </View>
-                    <View style={{height: 50, width: '100%'}} />
-                </ScrollView>
-                
-                </SafeAreaView>
-            </ImageBackground>
-        </ImageBackground>
-    )
+  return (
+    <ImageBackground
+      source={
+        settingsRoutes[auth.theme].backgroundSettings.img_start ??
+        settingsRoutes[auth.theme].backgroundSettings.img_1
+      }
+      style={{flex: 1, justifyContent: 'space-between', alignItems: 'center'}}>
+      <ImageBackground
+        style={{width: '100%', height: '100%', alignItems: 'center'}}
+        imageStyle={{
+          backgroundColor:
+            settingsRoutes[auth.theme].backgroundSettings.backgroundColor,
+        }}>
+        <SafeAreaView
+          style={{width: '100%', height: '100%', paddingBottom: -35}}>
+          {/* <HeaderAuth /> */}
+          {settingsRoutes[auth.theme].HeaderAuth({
+            translations: auth.translations,
+            label: 'Discover',
+          })}
+          <ScrollView
+            style={styles.scroll}
+            keyboardShouldPersistTaps="handled"
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.scrollView}>
+            <View style={styles.block}>
+              {settingsRoutes[auth.theme].home_screen.noAuth?.map(
+                (item, index) =>
+                  settingsRoutes[auth.theme].card({
+                    item,
+                    onPress: nextHandler,
+                    translations: auth.translations,
+                    key: index,
+                  }),
+              )}
+              {auth.token &&
+                settingsRoutes[auth.theme].home_screen.auth?.map(
+                  (item, index) =>
+                    settingsRoutes[auth.theme].card({
+                      item,
+                      onPress: nextHandler,
+                      translations: auth.translations,
+                      key: index,
+                    }),
+                )}
+            </View>
+            <View style={{height: 50, width: '100%'}} />
+          </ScrollView>
+        </SafeAreaView>
+      </ImageBackground>
+    </ImageBackground>
+  );
 }
 
 export default StartScreen;

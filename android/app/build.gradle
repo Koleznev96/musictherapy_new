@@ -134,10 +134,11 @@ android {
         applicationId "by.musictherapy"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 11 // 19.09.2022
-        versionName "1.9.2" // 19.09.2022
+        versionCode 12 // 18.01.2023
+        versionName "1.9.3" // 18.01.2023
     }
     splits {
+
         abi {
             reset()
             enable enableSeparateBuildPerCPUArchitecture
@@ -197,7 +198,7 @@ dependencies {
 
     implementation 'com.facebook.android:facebook-android-sdk:[8,9)'
 
-    compile project(':react-native-video')
+    implementation project(':react-native-video')
     implementation "androidx.appcompat:appcompat:1.0.0"
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {

@@ -162,22 +162,22 @@ export const styles = StyleSheet.create({
   },
   buttons_length: {
     marginTop: 10,
-    width: 130,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   button_length: {
-    width: 32,
+    // width: 32,
     height: 32,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#fff',
   },
   block_buttons_length_text: {
     fontSize: 14,
-    borderBottomWidth: 1,
-    borderBottomColor: '#fff',
+    marginRight: 6,
   },
   block_buttons_length_text_active: {
     fontSize: 14,

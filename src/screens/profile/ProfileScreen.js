@@ -23,16 +23,12 @@ import {ProfileForm} from './components/ProfileForm';
 import {useCallback} from 'react/cjs/react.production.min';
 import {checkLanguageConst} from '../../hooks/useLanguage';
 import {PopapContext} from '../../context/PopapContext';
+import {settingsRoutes} from '../../../Settings/routes/settingsRoutes';
 
 function ProfileScreen({navigation}) {
   const auth = useContext(AuthContext);
   const {loading, request, error, clearError} = useHttp();
   const [Refreshing, setRefreshing] = useState(false);
-  const [name, setName] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [telephone, setTelephone] = useState('');
-  const [email, setEmail] = useState('');
-  const [language, setLanguage] = useState('');
   const [activeMenu, setActiveMenu] = useState(true);
   const [statusNewData, setStatusNewData] = useState(false);
   const [statusNewForm, setStatusNewForm] = useState(false);
@@ -53,13 +49,15 @@ function ProfileScreen({navigation}) {
       const data = await request(`/api/profile/data`, 'GET', null, {
         Authorization: `${auth.token}`,
       });
-      setFormNew({
-        name: data.data.name,
-        fullName: data.data.fullName,
-        telephone: data.data.telephone,
-        email: data.data.email,
-      });
-      createFields(data.questionnaire);
+      if (settingsRoutes[auth.theme].isQuestionnaire) {
+        setFormNew({
+          name: data.data.name,
+          fullName: data.data.fullName,
+          telephone: data.data.telephone,
+          email: data.data.email,
+        });
+        createFields(data.questionnaire);
+      }
       setStatusNewData(false);
       setStatusNewForm(false);
     } catch (e) {}
@@ -87,11 +85,12 @@ function ProfileScreen({navigation}) {
 
   const DataPopap = () => (
     <View style={styles.block_dalate}>
-      <Text style={[GlobalStyle.CustomFontBold, styles.label_root]}>
-        {checkLanguageConst(
-          'Точно ли Вы хотите удалить Ваш аккаунт? Действие невозвратное.',
-          auth.translations,
-        )}
+      <Text
+        style={[
+          settingsRoutes[auth.theme].GlobalStyle.CustomFontBold,
+          styles.label_root,
+        ]}>
+        {checkLanguageConst('DeleteAccountWarning', auth.translations)}
       </Text>
 
       <View style={styles.block_btn}>
@@ -99,16 +98,22 @@ function ProfileScreen({navigation}) {
           style={styles.button_dalete}
           onPress={() => deleteRootHandler()}>
           <Text
-            style={[GlobalStyle.CustomFontRegular, styles.button_dalete_text]}>
-            {checkLanguageConst('Подтвердить', auth.translations)}
+            style={[
+              settingsRoutes[auth.theme].GlobalStyle.CustomFontRegular,
+              styles.button_dalete_text,
+            ]}>
+            {checkLanguageConst('Confirm', auth.translations)}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button_exit}
           onPress={() => popapRoot.exitHandler()}>
           <Text
-            style={[GlobalStyle.CustomFontRegular, styles.button_exit_text]}>
-            {checkLanguageConst('Отменить', auth.translations)}
+            style={[
+              settingsRoutes[auth.theme].GlobalStyle.CustomFontRegular,
+              styles.button_exit_text,
+            ]}>
+            {checkLanguageConst('Cancel', auth.translations)}
           </Text>
         </TouchableOpacity>
       </View>
@@ -126,6 +131,34 @@ function ProfileScreen({navigation}) {
 
   const loginHandler = () => {
     navigation.navigate('Login');
+  };
+
+  const selectLengHandler = () => {
+    navigation.navigate({
+      name: 'Select',
+      params: {
+        title: 'SelectLanguage',
+        data: auth.languages_list,
+        value_code: 'code',
+        label_code: 'name',
+        select_handler: auth.newLanguage,
+        selectedValue: auth.language,
+      },
+    });
+  };
+
+  const selectThemeHandler = () => {
+    navigation.navigate({
+      name: 'Select',
+      params: {
+        title: 'SelectTheme',
+        data: settingsRoutes.themes,
+        value_code: 'id',
+        label_code: 'name',
+        select_handler: auth.updateTheme,
+        selectedValue: auth.theme,
+      },
+    });
   };
 
   const activeMenuHandler = status => {
@@ -146,14 +179,15 @@ function ProfileScreen({navigation}) {
           Authorization: `${auth.token}`,
         },
       );
-
-      setFormNew({
-        name: data.data.name,
-        fullName: data.data.fullName,
-        telephone: data.data.telephone,
-        email: data.data.email,
-      });
-      createFields(data.questionnaire);
+      if (settingsRoutes[auth.theme].isQuestionnaire) {
+        setFormNew({
+          name: data.data.name,
+          fullName: data.data.fullName,
+          telephone: data.data.telephone,
+          email: data.data.email,
+        });
+        createFields(data.questionnaire);
+      }
       setStatusNewData(false);
       setStatusNewForm(false);
     } catch (e) {}
@@ -180,7 +214,7 @@ function ProfileScreen({navigation}) {
   if (!auth.token)
     return (
       <ImageBackground
-        source={require('../../assets/images/background.jpg')}
+        source={settingsRoutes[auth.theme].backgroundSettings.img_2}
         style={{
           flex: 1,
           justifyContent: 'space-between',
@@ -189,75 +223,100 @@ function ProfileScreen({navigation}) {
         <SafeAreaView
           style={{width: '100%', height: '100%', alignItems: 'center'}}>
           <View style={styles.block}>
-            <Image
-              source={require('../../assets/images/logo.png')}
-              style={styles.logo}
-            />
-
-            <Text style={[GlobalStyle.BellotaFontRegular, styles.text_glav]}>
-              {checkLanguageConst('Музыкотерапия', auth.translations)}
-            </Text>
-            <Text style={[GlobalStyle.BellotaFontRegular, styles.text_foot]}>
-              {checkLanguageConst(
-                'Уникальные программы востановления и отдыха',
-                auth.translations,
-              )}
+            {settingsRoutes[auth.theme].IconView({
+              translations: auth.translations,
+            })}
+            <Text
+              style={[
+                settingsRoutes[auth.theme].GlobalStyle.BellotaFontRegular,
+                styles.text_foot,
+                {color: settingsRoutes[auth.theme].ColorsStyles.text},
+              ]}>
+              {checkLanguageConst('ApplicationDescription', auth.translations)}
             </Text>
             <View style={styles.buttons_length}>
               <TouchableOpacity
-                style={[styles.button_length]}
-                onPress={() => auth.newLanguage('ru')}>
+                style={[
+                  styles.button_length,
+                  {
+                    borderBottomColor:
+                      settingsRoutes[auth.theme].ColorsStyles.text,
+                  },
+                ]}
+                onPress={() => selectLengHandler('ru')}>
                 <Text
                   style={[
-                    GlobalStyle.CustomFontRegular,
-                    auth.language === 'ru'
-                      ? styles.block_buttons_length_text
-                      : styles.block_buttons_length_text_active,
+                    settingsRoutes[auth.theme].GlobalStyle.CustomFontRegular,
+                    styles.block_buttons_length_text,
+                    {color: settingsRoutes[auth.theme].ColorsStyles.text},
                   ]}>
-                  рус
+                  {checkLanguageConst('Language', auth.translations)}:{' '}
+                  {auth.languages_list?.find(
+                    item => item.code === auth.language,
+                  )
+                    ? checkLanguageConst(
+                        auth.languages_list?.find(
+                          item => item.code === auth.language,
+                        ).name,
+                        auth.translations,
+                      )
+                    : ''}
                 </Text>
+                {settingsRoutes[auth.theme].icons({id: 'edit_mini'})}
               </TouchableOpacity>
-              <TouchableOpacity
-                style={[styles.button_length]}
-                onPress={() => auth.newLanguage('com')}>
-                <Text
-                  style={[
-                    GlobalStyle.CustomFontRegular,
-                    auth.language === 'com'
-                      ? styles.block_buttons_length_text
-                      : styles.block_buttons_length_text_active,
-                  ]}>
-                  eng
-                </Text>
-              </TouchableOpacity>
+              {settingsRoutes.isEnabledSwitcherTheme && (
+                <>
+                  <View style={{width: 10}} />
+                  <TouchableOpacity
+                    style={[styles.button_length]}
+                    onPress={() => selectThemeHandler()}>
+                    <Text
+                      style={[
+                        settingsRoutes[auth.theme].GlobalStyle
+                          .CustomFontRegular,
+                        styles.block_buttons_length_text,
+                      ]}>
+                      {checkLanguageConst('Theme', auth.translations)}:{' '}
+                      {checkLanguageConst(
+                        settingsRoutes.themes?.find(
+                          item => item.id === auth.theme,
+                        ).name,
+                        auth.translations,
+                      )}
+                    </Text>
+                    {settingsRoutes[auth.theme].icons({id: 'edit_mini'})}
+                  </TouchableOpacity>
+                </>
+              )}
             </View>
             <View style={styles.block_text}>
               <Text
-                style={[GlobalStyle.CustomFontRegular, styles.block_text_main]}>
+                style={[
+                  settingsRoutes[auth.theme].GlobalStyle.CustomFontRegular,
+                  styles.block_text_main,
+                  {color: settingsRoutes[auth.theme].ColorsStyles.text},
+                ]}>
                 {checkLanguageConst(
-                  'Предлагаем зарегистрироваться для доступа к расширенным функциям приложения и персональному подбору плейлистов.',
+                  'RegistrationDescription',
                   auth.translations,
                 )}
               </Text>
             </View>
             <View style={styles.block_buttons}>
-              <ButtonFull
-                data={{
-                  value: checkLanguageConst(
-                    'Создать новый аккаунт',
-                    auth.translations,
-                  ),
+              {settingsRoutes[auth.theme].ButtonFull({
+                data: {
+                  value: checkLanguageConst('CreateAccount', auth.translations),
                   change: registerHandler,
                   styles: {marginTop: 30},
-                }}
-              />
-              <ButtonFull
-                data={{
-                  value: checkLanguageConst('Войти', auth.translations),
+                },
+              })}
+              {settingsRoutes[auth.theme].ButtonFull({
+                data: {
+                  value: checkLanguageConst('Login', auth.translations),
                   change: loginHandler,
                   styles: {marginTop: 25},
-                }}
-              />
+                },
+              })}
             </View>
           </View>
         </SafeAreaView>
@@ -266,7 +325,7 @@ function ProfileScreen({navigation}) {
 
   return (
     <ImageBackground
-      source={require('../../assets/images/background.jpg')}
+      source={settingsRoutes[auth.theme].backgroundSettings.img_2}
       style={{flex: 1, justifyContent: 'space-between', alignItems: 'center'}}>
       <View
         style={{
@@ -279,45 +338,59 @@ function ProfileScreen({navigation}) {
       />
       <SafeAreaView
         style={{width: '100%', height: '100%', alignItems: 'center'}}>
-        <HeaderRoot
-          data={{
-            label: checkLanguageConst(
-              'Аккаунт',
-              auth.translations,
-            ).toUpperCase(),
-            backHandler: backHandler,
-          }}
-        />
-        <View style={styles.header_block}>
-          <TouchableOpacity
-            style={[
-              styles.header_button,
-              activeMenu ? styles.header_button_active : null,
-            ]}
-            onPress={() => activeMenuHandler(true)}>
-            <Text
+        {settingsRoutes[auth.theme].HeaderRoot({
+          translations: auth.translations,
+          data: {
+            label: checkLanguageConst('Account', auth.translations),
+            backHandler,
+          },
+        })}
+        {settingsRoutes[auth.theme].isQuestionnaire && (
+          <View style={styles.header_block}>
+            <TouchableOpacity
               style={[
-                GlobalStyle.CustomFontRegular,
-                styles.header_button_text,
-              ]}>
-              {checkLanguageConst('Ваши данные', auth.translations)}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.header_button,
-              !activeMenu ? styles.header_button_active : null,
-            ]}
-            onPress={() => activeMenuHandler(false)}>
-            <Text
+                styles.header_button,
+                activeMenu
+                  ? {
+                      borderBottomWidth: 1,
+                      borderBottomColor:
+                        settingsRoutes[auth.theme].ColorsStyles.colorButton,
+                    }
+                  : null,
+              ]}
+              onPress={() => activeMenuHandler(true)}>
+              <Text
+                style={[
+                  settingsRoutes[auth.theme].GlobalStyle.CustomFontRegular,
+                  styles.header_button_text,
+                  {color: settingsRoutes[auth.theme].ColorsStyles.text},
+                ]}>
+                {checkLanguageConst('YourData', auth.translations)}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
               style={[
-                GlobalStyle.CustomFontRegular,
-                styles.header_button_text,
-              ]}>
-              {checkLanguageConst('Анкета', auth.translations)}
-            </Text>
-          </TouchableOpacity>
-        </View>
+                styles.header_button,
+                !activeMenu
+                  ? {
+                      borderBottomWidth: 1,
+                      borderBottomColor:
+                        settingsRoutes[auth.theme].ColorsStyles.colorButton,
+                    }
+                  : null,
+              ]}
+              onPress={() => activeMenuHandler(false)}>
+              <Text
+                style={[
+                  settingsRoutes[auth.theme].GlobalStyle.CustomFontRegular,
+                  styles.header_button_text,
+                  {color: settingsRoutes[auth.theme].ColorsStyles.text},
+                ]}>
+                {checkLanguageConst('Questionnaire', auth.translations)}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
         {loading ? (
           <LoaderIn />
         ) : (
@@ -337,31 +410,59 @@ function ProfileScreen({navigation}) {
               <>
                 <View style={styles.buttons_length}>
                   <TouchableOpacity
-                    style={[styles.button_length]}
-                    onPress={() => auth.newLanguage('ru')}>
+                    style={[
+                      styles.button_length,
+                      {
+                        borderBottomColor:
+                          settingsRoutes[auth.theme].ColorsStyles.text,
+                      },
+                    ]}
+                    onPress={() => selectLengHandler('ru')}>
                     <Text
                       style={[
-                        GlobalStyle.CustomFontRegular,
-                        auth.language === 'ru'
-                          ? styles.block_buttons_length_text
-                          : styles.block_buttons_length_text_active,
+                        settingsRoutes[auth.theme].GlobalStyle
+                          .CustomFontRegular,
+                        styles.block_buttons_length_text,
+                        {color: settingsRoutes[auth.theme].ColorsStyles.text},
                       ]}>
-                      рус
+                      {checkLanguageConst('Language', auth.translations)}:{' '}
+                      {auth.languages_list?.find(
+                        item => item.code === auth.language,
+                      )
+                        ? checkLanguageConst(
+                            auth.languages_list?.find(
+                              item => item.code === auth.language,
+                            ).name,
+                            auth.translations,
+                          )
+                        : ''}
                     </Text>
+                    {settingsRoutes[auth.theme].icons({id: 'edit_mini'})}
                   </TouchableOpacity>
-                  <TouchableOpacity
-                    style={[styles.button_length]}
-                    onPress={() => auth.newLanguage('com')}>
-                    <Text
-                      style={[
-                        GlobalStyle.CustomFontRegular,
-                        auth.language === 'com'
-                          ? styles.block_buttons_length_text
-                          : styles.block_buttons_length_text_active,
-                      ]}>
-                      eng
-                    </Text>
-                  </TouchableOpacity>
+                  {settingsRoutes.isEnabledSwitcherTheme && (
+                    <>
+                      <View style={{width: 10}} />
+                      <TouchableOpacity
+                        style={[styles.button_length]}
+                        onPress={() => selectThemeHandler()}>
+                        <Text
+                          style={[
+                            settingsRoutes[auth.theme].GlobalStyle
+                              .CustomFontRegular,
+                            styles.block_buttons_length_text,
+                          ]}>
+                          {checkLanguageConst('Theme', auth.translations)}:{' '}
+                          {checkLanguageConst(
+                            settingsRoutes.themes?.find(
+                              item => item.id === auth.theme,
+                            ).name,
+                            auth.translations,
+                          )}
+                        </Text>
+                        {settingsRoutes[auth.theme].icons({id: 'edit_mini'})}
+                      </TouchableOpacity>
+                    </>
+                  )}
                 </View>
                 <ProfileData
                   statusNewData={statusNewData}
@@ -384,6 +485,40 @@ function ProfileScreen({navigation}) {
             <View style={{height: 50, width: '100%'}} />
           </ScrollView>
         )}
+        {/* <View
+          style={{
+            // width: '100%',
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <TouchableOpacity
+            onPress={() => deleteHandler()}
+            style={{
+              paddingBottom: 22,
+              width: '100%',
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              paddingTop: 12,
+              backgroundColor: '#1D293C',
+            }}>
+            <Text
+              style={[
+                settingsRoutes[auth.theme].GlobalStyle.CustomFontRegular,
+                styles.button_text_delete_ac,
+              ]}>
+              {checkLanguageConst(
+                'DeleteAccount',
+                auth.translations,
+              ).toLowerCase()}
+            </Text>
+          </TouchableOpacity>
+        </View> */}
       </SafeAreaView>
     </ImageBackground>
   );

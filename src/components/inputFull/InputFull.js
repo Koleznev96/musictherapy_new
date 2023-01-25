@@ -1,37 +1,47 @@
-import React, {useContext, useCallback, useEffect, useState} from 'react';
-import {
-    Text,
-    View,
-    Image,
-    Pressable,
-    TextInput
-} from 'react-native';
-import {AuthContext} from "../../context/authContext";
-import {useHttp} from "../../hooks/http.hook";
-import {styles} from "./useStyles";
-import GlobalStyle from "../GlobalStyle";
-import {Colors} from "../../utils/Colors";
-import { checkLanguageConst } from '../../hooks/useLanguage';
+import React from 'react';
+import {Text, TextInput} from 'react-native';
+import {styles} from './useStyles';
+import {checkLanguageConst} from '../../hooks/useLanguage';
+import {settingsRoutes} from '../../../Settings/routes/settingsRoutes';
 
-
-export const InputFull = ({ data, translations }) => {
-    return (
-        <>
-        <TextInput 
-        onFocus={() => data?.onFocus ? data.onFocus(data.valueFocus) : false}
-        secureTextEntry={data.secret ? true : false} 
-        value={data.value} 
-        placeholderTextColor={'#F3F3F3'} 
-        style={[styles.input, data?.styles ? data.styles : null ]} 
-        placeholder={data.placeholder} 
-        onChangeText={(value) => data.change(value)} 
+export const InputFull = ({data, translations, theme}) => {
+  return (
+    <>
+      <TextInput
+        onFocus={() => (data?.onFocus ? data.onFocus(data.valueFocus) : false)}
+        secureTextEntry={data.secret ? true : false}
+        value={data.value}
+        placeholderTextColor={settingsRoutes[theme].ColorsStyles.text}
+        style={[
+          {
+            width: '100%',
+            height: 46,
+            borderRadius: 14,
+            paddingHorizontal: 20,
+            aliginItems: 'center',
+            color: settingsRoutes[theme].ColorsStyles.text,
+            marginTop: 10,
+            textAlign: 'center',
+            borderColor: settingsRoutes[theme].ColorsStyles.colorInput,
+            borderWidth: 1,
+            fontSize: 18,
+          },
+          data?.styles ? data.styles : null,
+        ]}
+        placeholder={data.placeholder}
+        onChangeText={value => data.change(value)}
         secureTextEntry={data.secret}
-        />
-        {data.error?.length ? <Text style={[GlobalStyle.CustomFontLite, styles.error_text]}>
-                {/* {data.error} */}
-                {checkLanguageConst(data.error, translations)}
-        </Text> : null}
-        </>
-    );
-}
-
+      />
+      {data.error?.length ? (
+        <Text
+          style={[
+            settingsRoutes[theme].GlobalStyle.CustomFontLite,
+            styles.error_text,
+            {color: settingsRoutes[theme].ColorsStyles.colorTextError},
+          ]}>
+          {checkLanguageConst(data.error, translations)}
+        </Text>
+      ) : null}
+    </>
+  );
+};

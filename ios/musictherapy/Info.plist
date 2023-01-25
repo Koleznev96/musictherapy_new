@@ -36,7 +36,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Bellota-Bold.ttf</string>
@@ -46,6 +46,11 @@
 		<string>OpenSans-Light.ttf</string>
 		<string>OpenSans-Medium.ttf</string>
 		<string>OpenSans-Regular.ttf</string>
+		<string>Montserrat-Bold.ttf</string>
+		<string>Montserrat-Light.ttf</string>
+		<string>Montserrat-Medium.ttf</string>
+		<string>Montserrat-Regular.ttf</string>
+		<string>Montserrat-SemiBold.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

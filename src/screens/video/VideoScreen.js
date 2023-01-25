@@ -1,312 +1,294 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {
-    Text,
-    View,
-    FlatList,
-    TouchableOpacity,
-    ImageBackground,
-    RefreshControl,
-    Image
+  Text,
+  View,
+  FlatList,
+  TouchableOpacity,
+  ImageBackground,
+  RefreshControl,
+  Image,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import {AuthContext} from "../../context/authContext";
-import {useHttp} from "../../hooks/http.hook";
-import {styles} from "./useStyles";
-import GlobalStyle from "../../components/GlobalStyle";
-import { GlobalSvgSelector } from '../../assets/GlobalSvgSelector';
-import {HeaderRoot} from "../../components/headerRoot/HeaderRoot";
-import VideoPlayer from "../../components/videoPlayer/VideoPlayer";
-import { ColorsStyles } from '../../constants/ColorsStyles';
-import { LoaderIn } from '../../components/loader/minLoader/LoaderIn';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {AuthContext} from '../../context/authContext';
+import {useHttp} from '../../hooks/http.hook';
+import {styles} from './useStyles';
+import GlobalStyle from '../../components/GlobalStyle';
+import {GlobalSvgSelector} from '../../assets/GlobalSvgSelector';
+import {HeaderRoot} from '../../components/headerRoot/HeaderRoot';
+import VideoPlayer from '../../components/videoPlayer/VideoPlayer';
+import {ColorsStyles} from '../../constants/ColorsStyles';
+import {LoaderIn} from '../../components/loader/minLoader/LoaderIn';
 import {httpServer} from '../../../const';
-import { checkLanguage, checkLanguageConst } from '../../hooks/useLanguage';
-import { PopapContext } from '../../context/PopapContext';
-import { DataContext } from '../../context/DataContext';
+import {checkLanguage, checkLanguageConst} from '../../hooks/useLanguage';
+import {PopapContext} from '../../context/PopapContext';
+import {DataContext} from '../../context/DataContext';
+import {VideoItem} from '../../components/video/VideoItem';
+import {settingsRoutes} from '../../../Settings/routes/settingsRoutes';
 
+function VideoScreen({navigation, route}) {
+  const {data_root} = route.params;
+  const popapRoot = useContext(PopapContext);
+  const dataRoot = useContext(DataContext);
+  const auth = useContext(AuthContext);
+  const {loading, request, error, clearError} = useHttp();
+  const [data, setData] = useState([]);
+  const [Refreshing, setRefreshing] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const [counterPage, setCounterPage] = useState(0);
+  const [end_page, set_end_page] = useState(false);
+  const [loader, setLoader] = useState(false);
+  const [access, setAccess] = useState(null);
+  const [loaderPaginashion, setLoaderPaginashion] = useState(false);
+  // const [activeMenu, setActiveMenu] = useState(0);
 
-function VideoScreen ({ navigation, route }) {
-    const {data_root} = route.params;
-    const popapRoot = useContext(PopapContext);
-    const dataRoot = useContext(DataContext);
-    const auth = useContext(AuthContext);
-    const {loading, request, error, clearError} = useHttp();
-    const [data, setData] = useState([]);
-    const [Refreshing, setRefreshing] = useState(false);
-    const [activeIndex, setActiveIndex] = useState(-1);
-    const [counterPage, setCounterPage] = useState(0);
-    const [end_page, set_end_page] = useState(false);
-    const [loader, setLoader] = useState(false);
-    const [access, setAccess] = useState(null);
-    const [loaderPaginashion, setLoaderPaginashion] = useState(false);
-    // const [activeMenu, setActiveMenu] = useState(0);
+  // useEffect(() => {
+  //     setActiveMenu
+  // }, [])
 
-    // useEffect(() => {
-    //     setActiveMenu
-    // }, [])
+  const itemHandler = index => {
+    if (index === activeIndex) setActiveIndex(-1);
+    else setActiveIndex(index);
+  };
 
-    const itemHandler = (index) => {
-        if (index === activeIndex) setActiveIndex(-1);
-        else setActiveIndex(index);
+  const getData = async () => {
+    setLoader(true);
+    try {
+      const data = await request(
+        `${
+          data_root.url_
+            ? dataRoot.classic_menu === '0'
+              ? data_root.url
+              : data_root.url_
+            : data_root.url
+        }ios/0`,
+        'GET',
+        null,
+        {
+          Authorization: `${auth.token}`,
+        },
+      );
+      let new_data = data.data;
+      new_data.sort((prev, next) => next.like - prev.like);
+      setData(data.data);
+      setCounterPage(data.data.length);
+      set_end_page(data.end_page);
+      setAccess(data.access);
+      setLoader(false);
+    } catch (e) {}
+  };
+
+  useEffect(() => {
+    getData();
+  }, [auth.token, dataRoot.classic_menu]);
+
+  const fullScreenHandler = async data => {
+    navigation.navigate({
+      name: 'FullVideo',
+      params: data,
+    });
+
+    try {
+      await request(
+        `/api/log/play_data`,
+        'POST',
+        {
+          type: 'video',
+          id: data._id,
+        },
+        {
+          Authorization: auth.token ? `${auth.token}` : null,
+        },
+      );
+    } catch (e) {}
+  };
+
+  const backHandler = () => {
+    navigation.goBack();
+  };
+
+  const likeHandler = async (item, index) => {
+    let new_data = [...data];
+    let url = data_root.url_like + 'like/';
+    if (item.like) {
+      new_data[index].like = 0;
+      url += 'put';
+    } else {
+      new_data[index].like = 1;
+      url += 'add';
     }
+    setData(new_data);
 
-    const getData = async () => {
-        setLoader(true);
-        try {
-            const data = await request(`${data_root.url_ ? (dataRoot.classic_menu === "0" ? data_root.url : data_root.url_) : data_root.url}ios/0`, 'GET', null, {
-                Authorization: `${auth.token}`
-            });
-            let new_data = data.data;
-            new_data.sort((prev, next) => next.like - prev.like);
-            setData(data.data);
-            setCounterPage(data.data.length);
-            set_end_page(data.end_page);
-            setAccess(data.access);
-            setLoader(false);
-        } catch (e) {}
-    };
+    try {
+      await request(
+        url,
+        'POST',
+        {id: item._id},
+        {
+          Authorization: `${auth.token}`,
+        },
+      );
+    } catch (e) {}
+  };
 
-    useEffect(() => {
-        getData();
-    }, [auth.token, dataRoot.classic_menu]);
+  const DataPopap = label => (
+    <View style={styles.block_dalate}>
+      <Text
+        style={[
+          settingsRoutes[auth.theme].GlobalStyle.CustomFontRegular,
+          styles.label,
+        ]}>
+        {label}
+      </Text>
 
-    const fullScreenHandler = async (data) => {
-        navigation.navigate({
-            name: 'FullVideo',
-            params: data,
-        });
+      <TouchableOpacity
+        style={{
+          width: '60%',
+          height: 36,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: settingsRoutes[auth.theme].ColorsStyles.colorButton,
+          borderRadius: 20,
+        }}
+        onPress={() => popapRoot.exitHandler()}>
+        <Text
+          style={[
+            settingsRoutes[auth.theme].GlobalStyle.CustomFontRegular,
+            styles.item_text,
+          ]}>
+          Ok
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
 
-        try {
-            await request(`/api/log/play_data`, 'POST', {
-                type: 'video', id: data._id
-            }, {
-                Authorization: auth.token ? `${auth.token}` : null
-            });
-        } catch (e) {}
+  const accessHandler = dostup => {
+    let text = '';
+    if (dostup === 'auth') {
+      text =
+        auth.language === 'ru'
+          ? 'Этот контент доступен только после входа в систему (через меню Аккаунт)'
+          : 'This content is available only after sign in (via menu Account)';
+    } else if (dostup === 'premium') {
+      text =
+        auth.language === 'ru'
+          ? 'Доступно для премиум аккаунтов'
+          : 'Available for premium accounts';
     }
+    popapRoot.dataChange(DataPopap(text));
+    popapRoot.openHandler();
+  };
 
-    const backHandler = () => {
-        navigation.goBack();
-    }
+  const activeMenuHandler = value => {
+    // setActiveMenu(value);
+    dataRoot.upload_classic_menu(value);
+  };
 
-    const likeHandler = async (item, index) => {
-        let new_data = [...data];
-        let url = data_root.url_like +  'like/';
-        if (item.like) {
-            new_data[index].like = 0;
-            url += 'put';
-        }
-        else {
-            new_data[index].like = 1;
-            url += 'add';
-        }
-        setData(new_data);
-
-        try {
-            await request(url, 'POST', {id: item._id}, {
-                Authorization: `${auth.token}`
-            });
-        } catch (e) {}
-    }
-
-    const DataPopap = (label) =>(
-        <View style={styles.block_dalate}>
-            <Text style={[GlobalStyle.CustomFontRegular, styles.label]}>{label}</Text>
-
-            <TouchableOpacity
-            style={styles.button_dalete}
-            onPress={() => popapRoot.exitHandler()}
-            >
-                <Text style={[GlobalStyle.CustomFontRegular, styles.item_text]}>Ok</Text>
-            </TouchableOpacity>
-        </View>
-    );
-
-    const accessHandler = (dostup) => {
-        let text = "";
-        if (dostup === "auth") {
-            text = auth.language === 'ru' ? 'Этот контент доступен только после входа в систему (через меню Аккаунт)' : 
-            'This content is available only after sign in (via menu Account)';
-        }
-        else if (dostup === "premium") {
-            text = auth.language === 'ru' ? 'Доступно для премиум аккаунтов' : 
-            'Available for premium accounts';
-        }
-        popapRoot.dataChange(DataPopap(text));
-        popapRoot.openHandler();
-    }
-
-    const arrayToString = (array) => {
-        let new_array = array?.map(item => checkLanguageConst(item, auth.translations).toLowerCase());
-        return new_array.join(', ')
-    }
-
-    const activeMenuHandler = (value) => {
-        // setActiveMenu(value); 
-        dataRoot.upload_classic_menu(value);
-    }
-
-    return (
-        <ImageBackground
-            source={require('../../assets/images/background-img.jpg')}
-            style={{ flex: 1, justifyContent: 'space-between', alignItems: 'center' }}
-        >
-            <ImageBackground
-                style={{width: '100%', height: '100%', alignItems: 'center'}}
-                imageStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.38)'}}
-            >  
-                <View style={{width: '100%', height: 50, backgroundColor: ColorsStyles.backgroundFooter, position: 'absolute', top: 0}} />
-                <SafeAreaView
-                    style={{width: '100%', height: '100%', alignItems: 'center'}}
-                >
-                <HeaderRoot data={{label: data_root.name, backHandler}}/>
-                {data_root.url_ ? (
-                    <View style={styles.menu}>
-                        <TouchableOpacity
-                            style={dataRoot.classic_menu === 0 ? styles.menu_el_active : styles.menu_el}
-                            onPress={() => activeMenuHandler("0")}
-                        >
-                            <Text style={[GlobalStyle.CustomFontMedium, dataRoot.classic_menu === "0" ? styles.menu_el_text_active : styles.menu_el_text]}>
-                                CLASSICS
-                            </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            style={dataRoot.classic_menu === 1 ? styles.menu_el_active : styles.menu_el}
-                            onPress={() => activeMenuHandler("1")}
-                        >
-                            <Text style={[GlobalStyle.CustomFontMedium, dataRoot.classic_menu === "1" ? styles.menu_el_text_active : styles.menu_el_text]}>
-                                FUSION
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                ): null}
-                <View style={styles.block}>
-                    {loader ? (
-                        <LoaderIn />
-                    ) : (
-                    <FlatList
-                        // onEndReached={paginashion}
-                        // onEndReachedThreshold={0.3}
-                        style={{width: '100%'}}
-                        contentContainerStyle={{paddingBottom: 100}}
-                        showsVerticalScrollIndicator={false}
-                        refreshControl={
-                            <RefreshControl
-                                refreshing={Refreshing}
-                                onRefresh={() => getData()}
-                                colors={[ColorsStyles.colorTextError]}
-                            />
-                        }
-                        data={data}
-                        renderItem={({item, index}) => (
-                            <View style={styles.item_block_root}>
-                                <View style={activeIndex === index ? styles.item_block_active : styles.item_block}>
-                                    <TouchableOpacity
-                                    style={[styles.item_button]}
-                                    onPress={() => itemHandler(index)}
-                                    >
-                                        <Text style={[activeIndex === index ? GlobalStyle.CustomFontBold : GlobalStyle.CustomFontMedium, styles.item_name]}>
-                                            {checkLanguage(item.label_, auth.language)}
-                                        </Text>
-                                        <GlobalSvgSelector id={activeIndex === index ? 'arrow_bottom' : 'arrow_top'} />
-                                    </TouchableOpacity>
-                                    {activeIndex === index ? (
-                                        <Text style={[GlobalStyle.CustomFontRegular, styles.item_text]}>
-                                            {checkLanguage(item.text_, auth.language)}
-                                        </Text> 
-                                    ): null}
-                                    {item.instruments?.length ? (
-                                        <Text style={[GlobalStyle.CustomFontMedium, styles.instruments]}>
-                                            {arrayToString(item.instruments)}
-                                        </Text> 
-                                    ): null}
-                                </View> 
-                                <View style={{
-                                    width: '100%',
-                                    height: 200,
-                                    borderRadius: 16,
-                                    marginTop: 10,
-                                    backgroundColor: 'rgba(198, 198, 198, 0.54)',
-                                }}>
-                                    
-                                    <ImageBackground
-                                        source={{uri: httpServer + '/' + checkLanguage(item.poster_, auth.language)}}
-                                        style={{width: '100%', height: '100%', alignItems: 'center', borderRadius: 16,}}
-                                        imageStyle={{ borderRadius: 16, }}
-                                    >  
-                                    <ImageBackground
-                                        style={{width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center'}}
-                                        imageStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.38)', borderRadius: 16,}}
-                                    > 
-                                    {/* {item.access ? (item.access.indexOf(access) !== -1 ? null : (
-                                        <TouchableOpacity 
-                                        onPress={() => accessHandler()}
-                                        style={{position: 'absolute', left: 10, top: 10, opacity: 0.4}}
-                                        >
-                                            <GlobalSvgSelector id="access" />
-                                        </TouchableOpacity>
-                                    )) : null} */}
-                                    {item.dostup === "view" ? null : (
-                                        <TouchableOpacity 
-                                        onPress={() => accessHandler(item.dostup)}
-                                        style={{position: 'absolute', left: 10, top: 10, opacity: 0.4}}
-                                        >
-                                            <GlobalSvgSelector id="access" />
-                                        </TouchableOpacity>
-                                    )}
-
-                                    {auth.token ? (
-                                        <TouchableOpacity 
-                                        style={styles.button_like}
-                                        onPress={() => likeHandler(item, index)}
-                                        >
-                                            <GlobalSvgSelector id={item.like === 1 ? "like_active" : "like"} />
-                                        </TouchableOpacity>
-                                    ) : null}
-                                    
-                                    <TouchableOpacity
-                                    
-                                    onPress={() => 
-                                        // item.access ? (item.access.indexOf(access) !== -1 ? fullScreenHandler(item) : false) : fullScreenHandler(item)
-                                        item.dostup === "view" ? fullScreenHandler(item) : false
-                                    }
-                                    >
-                                        {/* <GlobalSvgSelector id="play" /> */}
-                                        <Image style={{width: 52, height: 52,}} source={require('../../components/audioPlayer/resources/ui_play.png')} />
-                                    </TouchableOpacity>
-                                    </ImageBackground>
-                                    </ImageBackground>
-                                    {/* <VideoPlayer 
-                                        isFullscreen={true}
-                                        poster={httpServer + '/' + item.poster}
-                                        paused={true}
-                                        pictureInPicture={true}
-                                        toggleResizeModeOnFullscreen={false}
-                                        disableBack={true}
-                                        showOnStart={true}
-                                        access={item.access ? (item.access.indexOf(access) !== -1 ? true : false) : true}
-                                        onEnterFullscreen={() => fullScreenHandler(item)}
-                                        style={{
-                                            borderRadius: 16,
-                                            height: 200,
-                                            width: '100%',
-                                        }}
-                                        videoStyle={{
-                                            width: '100%',
-                                            height: 200,
-                                        }}
-                                        source={{uri: httpServer + '/' + item.video}} 
-                                    /> */}
-                                </View>
-                            </View>
-                        )}
-                    />
-                    )}
-                    </View>
-                    <View style={{height: 50, width: '100%'}} />
-                </SafeAreaView>
-            </ImageBackground>
-        </ImageBackground>
-    )
+  return (
+    <ImageBackground
+      source={settingsRoutes[auth.theme].backgroundSettings.img_1}
+      style={{flex: 1, justifyContent: 'space-between', alignItems: 'center'}}>
+      <ImageBackground
+        style={{width: '100%', height: '100%', alignItems: 'center'}}
+        imageStyle={{
+          backgroundColor:
+            settingsRoutes[auth.theme].backgroundSettings.backgroundColor,
+        }}>
+        <View
+          style={{
+            width: '100%',
+            height: 50,
+            backgroundColor: ColorsStyles.backgroundFooter,
+            position: 'absolute',
+            top: 0,
+          }}
+        />
+        <SafeAreaView
+          style={{width: '100%', height: '100%', alignItems: 'center'}}>
+          {settingsRoutes[auth.theme].HeaderRoot({
+            translations: auth.translations,
+            data: {
+              label: checkLanguageConst(data_root.name, auth.translations),
+              backHandler,
+            },
+          })}
+          {data_root.url_ ? (
+            <View style={styles.menu}>
+              <TouchableOpacity
+                style={
+                  dataRoot.classic_menu === 0
+                    ? styles.menu_el_active
+                    : styles.menu_el
+                }
+                onPress={() => activeMenuHandler('0')}>
+                <Text
+                  style={[
+                    settingsRoutes[auth.theme].GlobalStyle.CustomFontMedium,
+                    dataRoot.classic_menu === '0'
+                      ? styles.menu_el_text_active
+                      : styles.menu_el_text,
+                  ]}>
+                  CLASSICS
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={
+                  dataRoot.classic_menu === 1
+                    ? styles.menu_el_active
+                    : styles.menu_el
+                }
+                onPress={() => activeMenuHandler('1')}>
+                <Text
+                  style={[
+                    settingsRoutes[auth.theme].GlobalStyle.CustomFontMedium,
+                    dataRoot.classic_menu === '1'
+                      ? styles.menu_el_text_active
+                      : styles.menu_el_text,
+                  ]}>
+                  FUSION
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ) : null}
+          <View style={styles.block}>
+            {loader ? (
+              <LoaderIn />
+            ) : (
+              <FlatList
+                style={{width: '100%'}}
+                contentContainerStyle={{paddingBottom: 100}}
+                showsVerticalScrollIndicator={false}
+                refreshControl={
+                  <RefreshControl
+                    refreshing={Refreshing}
+                    onRefresh={() => getData()}
+                    colors={[ColorsStyles.colorTextError]}
+                  />
+                }
+                data={data}
+                renderItem={({item, index}) => (
+                  <VideoItem
+                    item={item}
+                    translations={auth.translations}
+                    activeIndex={activeIndex}
+                    index={index}
+                    itemHandler={itemHandler}
+                    language={auth.language}
+                    accessHandler={accessHandler}
+                    likeHandler={likeHandler}
+                    token={auth.token}
+                    fullScreenHandler={fullScreenHandler}
+                    dostup={item.dostup}
+                    theme={auth.theme}
+                  />
+                )}
+              />
+            )}
+          </View>
+          <View style={{height: 50, width: '100%'}} />
+        </SafeAreaView>
+      </ImageBackground>
+    </ImageBackground>
+  );
 }
 
 export default VideoScreen;
