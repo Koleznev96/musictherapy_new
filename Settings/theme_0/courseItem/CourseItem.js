@@ -8,7 +8,6 @@ import {
   checkLanguageConst,
 } from '../../../src/hooks/useLanguage';
 import {GlobalSvgSelector} from '../GlobalSvgSelector';
-import {CardItem} from '../cardItem/CardItem';
 
 const dateToString = date => {
   date = new Date(date);
@@ -33,16 +32,50 @@ export const CourseItem = ({
 }) => {
   return (
     <View style={styles.item_block_root}>
-      <CardItem
-        language={language}
-        httpServer={httpServer}
-        label={item.label}
-        description={item.description}
-        poster={item.poster}
-        activeIndex={activeIndex}
-        index={index}
-        itemHandler={itemHandler}
-      />
+      <View
+        style={
+          activeIndex === index ? styles.item_block_active : styles.item_block
+        }>
+        <TouchableOpacity
+          style={[styles.item_button]}
+          onPress={() => itemHandler(index)}>
+          <Text
+            style={[
+              activeIndex === index
+                ? GlobalStyle.CustomFontBold
+                : GlobalStyle.CustomFontMedium,
+              styles.item_name,
+            ]}>
+            {checkLanguage(item.label, language)}
+          </Text>
+          <GlobalSvgSelector
+            id={activeIndex === index ? 'arrow_bottom' : 'arrow_top'}
+          />
+        </TouchableOpacity>
+        {activeIndex === index ? (
+          <Text style={[GlobalStyle.CustomFontRegular, styles.item_text]}>
+            {checkLanguage(item.description, language)}
+          </Text>
+        ) : null}
+      </View>
+      <View
+        style={{
+          width: '100%',
+          height: 200,
+          borderRadius: 16,
+          marginTop: 10,
+          backgroundColor: 'rgba(198, 198, 198, 0.54)',
+        }}>
+        <ImageBackground
+          source={{uri: httpServer + '/' + item.poster}}
+          style={{
+            width: '100%',
+            height: '100%',
+            alignItems: 'center',
+            borderRadius: 16,
+          }}
+          imageStyle={{borderRadius: 16}}></ImageBackground>
+      </View>
       <Text style={[GlobalStyle.CustomFontRegular, styles.item_desc_text]}>
         {item.avalibel
           ? `${checkLanguageConst(
@@ -59,13 +92,18 @@ export const CourseItem = ({
         style={{
           width: '100%',
           alignItems: 'center',
+          flexDirection: 'row',
+          justifyContent: 'center',
           marginTop: 10,
         }}>
         <TouchableOpacity
           style={styles.button_start_test}
           onPress={() => startCourseHandler(item)}>
           <Text
-            style={[GlobalStyle.CustomFontBold, styles.button_start_test_text]}>
+            style={[
+              GlobalStyle.CustomFontRegular,
+              styles.button_start_test_text,
+            ]}>
             {!item.avalibel
               ? checkLanguageConst('ActivateCourse', translations)
               : item.status

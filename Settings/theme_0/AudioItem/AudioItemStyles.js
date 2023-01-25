@@ -1,11 +1,8 @@
 export const AudioItemStyles = {
   default: {
-    borderBottomWidth: 0,
-    borderBottomColor: 'rgba(0, 0, 0, 0)',
-    backgroundColor: '#716B65',
+    borderBottomWidth: 1,
+    borderBottomColor: '#969696',
+    backgroundColor: '#154073',
   },
   active: {},
-  honest: {
-    backgroundColor: '#AE947B',
-  },
 };

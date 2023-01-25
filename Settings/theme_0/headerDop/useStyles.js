@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     alignContent: 'center',
     paddingLeft: 20,
     paddingRight: 20,
-    backgroundColor: ColorsStyles.colorHeader,
+    backgroundColor: ColorsStyles.backgroundFooter,
     borderBottomWidth: 3,
     borderColor: ColorsStyles.colorHr,
   },

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, TouchableOpacity, ImageBackground, View} from 'react-native';
+import {Text, TouchableOpacity, ImageBackground} from 'react-native';
 import {checkLanguageConst} from '../../../src/hooks/useLanguage';
 import GlobalStyle from '../GlobalStyle';
 import {styles} from './useStyles';
@@ -14,11 +14,11 @@ export const Card = ({item, onPress, translations, key}) => {
         source={item.img}
         style={{
           width: '100%',
-          height: 125,
+          height: '100%',
           alignItems: 'center',
           justifyContent: 'center',
         }}
-        imageStyle={{borderRadius: 3, backgroundColor: '#000'}}>
+        imageStyle={{borderRadius: 16, backgroundColor: '#000'}}>
         <ImageBackground
           style={{
             width: '100%',
@@ -27,15 +27,14 @@ export const Card = ({item, onPress, translations, key}) => {
             justifyContent: 'center',
           }}
           imageStyle={{
-            borderRadius: 3,
-            // backgroundColor: 'rgba(0, 0, 0, 0.3)',
-          }}></ImageBackground>
+            borderRadius: 16,
+            backgroundColor: 'rgba(0, 0, 0, 0.3)',
+          }}>
+          <Text style={[GlobalStyle.CustomFontMedium, styles.item_name]}>
+            {checkLanguageConst(item.name, translations)?.toUpperCase()}
+          </Text>
+        </ImageBackground>
       </ImageBackground>
-      <View style={styles.item_text}>
-        <Text style={[GlobalStyle.CustomFontMedium, styles.item_name]}>
-          {checkLanguageConst(item.name, translations)}
-        </Text>
-      </View>
     </TouchableOpacity>
   );
 };

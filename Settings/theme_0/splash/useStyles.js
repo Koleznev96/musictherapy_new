@@ -11,13 +11,11 @@ const scaleModerate = (size, factor = 0.5, width_def = width) =>
 
 export const styles = StyleSheet.create({
   block: {
-    position: 'absolute',
-    top: '35%',
-    right: '10%',
+    marginTop: '50%',
   },
   logo: {
-    width: 200,
-    height: 200,
+    width: 95,
+    height: 109,
   },
   text_glav: {
     marginTop: 25,

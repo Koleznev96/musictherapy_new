@@ -18,7 +18,6 @@ export const styles = StyleSheet.create({
     marginBottom: 5,
     paddingLeft: 10,
     marginTop: 20,
-    color: ColorsStyles.text,
   },
   item_block: {
     marginTop: 10,
@@ -28,7 +27,7 @@ export const styles = StyleSheet.create({
   item_block_active: {
     marginTop: 10,
     padding: 10,
-    // backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
     borderRadius: 14,
     // maxHeight: 150,
     position: 'relative',
@@ -48,13 +47,9 @@ export const styles = StyleSheet.create({
   item_name: {
     fontSize: 18,
     marginRight: 10,
-    color: ColorsStyles.text,
   },
   item_text: {
     fontSize: 16,
-    color: ColorsStyles.text,
-    paddingLeft: 12,
-    marginTop: 5,
   },
   item_scroll: {
     width: '100%',

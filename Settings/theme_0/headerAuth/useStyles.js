@@ -6,11 +6,10 @@ export const styles = StyleSheet.create({
     width: '100%',
     // height: 60,
     flexDirection: 'row',
-    paddingTop: 25,
+    paddingTop: 15,
     alignItems: 'center',
     alignContent: 'center',
     justifyContent: 'center',
-    marginBottom: -15,
   },
   block: {
     flexDirection: 'row',

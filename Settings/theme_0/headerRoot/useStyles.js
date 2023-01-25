@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     alignContent: 'center',
     paddingLeft: 20,
     paddingRight: 20,
-    backgroundColor: ColorsStyles.colorHeader,
+    backgroundColor: ColorsStyles.backgroundFooter,
     borderBottomWidth: 3,
     borderColor: ColorsStyles.colorHr,
   },
@@ -23,17 +23,17 @@ export const styles = StyleSheet.create({
   },
   text_glav: {
     marginLeft: 15,
-    fontSize: 20,
+    fontSize: 22,
   },
   back_button: {
-    paddingHorizontal: 20,
-    paddingVertical: 3,
-    borderRadius: 3,
-    borderWidth: 2,
-    borderColor: '#C59251',
+    paddingHorizontal: 10,
+    paddingVertical: 2,
+    borderRadius: 12,
+    borderWidth: 1.5,
+    borderColor: '#fff',
     marginTop: 2,
   },
   back_button_text: {
-    fontSize: 15,
+    fontSize: 16,
   },
 });

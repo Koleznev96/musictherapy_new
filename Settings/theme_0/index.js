@@ -33,7 +33,7 @@ export const Theme_0 = {
       active_icon: <MenuSvgSelector id="programs_active" />,
     },
     tab1: {
-      isView: false,
+      isView: true,
       title: 'Tab1',
       icon: <MenuSvgSelector id="goal" />,
       active_icon: <MenuSvgSelector id="goal_active" />,
@@ -60,43 +60,60 @@ export const Theme_0 = {
   home_screen: {
     noAuth: [
       {
+        name: 'Category1',
+        router: 'Video',
+        img: require('./images/classic.jpg'),
+        url: '/api/data/v2/classic/',
+        url_: '/api/data/v2/fusion/',
+        url_like: '/api/data/video/',
+      },
+      {
+        name: 'Category2',
+        router: 'Video',
+        img: require('./images/meditation.jpg'),
+        url: '/api/data/v2/meditation/',
+        url_like: '/api/data/video/',
+      },
+      {
         name: 'Announcements',
         router: 'Card',
-        img: require('./images/events.png'),
+        img: require('./images/sound.jpg'),
         url: '/api/data/v2/live_sound/',
         url_like: '/api/data/card/',
-        background_img: require('./backgrounds/background_start.png'),
+      },
+      {
+        name: 'Category3',
+        router: 'Video',
+        img: require('./images/instruments.jpg'),
+        url: '/api/data/v2/tool/',
+        url_like: '/api/data/video/',
       },
     ],
     auth: [
       {
-        name: 'CategoryOnlineCourses',
-        router: 'Courses',
-        img: require('./images/course.png'),
-        url: '/api/data/get_list_course/',
-        url_like: '/api/data/video/',
-      },
-      {
         name: 'Tests',
         router: 'Tests',
-        img: require('./images/tests.png'),
+        img: require('./images/test.jpg'),
         url: '/api/data/get_list_test/',
         url_like: '/api/data/card/',
-        // background_img: require('./backgrounds/background_start.png'),
+      },
+      {
+        name: 'CategoryOnlineCourses',
+        router: 'Courses',
+        img: require('./images/course.jpg'),
+        url: '/api/data/get_list_course/',
+        url_like: '/api/data/video/',
       },
     ],
   },
   GlobalStyle: GlobalStyle,
   icons: props => <GlobalSvgSelector {...props} />,
   backgroundSettings: {
-    backgroundColor: 'rgba(0, 0, 0, 0)',
-    img_start: require('./backgrounds/background_start.png'),
-    img_1: require('./backgrounds/background.png'),
-    img_2: require('./backgrounds/background.png'),
-    img_splash: require('./backgrounds/background_splash.png'),
-    img_logo: undefined, // undefined
-    img_playlist: require('./backgrounds/background.png'), // undefined
-    img_consultant: require('./backgrounds/background.png'),
+    backgroundColor: 'rgba(0, 0, 0, 0.38)',
+    img_1: require('./backgrounds/background_1.jpg'),
+    img_2: require('./backgrounds/background_2.jpg'),
+    img_splash: require('./backgrounds/background_2.jpg'),
+    img_logo: require('./backgrounds/background_logo.png'), // undefined
   },
   card: props => <Card {...props} />,
   audioItem: {
@@ -109,7 +126,7 @@ export const Theme_0 = {
   ButtonInd: props => <ButtonInd {...props} />,
 
   HeaderAuth: props => <HeaderAuth {...props} />,
-  HeaderDop: props => <HeaderRoot {...props} />,
+  HeaderDop: props => <HeaderDop {...props} />,
   HeaderRoot: props => <HeaderRoot {...props} />,
 
   ColorsStyles: ColorsStyles,
@@ -118,7 +135,7 @@ export const Theme_0 = {
 
   ConsultantItem: props => <ConsultantItem {...props} />,
 
-  NameCompany: undefined, // undefined
+  NameCompany: '© www.MusicTherapy.by', // undefined
 
   EventItem: props => <EventItem {...props} />,
 

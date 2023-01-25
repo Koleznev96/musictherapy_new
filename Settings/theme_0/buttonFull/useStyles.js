@@ -15,7 +15,6 @@ export const styles = StyleSheet.create({
     width: '100%',
     textAlign: 'center',
     fontSize: width > 340 ? 18 : 16,
-    // color: ColorsStyles.text,
   },
   block_loader: {
     width: '100%',

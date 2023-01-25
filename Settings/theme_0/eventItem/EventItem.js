@@ -15,7 +15,7 @@ export const EventItem = ({httpServer, item, translations, nextHandler}) => {
       <TouchableOpacity
         style={[styles.item_button]}
         onPress={() => nextHandler(item.url)}>
-        <Text style={[GlobalStyle.CustomFontBold, styles.item_button_text]}>
+        <Text style={[GlobalStyle.CustomFontRegular, styles.item_button_text]}>
           {checkLanguageConst('Купить билеты', translations)}
         </Text>
       </TouchableOpacity>

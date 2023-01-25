@@ -8,9 +8,7 @@ export const styles = StyleSheet.create({
   },
   instruments: {
     fontSize: 12,
-    color: ColorsStyles.text,
-    paddingLeft: 6,
-    paddingBottom: 6,
+    color: '#B9B9B9',
   },
   menu: {
     width: '100%',
@@ -112,10 +110,8 @@ export const styles = StyleSheet.create({
   },
   item_block: {
     marginTop: 10,
-    // padding: 6,
-    width: '100%',
-    backgroundColor: '#FFF',
-    borderRadius: 3,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   item_block_active: {
     marginTop: 10,
@@ -127,22 +123,16 @@ export const styles = StyleSheet.create({
   item_button: {
     width: '100%',
     paddingTop: 3,
-    paddingBottom: 0,
+    paddingBottom: 3,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 8,
   },
   item_name: {
-    fontSize: 16,
+    fontSize: 17,
     marginRight: 10,
-    color: ColorsStyles.text,
-    paddingVertical: 6,
   },
   item_text: {
     fontSize: 14,
-    color: ColorsStyles.text,
-    paddingLeft: 6,
-    paddingBottom: 6,
   },
   item_scroll: {
     maxHeight: 80,

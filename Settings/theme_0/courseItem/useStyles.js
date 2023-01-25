@@ -121,14 +121,13 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
   },
   button_start_test: {
-    minWidth: '70%',
-    backgroundColor: '#C38310',
-    height: 32,
-    borderRadius: 3,
-    alignItems: 'center',
+    width: '70%',
+    height: 27,
+    borderRadius: 6,
+    backgroundColor: '#FCB900',
     flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 10,
   },
   button_view_test: {
     width: '55%',
@@ -140,8 +139,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   button_start_test_text: {
-    fontSize: 13,
-    color: '#FFF',
+    fontSize: 12,
+    color: '#000000',
   },
   button_view_test_text: {
     fontSize: 12,
@@ -150,6 +149,5 @@ export const styles = StyleSheet.create({
   item_desc_text: {
     fontSize: 12,
     marginTop: 10,
-    color: ColorsStyles.text,
   },
 });

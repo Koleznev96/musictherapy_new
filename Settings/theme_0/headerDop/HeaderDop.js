@@ -12,7 +12,7 @@ export const HeaderDop = ({data, translations}) => {
       <View style={styles.block}>
         <Image source={require('../images/logo-min.png')} style={styles.logo} />
         <Text style={[GlobalStyle.CustomFontBold, styles.text_glav]}>
-          {data?.label}
+          {data?.label?.toUpperCase()}
         </Text>
       </View>
       {data?.backHandler && (

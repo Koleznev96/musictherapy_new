@@ -1,10 +1,11 @@
 import React from 'react';
-import {Text, View, ScrollView} from 'react-native';
+import {Text, View, Image} from 'react-native';
 import {styles} from './useStyles';
 import GlobalStyle from '../GlobalStyle';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {checkLanguageConst} from '../../../src/hooks/useLanguage';
 import {GlobalSvgSelector} from '../GlobalSvgSelector';
+import {ColorsStyles} from '../ColorsStyles';
 
 export const ConsultantItem = ({
   item,
