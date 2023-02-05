@@ -1,5 +1,5 @@
 // prodaction
-export const httpServer = 'https://admin.musictherapy.by';
+export const httpServer = 'https://online.artgrand.by';
 
 // herocku
 // export const httpServer = "https://musictherapy96.herokuapp.com";
