@@ -3,7 +3,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '11.0'
 
-target 'musictherapy' do
+target 'ArtGrand' do
   config = use_native_modules!
 
   use_react_native!(
@@ -20,7 +20,7 @@ target 'musictherapy' do
 
   pod 'RNSound', :path => '../node_modules/react-native-sound'
 
-  target 'musictherapyTests' do
+  target 'ArtGrandTests' do
     inherit! :complete
     # Pods for testing
   end

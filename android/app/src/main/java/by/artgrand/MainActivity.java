@@ -1,4 +1,4 @@
-package by.musictherapy;
+package by.artgrand;
 
 import com.facebook.react.ReactActivity;
 
@@ -11,6 +11,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "musictherapy";
+    return "ArtGrand";
   }
 }

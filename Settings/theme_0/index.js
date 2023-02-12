@@ -24,7 +24,7 @@ import {PlayListMenu} from './playListMenu/PlayListMenu';
 import {IconView} from './iconView/IconView';
 
 export const Theme_0 = {
-  isQuestionnaire: true,
+  isQuestionnaire: false,
   menu: {
     main: {
       isView: true,

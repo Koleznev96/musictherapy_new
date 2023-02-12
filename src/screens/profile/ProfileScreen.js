@@ -49,13 +49,14 @@ function ProfileScreen({navigation}) {
       const data = await request(`/api/profile/data`, 'GET', null, {
         Authorization: `${auth.token}`,
       });
+
+      setFormNew({
+        name: data.data.name,
+        fullName: data.data.fullName,
+        telephone: data.data.telephone,
+        email: data.data.email,
+      });
       if (settingsRoutes[auth.theme].isQuestionnaire) {
-        setFormNew({
-          name: data.data.name,
-          fullName: data.data.fullName,
-          telephone: data.data.telephone,
-          email: data.data.email,
-        });
         createFields(data.questionnaire);
       }
       setStatusNewData(false);
@@ -179,13 +180,14 @@ function ProfileScreen({navigation}) {
           Authorization: `${auth.token}`,
         },
       );
+
+      setFormNew({
+        name: data.data.name,
+        fullName: data.data.fullName,
+        telephone: data.data.telephone,
+        email: data.data.email,
+      });
       if (settingsRoutes[auth.theme].isQuestionnaire) {
-        setFormNew({
-          name: data.data.name,
-          fullName: data.data.fullName,
-          telephone: data.data.telephone,
-          email: data.data.email,
-        });
         createFields(data.questionnaire);
       }
       setStatusNewData(false);

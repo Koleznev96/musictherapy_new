@@ -113,7 +113,6 @@ export const ProfileData = ({
             paddingTop: 12,
             backgroundColor: '#1D293C',
             zIndex: 1001,
-            backgroundColor: 'red',
           }}>
           <Text
             style={[
