@@ -20,6 +20,7 @@ export const TestItem = ({
   nextTestHandler,
   startTestHandler,
   viewResultTestHandler,
+  translations
 }) => {
   return (
     <View style={styles.item_block_root}>

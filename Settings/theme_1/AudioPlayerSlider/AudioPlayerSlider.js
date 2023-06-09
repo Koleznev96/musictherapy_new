@@ -115,6 +115,7 @@ const styles = {
     container_active: {
       width: '100%',
       borderTopColor: 'rgba(255, 255, 255, 0.6)',
+      backgroundColor: '#000',
     },
   }),
 };
