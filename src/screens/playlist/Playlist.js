@@ -34,7 +34,7 @@ function Playlist({navigation, route}) {
   const [activeIndexA, setActiveIndexA] = useState(-1);
   const [audio, setAudio] = useState([]);
   const [video, setVideo] = useState([]);
-  const [menu_status, set_menu_status] = useState(true);
+  const [menu_status, set_menu_status] = useState(isVideo);
   const [load, setLoad] = useState(false);
   const [clear, setClear] = useState(false);
   const [activeItem, setActivItem] = useState(null);
