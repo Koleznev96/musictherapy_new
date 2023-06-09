@@ -112,14 +112,14 @@ function ResultTestScreen({navigation, route}) {
           },
         ],
       };
-
-      for (let j = 0; j < answer.length; j++) {
-        lit.labels.push(dateToString(answer[j].date_end));
-        lit.datasets[0].data.push(answer[j].result?.balls);
+      const copy_answer = [].concat(answer).reverse();
+      for (let j = 0; j < copy_answer.length; j++) {
+        lit.labels.push(dateToString(copy_answer[j].date_end));
+        lit.datasets[0].data.push(copy_answer[j].result?.balls);
         const color = test?.result?.find(
           item =>
-            item.start_balls <= answer[j].result?.balls &&
-            answer[j].result?.balls <= item.end_balls,
+            item.start_balls <= copy_answer[j].result?.balls &&
+            copy_answer[j].result?.balls <= item.end_balls,
         )?.color;
         result.result[j].color = color;
         lit.datasets[0].colors.push(color ? color : 'rgba(0, 0, 0, 1)');
